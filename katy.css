@@ -1,0 +1,116 @@
+body {
+    max-width: 100%;
+}
+
+.signup-container_primary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem;
+    padding: 5rem;
+}
+
+.signup-container_content {
+    display: flex;
+    flex-direction: column;
+    max-width: 50rem;
+    width: 100%;
+    margin: 10rem;
+    /* justify-content: space-around; */
+
+}
+
+.signup-container_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.signup-header-text {
+    font-weight: 800;
+}
+
+.signup-login-block {
+    width: 100%
+}
+
+.signup-login-button {
+    cursor: pointer;
+    text-decoration: none;
+    color: #3659e3;
+    text-align: left;
+}
+
+.signup-login-button:hover {
+    text-decoration: underline;
+}
+
+.email-address-container_primary {
+    /* border: 1px solid #dbdae3;
+    border-radius: 2px;
+    /* max-width: 100rem; */
+    /* padding: 5px; */
+
+}
+
+.div-line-text {
+    border: 1px solid #a9a8b3;
+    margin: 30px 0;
+    border-radius: 100px;
+    background: #fff;
+    position: relative;
+    display: inline-block;
+    padding: 0 12px 3px;
+    min-width: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+.div-line {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.div-line::before {
+    content: "";
+    height: 1px;
+    position: absolute;
+    color: #a9a8b3;
+    align-items: center;
+    border-top: 1px solid black;
+  }
+
+.create-account-button {
+    text-transform: uppercase;
+    width: 100%;
+}
+
+
+
+.signup-with-google-button {
+    text-transform: uppercase;
+    width: 100%;
+}
+
+
+
+/* mobile version */
+
+@media screen and (max-width: 768px) {
+  /* CSS styles applied for screens 768px and larger */
+  body {
+    background-color: lightblue;
+  }
+
+  .signup-container_primary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    padding: 1rem;
+    }
+}
