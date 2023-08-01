@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <style>
+      .product-name {
+        font-size: x-large;
+      }
+      img {
+        max-width: 100%;
+      }
+      h2 {
+        font-size: large;
+      }
+      main {
+        max-width: 800px;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="product-detail">
+        <h1 class="product-name">Apple Pie</h1>
+        <img class="product-photo" src="https://picsum.photos/seed/1/300/300" />
+        <h2>More Photos</h2>
+        <div class="more-photos">
+          <img
+            src="https://images.hktv-img.com/images/HKTV/10883/pkt2a_other_4918670_20181009201445_01_1200.jpg"
+          />
+          <img
+            src="https://images.hktv-img.com/images/HKTV/10883/pkt2a_other_4918673_20181009201445_01_1200.jpg"
+          />
+          <img
+            src="https://images.hktv-img.com/images/HKTV/10883/pkt2a_other_4918676_20181009201445_01_1200.jpg"
+          />
+        </div>
+      </div>
+    </main>
+
+    <script>
+      let params = new URLSearchParams(location.search)
+      let id = params.get('id')
+
+      let productDetail = document.querySelector('.product-detail')
+
+      // productDetail.textContent = 'loading product ' + id + '...'
+    </script>
+  </body>
+</html>

@@ -6,7 +6,7 @@ let app = express();
 app.use(express.static('public'))
 
 app.get('/', (req, res) =>
-res.redirect('/preference.html'))
+res.redirect('/home.html'))
 
 const port = 8000;
 app.listen(port, () =>
