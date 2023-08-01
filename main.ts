@@ -7,7 +7,7 @@ app.use("/images", express.static("uploads"));
 app.use(express.static('public'))
 
 app.get('/', (req, res) =>
-res.redirect('/category.html'))
+res.redirect('/select-category.html'))
 
 
 const port = 8000;
