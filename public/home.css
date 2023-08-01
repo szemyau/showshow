@@ -1,6 +1,6 @@
 :root {
-    /* --company-logo: 'cursive'; */
-    /* --font-color:'rgb(255 48 48 / 80%)'; */
+    --company-logo: cursive;
+    --font-color:rgb(255 48 48 / 80%);
 }
 
 .company_name {
@@ -10,8 +10,9 @@
     font-size: 1.5rem;
     font-weight: bold;
     margin-right: auto;
-    font-family: cursive;
-    color: rgb(255 48 48 / 80%);
+    font-family: var(--company-logo);
+    color: var(--font-color);
+ 
 }
 
 .navbar-nav {
@@ -20,10 +21,7 @@
 }
 
 .image-container img{
-    /* object-fit:cover; */
     max-width: 100%;
-    height: 30%;
-    
 }
 
 img:hover{
