@@ -9,10 +9,6 @@
     <link rel="stylesheet" href="category.css">
 
     <style>
-        table {
-            max-width: 100%;
-        }
-
         img {
             border-radius: 1rem;
         }
@@ -21,7 +17,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
+            right: 0;
             height: 50px;
             background-color: #333;
             color: #fff;
@@ -40,6 +36,9 @@
             font-weight: bold;
             outline: none;
         }
+        img {
+            object-fit: cover;
+        }
     </style>
 </head>
 
@@ -50,32 +49,89 @@
         <button id="next-button">Next</button>
     </div>
 
-    <table class="category-list">
+    <div class="category-list">
+        <div class="category-row">
+            <div class="container-lg-6">
+                <picture>
+                    <source srcset="./photo/health.jpg" media="(min-width: 1200px)">
+                    <source srcset="./photo/health.jpg" media="(min-width: 768px)">
+                    <img src="./photo/health.jpg" width="200" height="200" alt="Health">
+                    <figcaption>Health</figcaption>
+                </picture>
+            </div>
+            <div class="container-lg-6">
+                <picture>
+                    <source srcset="./photo/hiking.jpg" media="(min-width: 1200px)">
+                    <source srcset="./photo/hiking.jpg" media="(min-width: 768px)">
+                    <img src="./photo/hiking.jpg" width="200" height="200" alt="Hiking">
+                    <figcaption>Hiking</figcaption>
+                </picture>
+            </div>
+
+            <!-- <figure>
+                <picture>
+                    <source srcset="./photo/health.jpg" media="(min-width: 1200px)">
+                    <source srcset="./photo/health.jpg" media="(min-width: 768px)">
+                    <img src="./photo/health.jpg" width="200" height="200" alt="Health">
+                    <figcaption>Health</figcaption>
+                </picture>
+            </figure>
+            <figure>
+                <picture>
+                    <source srcset="./photo/hiking.jpg" media="(min-width: 1200px)">
+                    <source srcset="./photo/hiking.jpg" media="(min-width: 768px)">
+                    <img src="./photo/hiking.jpg" width="200" height="200" alt="Health">
+                    <figcaption>Health</figcaption>
+                </picture>
+            </figure>
+        </div>
+        <div class="category-row">
+            <figure>
+                <picture>
+                    <source srcset="./photo/health.jpg" media="(min-width: 1200px)">
+                    <source srcset="./photo/health.jpg" media="(min-width: 768px)">
+                    <img src="./photo/health.jpg" width="200" height="200" alt="Health">
+                    <figcaption>Health</figcaption>
+                </picture>
+            </figure>
+        </div> -->
+        
+
+    </div>
+
+    <table class="category-ist">
         <tr>
             <td>
-                <figure id="1" name="health">
-                    <img src="/photo/health.jpg" width="200" height="200" alt="health and wellbeing">
-                    <div class="category-photo">Health & wellbeing</div>
+                <figure>
+                    <picture>
+                        <source srcset="./photo/health.jpg" media="(min-width: 1200px)">
+                        <source srcset="./photo/health.jpg" media="(min-width: 768px)">
+                        <img src="./photo/health.jpg" width="200" height="200" alt="Health">
+                        <figcaption>Health</figcaption>
+                    </picture>
                 </figure>
+                <!-- <figure id="1" name="health" style="cursor: pointer;">
+                        <img src="./photo/health.jpg" width="200" height="200" alt="health and wellbeing">
+                    <div class="category-photo">Health & wellbeing</div>
+                </figure> -->
             </td>
             <td>
                 <figure id="2" name="hiking">
-                    <img src="/photo/hiking.jpg" width="200" height="200" alt="hiking">
+                    <img src="./photo/hiking.jpg" width="200" height="200" alt="hiking">
                     <div class="category-photo">Hiking</div>
                 </figure>
             </td>
-
         </tr>
         <tr>
             <td>
                 <figure id="3" name="music">
-                    <img src="/photo/music.jpg" width="200" height="200" alt="music">
+                    <img src="./photo/music.jpg" width="200" height="200" alt="music">
                     <div class="category-photo">Music</div>
                 </figure>
             </td>
             <td>
                 <figure id="4" name="party-room">
-                    <img src="/photo/party-room.jpg" width="200" height="200" alt="party game">
+                    <img src="./photo/party-room.jpg" width="200" height="200" alt="party game">
                     <div class="category-photo">Party Game</div>
                 </figure>
             </td>
@@ -83,13 +139,13 @@
         <tr>
             <td>
                 <figure id="5" name="vr-game">
-                    <img src="/photo/vr-game.jpg" width="200" height="200" alt="vr-game">
+                    <img src="./photo/vr-game.jpg" width="200" height="200" alt="vr-game">
                     <div class="category-photo">VR Game</div>
                 </figure>
             </td>
             <td>
                 <figure id="6" name="Hiking">
-                    <img src="/photo/war-game.jpg" width="200" height="200" alt="hiking">
+                    <img src="./photo/war-game.jpg" width="200" height="200" alt="hiking">
                     <div class="category-photo">War Game</div>
                 </figure>
             </td>
@@ -124,7 +180,7 @@
 
             //target = _blank,?
             figure.innerHTML = /*html*/`
-            <img target="_self" src="/photo/category.jpg">
+            <img target="_self" src="./photo/category.jpg">
             <figcaption>
                 <div class="category-name"></div>
             </figcaption>
