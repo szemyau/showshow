@@ -1,0 +1,31 @@
+:root {
+    /* --company-logo: 'cursive'; */
+    /* --font-color:'rgb(255 48 48 / 80%)'; */
+}
+
+.company_name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: auto;
+    font-family: cursive;
+    color: rgb(255 48 48 / 80%);
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.image-container img{
+    /* object-fit:cover; */
+    max-width: 100%;
+    height: 30%;
+    
+}
+
+img:hover{
+    background-color: rgb(33, 28, 28);
+}
