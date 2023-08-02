@@ -47,7 +47,7 @@ body {
     text-decoration: underline;
 }
 
-.email-address-container_primary {
+.email-container_primary {
     /* border: 1px solid #dbdae3;
     border-radius: 2px;
     /* max-width: 100rem; */
@@ -102,7 +102,6 @@ body {
 @media screen and (max-width: 768px) {
   /* CSS styles applied for screens 768px and larger */
   body {
-    background-color: lightblue;
   }
 
   .signup-container_primary {
