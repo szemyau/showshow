@@ -1,13 +1,22 @@
 import express  from 'express'
 import {print} from 'listening-on'
+import { userRoutes } from './user.routes';
 
 let app = express();
 
 app.use("/images", express.static("uploads"));
 app.use(express.static('public'))
+app.use(express.urlencoded())
+
+
 
 app.get('/', (req, res) =>
 res.redirect('/select-category.html'))
+
+app.get('/signup', (req, res) =>
+res.redirect('/signup'))
+
+app.use(userRoutes)
 
 // app.use((req,res) => {
 //     res.status(404)
