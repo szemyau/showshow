@@ -7,7 +7,7 @@ CREATE TABLE "user" (
     password varchar(64) not null,
     role integer not null,
     created_at timestamp not null,
-    updated_at simestamp not null
+    updated_at timestamp not null
 );
 
 create type statusEnum as enum ('active', 'expired', 'cancelled');
