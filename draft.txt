@@ -1,7 +1,4 @@
-CREATE DATABASE tecky;
-
-
-CREATE table "event"(
+CREATE DATABASE "event"(
     id serial primary key,
     name varchar(255)
     creator_id integer,

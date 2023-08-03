@@ -29,12 +29,12 @@ event
 ----
 id pk
 creator_id fk >- user.id
-name text
+name varchar(255)
 preference_id fk >- preference.id
-date date
-time time
+event_date date
+event_time time
 agency varchar(64)
-venue varchar(64)
+venue varchar(255)
 vacancy integer
 quota integer
 status enum('active','expired','cancelled')
