@@ -30,14 +30,12 @@ app.get('/select-category', (req, res) =>{
 //     res.send(`Selected category: ${selectedCategory}`);
 // });
 
-app.get('/signup', (req, res) =>
-res.redirect('/signup'))
 
 
-app.use((req,res) => {
-    res.status(404)
-    res.sendFile(path.resolve('public', '404.html'))
-})
+// app.use((req,res) => {
+//     res.status(404)
+//     res.sendFile(path.resolve('public', '404.html'))
+// })
 
 const port = 8000;
 app.listen(port, () =>
