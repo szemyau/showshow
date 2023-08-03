@@ -5,6 +5,7 @@ npm install -D @types/express;
 npm install -D ts-node typescript @types/node;
 npm i -D ts-node-dev;
 npm i listening-on;
+npm i dotenv;
 
 
 # questions

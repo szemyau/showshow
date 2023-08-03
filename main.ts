@@ -2,6 +2,7 @@ import express  from 'express'
 import {print} from 'listening-on'
 import { userRoutes } from './user.routes';
 import path from "path";
+import { config } from 'dotenv';
 
 let app = express();
 app.use(express.urlencoded({ extended: false }))

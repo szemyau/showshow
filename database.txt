@@ -45,7 +45,7 @@ updated_at timestamp
 preference
 -----
 id pk
-category integer
+category varchar(60)
 created_at timestamp
 updated_at timestamp
 
