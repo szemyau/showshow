@@ -6,6 +6,9 @@ npm install -D ts-node typescript @types/node;
 npm i -D ts-node-dev;
 npm i listening-on;
 npm i dotenv;
+npm install pg;
+npm install -D @types/pg;
+npm i -D gen-env;
 
 
 # questions
