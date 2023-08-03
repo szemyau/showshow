@@ -4,3 +4,4 @@
 //     console.log(e.target.getAttribute('id'));
 //     // window.location.href="home.html"
 // })
+

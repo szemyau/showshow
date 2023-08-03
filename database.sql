@@ -54,3 +54,5 @@ CREATE TABLE "users_preferences" (
     created_at timestamp not null,
     updated_at timestamp not null
 );
+
+insert into 
