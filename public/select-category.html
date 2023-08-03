@@ -53,7 +53,7 @@
 </head>
 
 <body>
-    <form action="/select-category" method="GET">
+    <form action="/select-category/hiking" method="GET">
         <div class="previous-and-next-page">
             <button id="previous"><i class="fa-solid fa-chevron-left"></i></button>
             <button id="next"><i class="fa-solid fa-chevron-right"></i></button>
@@ -62,40 +62,40 @@
         <div class="category-row">
             <div class="interest-choices">
                 <img src="./photo/health.jpg" class="img-thumbnail" alt="health">
-                <label>Health<input type="checkbox" name="health" value="health"></label>
+                <label>Health<input type="checkbox" name="category" value="health"></label>
             </div>
             <div class="interest-choices">
                 <img src="./photo/hiking.jpg" alt="hiking">
-                <label>Hiking<input type="checkbox" name="hiking" value="hiking"></label>
+                <label>Hiking<input type="checkbox" name="category" value="hiking"></label>
             </div>
         </div>
 
         <div class="category-row">
             <div class="interest-choices">
                 <img src="./photo/music.jpg" alt="music">
-                <label>Music<input type="checkbox" name="music" value="music"></label>
+                <label>Music<input type="checkbox" name="category" value="music"></label>
             </div>
             <div class="interest-choices">
                 <img src="./photo/party-room.jpg" alt="music">
-                <label>Party Room<input type="checkbox" name="party-room" value="party-room"></label>
+                <label>Party Room<input type="checkbox" name="category" value="party-room"></label>
             </div>
         </div>
 
         <div class="category-row">
             <div class="interest-choices">
                 <img src="./photo/vr-game.jpg" alt="VR Game">
-                <label>VR Game<input type="checkbox" name="vr-game" value="vr-game"></label>
+                <label>VR Game<input type="checkbox" name="category" value="vr-game"></label>
             </div>
             <div class="interest-choices">
                 <img src="./photo/war-game.jpg" alt="VR Game">
-                <label>War Game<input type="checkbox" name="war-game" value="war-game"></label>
+                <label>War Game<input type="checkbox" name="category" value="war-game"></label>
             </div>
         </div>
     </form>
-    <button id="test">test</button>
+    <!-- <button id="test">test</button> -->
 
     <script src="./js/select-category.js"></script>
-    <script>
+    <!-- <script>
         const nextPage = document.querySelector('#next')
 
       document.querySelector("#test").addEventListener('click', (e) => {
@@ -103,7 +103,7 @@
             console.log("click");
             window.location.href="/home.html"
         })
-    </script>
+    </script> -->
 </body>
 
 </html>
