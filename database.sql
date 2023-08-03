@@ -9,8 +9,6 @@ CREATE TABLE "user" (
     updated_at timestamp
 )
 
-<<<<<<< HEAD
-=======
 CREATE table "event"(
     id serial primary key,
     name varchar(255)
@@ -42,4 +40,3 @@ CREATE TABLE "users_preferences" (
     created_at timestamp not null,
     updated_at timestamp not null
 );
->>>>>>> 908c8ca5b6a335725e9136fb048ea53da864d89c
