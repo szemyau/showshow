@@ -14,15 +14,18 @@ app.use(express.urlencoded())
 app.get('/', (req, res) =>
 res.redirect('/home.html'))
 
-app.get('/select-category', (req, res) =>
-res.redirect('/home.html'))
+app.get('/select-category', (req, res) =>{
+    console.log(req.query)
+    res.redirect('/home.html')
+}
+)
 
-app.use((req, res, next) => {
-  console.log('before using urlencoded', req.url, req.body)
-  next()
-})
+// app.use('/select-category', (req, res, next) => {
+//   console.log('before using urlencoded', req.url, req.body)
+//   next()o
+// })
 
-// app.use((req, res, next) => {
+// app.use('/select-category', (req, res, next) => {
 //   console.log('after using urlencoded', req.url, req.body)
 //   next()
 // })
