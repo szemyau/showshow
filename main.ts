@@ -3,6 +3,7 @@ import { print } from 'listening-on'
 import { userRoutes } from './user.routes';
 import { categoryRoutes } from './routes/category.routes';
 import path from "path";
+import { client } from './database';
 
 let app = express();
 app.use(express.urlencoded({ extended: false }))
@@ -24,6 +25,14 @@ app.get('/', (req, res) =>
 
 app.get('/signup', (req, res) =>
     res.redirect('/signup'))
+
+app.get('/preference', async(req, res) => {
+let id=req.query.id
+let data=(await client.query(`select * from preference where id = $1`,[id])).rows
+
+    res.json(data)
+})
+
 
 app.use((req, res) => {
     res.status(404)

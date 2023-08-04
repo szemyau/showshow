@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div>all hiking events</div>
+    <div id="title"></div>
 
     <script>
         let params = new URL(document.location).searchParams;
@@ -18,10 +18,14 @@
 
 
         async function getEventsByCategory() {
-            let res = await fetch(`/category/event?id=${id}`)
+            let res = await fetch(`/preference?id=${id}`)
             let data = await res.json()
+            document.querySelector("#title").textContent=data[0].category
         }
+        getEventsByCategory()
 
+
+   
     </script>
 </body>
 
