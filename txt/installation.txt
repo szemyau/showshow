@@ -9,7 +9,8 @@ npm i dotenv;
 npm install pg;
 npm install -D @types/pg;
 npm i -D gen-env;
-
+npm i express-validator;
+npm i express-session;
 
 # questions
 
