@@ -2,6 +2,12 @@ import { Router } from 'express'
 import { body, validationResult } from 'express-validator'
 import expressSession from 'express-session'
 import { client } from "./database"
+import { UserCollection } from './userCollection';
+import {Request, Response} from 'express'
+import { checkPassword } from "./hash";
+
+
+
 
 export let userRoutes = Router()
 
@@ -30,33 +36,45 @@ export type User = {
 }
 
 // sign up
-// email uniqueness
-// validation
+// validation function
 const validateRegistration = [
     body('email')
       .isEmail()
-      .withMessage('Invalid email address'),
+      .withMessage('Invalid email address')
+      // check email uniqueness
+      .custom(async value => {        
+        const user:any= await UserCollection.findUserByEmail(value);
+        if (user.length>0) {
+          throw new Error('Email already registered');
+        }
+    }),
     body('password')
       .isLength({ min: 8 })
       .withMessage('Password must be at least 8 characters long')
       .matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]+$/)
       .withMessage(
         'Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number'
-      ),
+     )
 ];
 
 // save data to database
-userRoutes.post('/signup', validateRegistration, async(req:any, res:any) => {
- console.log(req.body);
- 
-    const errors = validationResult(req);
+userRoutes.post('/signup', validateRegistration, async(req:Request, res:Response) => { 
+    const errors = validationResult(req);    
     if (!errors.isEmpty()) {
       const errorMessages = errors.array().map((error) => error.msg);
+      console.log(errorMessages);
       return res.status(400).json({ errors: errorMessages });
     }
 
     let email = req.body.email
     let password = req.body.password
+    let confirmPassword = req.body.confirmPassword
+
+    // check confirmPassword is same as password
+    if(confirmPassword != password) {
+        res.status(400).json("Password not match")
+        return
+    }
 
     let result = await client.query(
         /*sql*/`
