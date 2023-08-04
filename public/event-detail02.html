@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Party Room</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<style>
+body, html {
+  height: 100%;
+  font-family: "Inconsolata", sans-serif;
+}
+
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("/public/photo/room.jpg");
+  min-height: 75%;
+}
+
+.menu {
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<!-- Links (sit on top) -->
+<div class="w3-top">
+  <div class="w3-row w3-padding w3-black">
+    <div class="w3-col s3">
+      <a href="#" class="w3-button w3-block w3-black">HOME</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#about" class="w3-button w3-block w3-black">ABOUT</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#menu" class="w3-button w3-block w3-black">The Room</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#where" class="w3-button w3-block w3-black">WHERE</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header with image -->
+<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
+    <span class="w3-tag"></span>
+  </div>
+  <div class="w3-display-middle w3-center">
+    <span class="w3-text-white" style="font-size:90px">Party<br>Room</span>
+  </div>
+  <div class="w3-display-bottomright w3-center w3-padding-large">
+    <span class="w3-text-white">1103 Exchange Tower , Kowloon Bay , KLN</span>
+  </div>
+</header>
+
+<!-- Add a background color and large text to the whole page -->
+<div class="w3-sand w3-grayscale w3-large">
+
+<!-- About Container -->
+<div class="w3-container" id="about">
+  <div class="w3-content" style="max-width:700px">
+    <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">ABOUT THE Party Room</span></h5>
+    <p>A party room is a designated space within a building or property that is specifically designed and furnished for hosting parties and other social gatherings. It is a place where people can come together to celebrate special occasions, such as birthdays, anniversaries, graduations, and other milestones.
+
+        Party rooms are often equipped with various amenities to enhance the party experience, such as a sound system, lighting, and decorations. They may also have tables and chairs for guests to socialize and enjoy refreshments.
+        
+        Some party rooms are located within restaurants, hotels, or event venues, while others are standalone spaces that can be rented out for private events. They can range in size from small, intimate rooms to large banquet halls that can accommodate hundreds of guests.
+        
+        Overall, party rooms provide a convenient and enjoyable way to host a celebration without having to worry about the logistics of setting up and cleaning up.</p>
+    <p></p>
+    <div class="w3-panel w3-leftbar w3-light-grey">
+      <p><i>A party room include a variety of elements, depending on the specific venue and the type of event being hosted. Here are some common features you might find in a party room</i></p>
+      <p></p>
+    </div>
+    <img src="/public/photo/room01.jpg" style="width:100%;max-width:1000px" class="w3-margin-top">
+    <p><strong>Opening hours:</strong>24 Hours</p>
+    <p><strong>Address:</strong> 1103 Exchange Tower , Kowloon Bay , KLN</p>
+  </div>
+</div>
+
+<!-- Menu Container -->
+<div class="w3-container" id="menu">
+  <div class="w3-content" style="max-width:700px">
+ 
+    <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">THE Room</span></h5>
+  
+    <div class="w3-row w3-center w3-card w3-padding">
+      <a href="javascript:void(0)" onclick="openMenu(event, 'Eat');" id="myLink">
+        <div class="w3-col s6 tablink">Facilities</div>
+      </a>
+      <a href="javascript:void(0)" onclick="openMenu(event, 'Drinks');">
+        <div class="w3-col s6 tablink">Drink</div>
+      </a>
+    </div>
+
+    <div id="Eat" class="w3-container menu w3-padding-48 w3-card">
+      <h5>Dance floor</h5>
+      <p class="w3-text-grey">For events that involve dancing, a designated dance floor may be included</p><br>
+    
+      <h5>Projector and screen</h5>
+      <p class="w3-text-grey">If the party includes a presentation or slideshow, a projector and screen may be available</p><br>
+    
+      <h5>Lighting</h5>
+      <p class="w3-text-grey">Appropriate lighting can set the mood for the party and create a welcoming ambiance</p><br>
+    
+      <h5>Sound system</h5>
+      <p class="w3-text-grey">Music is a key component of many parties, so a good sound system is often provided</p><br>
+    
+      <h5>Bar</h5>
+      <p class="w3-text-grey">If alcohol is being served, a bar area may be provided</p>
+    </div>
+
+    <div id="Drinks" class="w3-container menu w3-padding-48 w3-card">
+      <h5>Margarita</h5>
+      <p class="w3-text-grey">A classic Mexican cocktail made with tequila, lime juice, and orange liqueur, served in a salt-rimmed glass</p><br>
+    
+      <h5>Martini</h5>
+      <p class="w3-text-grey">A traditional gin-based cocktail made with dry vermouth and garnished with an olive or lemon twist</p><br>
+    
+      <h5>Old Fashioned</h5>
+      <p class="w3-text-grey">A whiskey-based cocktail made with simple syrup, bitters, and a twist of orange rind</p><br>
+    
+      <h5>Cosmopolitan</h5>
+      <p class="w3-text-grey">A vodka-based cocktail made with cranberry juice, triple sec, and lime juice, served in a martini glass</p><br>
+    
+      <h5>Mojito</h5>
+      <p class="w3-text-grey">A refreshing Cuban cocktail made with white rum, lime juice, sugar, mint leaves, and a splash of soda water</p>
+    </div>  
+    <img src="/public/photo/cocktail.jpg" style="width:100%;max-width:1000px;margin-top:32px;">
+  </div>
+</div>
+
+<!-- Contact/Area Container -->
+<div class="w3-container" id="where" style="padding-bottom:32px;">
+  <div class="w3-content" style="max-width:700px">
+    <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">WHERE TO FIND US</span></h5>
+    <p>Find us at some address at some place.</p>
+    <img src="/public/photo/location.jpg" class="w3-image" style="width:100%">
+    <p><span class="w3-tag">FYI!</span> We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste.</p>
+    <p><strong>Reserve</strong> the room, ask for today's special or just send us a message:</p>
+    <form action="/action_page.php" target="_blank">
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="How many people" required name="People"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date and time" required name="date" value="2020-11-16T20:00"></p>
+      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
+      <p><button class="w3-button w3-black" type="submit">SEND MESSAGE</button></p>
+    </form>
+  </div>
+</div>
+
+<!-- End page content -->
+</div>
+
+<script>
+// Tabbed Menu
+function openMenu(evt, menuName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("menu");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
+  }
+  document.getElementById(menuName).style.display = "block";
+  evt.currentTarget.firstElementChild.className += " w3-dark-grey";
+}
+document.getElementById("myLink").click();
+</script>
+
+</body>
+</html>
