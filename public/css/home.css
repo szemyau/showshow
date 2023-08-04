@@ -44,6 +44,7 @@
     font-family: Arial, Helvetica, sans-serif;
     text-transform: uppercase;
     padding: 1rem;
+    font-weight: bold;
 }
 
 .category-photo-container {
@@ -54,4 +55,9 @@
 
 a.btn.btn-primary {
     size: 1rem;
+}
+
+#choices-container {
+    height: 10rem;
+    background-color: pink;
 }

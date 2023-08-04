@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Home</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/home.css">
@@ -13,7 +13,7 @@
 <body>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <div class="company_name">Show</div>
+      <div class="company_name">Sshow</div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
         aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -44,21 +44,22 @@
   <div class="faded">
     <img src="./photo/home-banner.jpg" class="home-banner" alt="event banner">
   </div>
+  <div id="choices-container">
 
-  <div class="about-your-choices">About your choices</div>
+    <div class="about-your-choices">About your choices</div>
 
+    <!-- add id  -->
+    <div class="category-photo-container d-flex flex-wrap" id="category-container">
 
-  <!-- <div class="category-photo-container d-flex flex-wrap">
-
-    <div class="card" style="width: 10rem;" id="hiking">
-      <img src="./photo/hiking.jpg" class="card-img-top" alt="hiking">
-      <div class="card-body">
-        <div class="card-title d-flex justify-content-center">Hiking</div>
-        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+      <div class="card" style="width: 10rem;" id="hiking">
+        <img src="./photo/hiking-choice.jpg" class="card-img-top" alt="hiking">
+        <div class="card-body">
+          <div class="card-title d-flex justify-content-center">Hiking</div>
+          <a href="/category.html?id=1" class="btn btn-primary btn-sm">Go somewhere</a>
+        </div>
       </div>
-    </div>
       <div class="card" style="width:10rem;" id="health">
-        <img src="./photo/health.jpg" class="card-img-top" alt="health">
+        <img src="./photo/yoga-choice.jpg" class="card-img-top" alt="health">
         <div class="card-body">
           <div class="card-title d-flex justify-content-center">Health</div>
           <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
@@ -88,31 +89,38 @@
           <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
         </div>
       </div>
-    
 
-  </div> -->
-
-  <!-- <div class="category-photo-container d-flex flex-wrap border border-1">
-    <div class="row justify-content-around w-100">
-      <div class="col-5">
-        <div class="card" id="hiking">
-          <img src="./photo/hiking.jpg" class="card-img-top w-100 " alt="hiking">
-          <div class="card-body">
-            <div class="card-title d-flex justify-content-center">Hiking</div>
-            <a href="#" class="btn btn-primary btn-sm d-flex justify-content-center">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-5">
-        <div class="card" id="health">
-          <img src="./photo/health.jpg" class="card-img-top w-100 " alt="health">
-          <div class="card-body">
-            <div class="card-title d-flex justify-content-center">Health</div>
-            <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
-          </div>
+      <div class="card" style="width: 10rem;" id="war-game">
+        <img src="./photo/party-room.jpg" class="card-img-top" alt="party-room">
+        <div class="card-body">
+          <div class="card-title d-flex justify-content-center">Party Room</div>
+          <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
         </div>
       </div>
     </div>
+  </div>
+  <br>
+
+  <div class="about-your-choices">Look for more</div>
+
+
+  <!-- <div class="category-photo-container d-flex flex-wrap">
+
+    <div class="card" style="width: 10rem;" id="hiking">
+      <img src="./photo/hiking-choice.jpg" class="card-img" alt="hiking">
+      <div class="card-body">
+        <div class="card-title d-flex justify-content-center">Hiking</div>
+        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+      </div>
+    </div>
+    <div class="card" style="width:10rem;" id="health">
+      <img src="./photo/yoga-choice.jpg" class="card-img-top" alt="health">
+      <div class="card-body">
+        <div class="card-title d-flex justify-content-center">Health</div>
+        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+      </div>
+    </div>
+
     <div class="card" style="width: 10rem;" id="music">
       <img src="./photo/music.jpg" class="card-img-top" alt="music">
       <div class="card-body">
@@ -137,13 +145,15 @@
       </div>
     </div>
 
+    <div class="card" style="width: 10rem;" id="war-game">
+      <img src="./photo/party-room.jpg" class="card-img-top" alt="party-room">
+      <div class="card-body">
+        <div class="card-title d-flex justify-content-center">Party Room</div>
+        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+      </div>
+    </div>
 
   </div> -->
-
-
-
-
-
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"

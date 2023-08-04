@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>all hiking events</div>
+
+    <script>
+        let params = new URL(document.location).searchParams;
+        let id = params.get("id")
+
+        console.log({ id });
+
+
+        async function getEventsByCategory() {
+            let res = await fetch(`/category/event?id=${id}`)
+            let data = await res.json()
+        }
+
+    </script>
+</body>
+
+</html>

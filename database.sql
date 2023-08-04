@@ -55,4 +55,29 @@ CREATE TABLE "users_preferences" (
     updated_at timestamp not null
 );
 
-insert into 
+-- 1 -> member
+-- 2 -> admin
+
+create type roleEnum as enum ('admin', 'member');
+
+alter TABLE "user"
+add column roleEnum roleEnum;
+
+update "user"
+set roleEnum = 'admin'
+where role = 2;
+
+update "user"
+set roleEnum = 'member'
+where role = 1;
+
+alter TABLE "user"
+drop column role;
+
+alter table "user"
+rename column roleEnum to role;
+
+alter type roleEnum rename to user_role;
+
+alter TABLE "user"
+alter column role set not null;
