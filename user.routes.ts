@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { body, validationResult } from 'express-validator'
 import expressSession from 'express-session'
-
+import { client } from "./database"
 
 export let userRoutes = Router()
 
@@ -29,12 +29,8 @@ export type User = {
     password: string
 }
 
-let users: User[] = []
-let maxId = users.reduce((id, user) => Math.max(id, user.id), 0)
-
-
-
 // sign up
+// email uniqueness
 // validation
 const validateRegistration = [
     body('email')
@@ -49,36 +45,41 @@ const validateRegistration = [
       ),
 ];
 
-// send data to server
-userRoutes.post('/signup', validateRegistration, (req:any, res:any) => {
+// save data to database
+userRoutes.post('/signup', validateRegistration, async(req:any, res:any) => {
+ console.log(req.body);
+ 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       const errorMessages = errors.array().map((error) => error.msg);
       return res.status(400).json({ errors: errorMessages });
     }
 
-// Registration logic if validation passes
-    maxId++
     let email = req.body.email
     let password = req.body.password
 
-    users.push({
-        id: maxId,
-        email: email,
-        password: password,
-    })
-    console.log(`users:`, users)
-    console.log(`request body:`, req.body)
+    let result = await client.query(
+        /*sql*/`
+        insert into "user" (email, password, role, created_at, updated_at) values ($1, $2, $3, now(), now())
+        returning id`,
+        [email, password, 1],
+    );
+
+    const insertedUserId = result.rows[0].id;
+   
+    console.log(`insertedUserId:`, insertedUserId)
     res.json({})
 })
+
+
 
 
 // login
 userRoutes.get('/users', (req, res) => {
     res.json(
-        users.map(user => ({
-            id: user.id,
-            email: user.email,
-        }))
+        // users.map(user => ({
+        //     id: user.id,
+        //     email: user.email,
+        // }))
     )
 })
