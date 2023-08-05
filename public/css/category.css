@@ -1,0 +1,36 @@
+.event-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* justify-content: flex-start; */
+    width: 90%;
+    margin: 10rem auto 5rem; /* Center the container horizontally */
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.card img {
+    width: 20%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+.card-content {
+    padding: 30px;
+}
+
+.card p {
+    text-align: left;
+}

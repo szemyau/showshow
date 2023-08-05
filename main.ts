@@ -22,16 +22,14 @@ app.get('/select-category', (req, res) => {
 app.get('/', (req, res) =>
     res.redirect('/home.html'))
 
-
-app.get('/signup', (req, res) =>
-    res.redirect('/signup'))
-
-app.get('/preference', async(req, res) => {
-let id=req.query.id
-let data=(await client.query(`select * from preference where id = $1`,[id])).rows
-
+app.get('/category', async(req, res) => {
+    let id=req.query.id
+    let data=(await client.query(`select * from preference where id = $1`,[id])).rows
     res.json(data)
 })
+
+
+
 
 
 app.use((req, res) => {

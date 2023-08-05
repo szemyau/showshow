@@ -81,3 +81,18 @@ alter type roleEnum rename to user_role;
 
 alter TABLE "user"
 alter column role set not null;
+
+-- change preference to category
+alter TABLE preference
+rename to category;
+
+ALTER SEQUENCE preference_id_seq RENAME TO category_id_seq;
+
+alter TABLE users_preferences
+rename to users_categories;
+
+ALTER SEQUENCE users_preferences_id_seq RENAME TO users_categories_id_seq;
+
+ALTER TABLE users_categories
+DROP CONSTRAINT fk_users_categories_preference;
+
