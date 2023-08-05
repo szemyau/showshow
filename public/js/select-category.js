@@ -8,5 +8,5 @@
 app.post('/select-category', (req, res) => {
     let categoryForm = req.query.name
 
-    let categoryContainer: Array<string | number> = []
+    // let categoryContainer: Array<string | number> = []
 })

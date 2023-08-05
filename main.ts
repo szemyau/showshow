@@ -1,6 +1,6 @@
 import express from 'express'
 import { print } from 'listening-on'
-import { userRoutes } from './user.routes';
+import { userRoutes } from './routes/user.routes';
 import { categoryRoutes } from './routes/category.routes';
 import path from "path";
 import { client } from './database';
@@ -22,9 +22,9 @@ app.get('/select-category', (req, res) => {
 app.get('/', (req, res) =>
     res.redirect('/home.html'))
 
-app.get('/category', async(req, res) => {
-    let id=req.query.id
-    let data=(await client.query(`select * from preference where id = $1`,[id])).rows
+app.get('/category', async (req, res) => {
+    let id = req.query.id
+    let data = (await client.query(`select * from preference where id = $1`, [id])).rows
     res.json(data)
 })
 
