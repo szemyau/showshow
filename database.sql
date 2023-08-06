@@ -28,6 +28,7 @@ CREATE table "event"(
     updated_at timestamp
 );
 
+-- already changed the table name from preference to category
 CREATE TABLE "preference" (
     id serial primary key,
     category varchar(60),
@@ -94,8 +95,7 @@ rename to users_categories;
 
 ALTER SEQUENCE users_preferences_id_seq RENAME TO users_categories_id_seq;
 
-alter TABLE users_categories
-rename column preference_id to category_id;
+alter table users_categories rename preference_id to category_id;
 
 -- ADDED BY KATY ON 6 AUG 2023
 -- add column category_id to table event and insert data
@@ -189,3 +189,46 @@ updated_at timestamp
 # users_preferences (478, 136)
 # zoom: 0.900
 # participants_events (867, 352)
+-- just take a look on updated table on 6 Aug by chloe
+CREATE TABLE "user" (
+    id serial primary key,
+    email varchar(64) not null,
+    password varchar(64) not null,
+    role user_role not null,
+    created_at timestamp not null,
+    updated_at timestamp not null
+);
+
+CREATE table "event"(
+    id serial primary key,
+    name varchar(255),
+    creator_id integer,
+    foreign key (creator_id) references "user"(id),
+    event_date date,
+    event_time time,
+    agency varchar(64),
+    venue  varchar(255),
+    vacancy integer,
+    quota integer,
+    status statusEnum default 'active',
+    created_at timestamp,
+    updated_at timestamp,
+    category_id integer REFERENCES "category"(id)
+);
+
+CREATE TABLE "category" (
+    id serial primary key,
+    category varchar(60),
+    created_at timestamp not null,
+    updated_at timestamp not null
+);
+
+CREATE TABLE "users_categories" (
+    id serial primary key,
+    user_id integer,
+    FOREIGN KEY (user_id) REFERENCES "user"(id),
+    category_id integer,
+    FOREIGN KEY (category_id) REFERENCES "category"(id),
+    created_at timestamp not null,
+    updated_at timestamp not null
+);
