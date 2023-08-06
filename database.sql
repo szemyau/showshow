@@ -95,14 +95,8 @@ rename to users_categories;
 
 ALTER SEQUENCE users_preferences_id_seq RENAME TO users_categories_id_seq;
 
--- chloe read the old version, but hold on, pls dont do anything this command
--- fail to command
-ALTER TABLE users_categories
-DROP CONSTRAINT fk_users_categories_preference;
-alter TABLE users_categories
-rename column preference_id to category_id;
+alter table users_categories rename preference_id to category_id;
 
--- katy's version
 -- ADDED BY KATY ON 6 AUG 2023
 -- add column category_id to table event and insert data
 ALTER TABLE event
@@ -115,7 +109,7 @@ values ('Hiking at Lion Rock', 1, '2023-08-06', '13:00:00', null, 'Lion Rock', 1
 ('Hiking at Victoria Peak', 2, '2023-08-17', '13:00:00', null, 'Victoria Peak', 7, 7, 'active', now(), now());
 
 
--- just take a look on updated table 
+-- just take a look on updated table on 6 Aug by chloe
 CREATE TABLE "user" (
     id serial primary key,
     email varchar(64) not null,
@@ -138,7 +132,8 @@ CREATE table "event"(
     quota integer,
     status statusEnum default 'active',
     created_at timestamp,
-    updated_at timestamp
+    updated_at timestamp,
+    category_id integer REFERENCES "category"(id)
 );
 
 CREATE TABLE "category" (
