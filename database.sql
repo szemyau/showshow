@@ -82,6 +82,7 @@ alter type roleEnum rename to user_role;
 alter TABLE "user"
 alter column role set not null;
 
+-- ADDED BY KATY ON 5 AUG 2023
 -- change preference to category
 alter TABLE preference
 rename to category;
@@ -95,5 +96,16 @@ ALTER SEQUENCE users_preferences_id_seq RENAME TO users_categories_id_seq;
 
 alter TABLE users_categories
 rename column preference_id to category_id;
+
+-- ADDED BY KATY ON 6 AUG 2023
+-- add column category_id to table event and insert data
+ALTER TABLE event
+ADD COLUMN category_id integer REFERENCES "category"(id);
+
+-- demo data for table event
+insert into event (name, creator_id, event_date, event_time, agency, venue, vacancy, quota, status, created_at, updated_at)
+values ('Hiking at Lion Rock', 1, '2023-08-06', '13:00:00', null, 'Lion Rock', 10, 10, 'active', now(), now()),
+('Hiking at Tai Mo Shan', 2, '2023-08-16', '13:00:00', null, 'Tai Mo Shan', 5, 5, 'active', now(), now()),
+('Hiking at Victoria Peak', 2, '2023-08-17', '13:00:00', null, 'Victoria Peak', 7, 7, 'active', now(), now());
 
 
