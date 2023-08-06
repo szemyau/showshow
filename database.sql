@@ -93,6 +93,7 @@ rename to users_categories;
 
 ALTER SEQUENCE users_preferences_id_seq RENAME TO users_categories_id_seq;
 
-ALTER TABLE users_categories
-DROP CONSTRAINT fk_users_categories_preference;
+alter TABLE users_categories
+rename column preference_id to category_id;
+
 
