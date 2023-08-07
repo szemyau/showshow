@@ -16,7 +16,7 @@
   <body>
     <template id="cardTemplate">
       <a class="card">
-        <img src="./photo/hiking-choice.jpg" alt="hiking" />
+        <img src="./photo/hiking.jpg" alt="hiking" />
         <div class="card-content">
           <p class="event-datetime">event date and time</p>
           <p class="event-name">event name</p>
@@ -28,8 +28,10 @@
         </div>
       </a>
     </template>
+
+    
     <div id="cardList" class="event-container">
-      <div class="card">
+      <!-- <div class="card">
         <img src="./photo/hiking-choice.jpg" alt="hiking" />
         <div class="card-content">
           <p class="event-datetime">event date and time</p>
@@ -40,29 +42,16 @@
             <span class="event-quota">quota</span>
           </p>
         </div>
-      </div>
-      <div class="card">
-        <img src="./photo/hiking-choice.jpg" alt="hiking" />
-        <div class="card-content">
-          <p class="card-title">event date and time</p>
-          <p class="card-title">event name</p>
-          <p class="card-title">vacancy</p>
-        </div>
-      </div>
-      <div class="card">
-        <img src="./photo/hiking-choice.jpg" alt="hiking" />
-        <div class="card-content">
-          <p class="card-title">event date and time</p>
-          <p class="card-title">event name</p>
-          <p class="card-title">vacancy</p>
-        </div>
-      </div>
+      </div> -->
+
     </div>
 
     <script>
       function demo() {
         // ajax load
         let json = {
+          let res = await fetch(`/event-list?id=${id}`);
+          let data = await res.json();
           events: [
             {
               id: 8,
@@ -104,7 +93,7 @@
       // getCategory()
 
       async function getEventsByCategory() {
-        let res = await fetch(`/category?id=${id}`);
+        let res = await fetch(`/event-list?id=${id}`);
         let data = await res.json();
         console.log({ res });
         console.log({ data });
