@@ -68,6 +68,7 @@ app.get('/select-category', async (req, res, next) => {
 app.get('/', (req, res) =>
     res.redirect('/select-category.html'))
 
+// loading tables category and event data pass to frontend
 app.get('/category', async (req, res) => {
     try {
         let id = req.query.id;
