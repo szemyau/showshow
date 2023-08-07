@@ -27,6 +27,7 @@
     "@types/node": "^20.4.5",
     "@types/pg": "^8.10.2",
     "gen-env": "^1.0.1",
+    "quick-erd": "^4.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.1.6"
   }
