@@ -1,81 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/category.css">
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/category.css" />
+  </head>
 
-<body>
-    <div id="title" class="event-container">
-        <div class="card">
-            <img src="./photo/hiking-choice.jpg" alt="hiking">
-            <div class="card-content">
-                <p class="event-datetime">event date and time</p>
-                <p class="event-name">event name</p>
-                <p>
-                    <span class="event-vacancy">vacancy</span>
-                    <span> / </span>
-                    <span class="event-quota">quota</span>
-                </p>
-
-            </div>
+  <body>
+    <template id="cardTemplate">
+      <a class="card">
+        <img src="./photo/hiking-choice.jpg" alt="hiking" />
+        <div class="card-content">
+          <p class="event-datetime">event date and time</p>
+          <p class="event-name">event name</p>
+          <p>
+            <span class="event-vacancy">vacancy</span>
+            <span> / </span>
+            <span class="event-quota">quota</span>
+          </p>
         </div>
-        <div class="card">
-            <img src="./photo/hiking-choice.jpg" alt="hiking">
-            <div class="card-content">
-                <p class="card-title">event date and time</p>
-                <p class="card-title">event name</p>
-                <p class="card-title">vacancy</p>
-            </div>
+      </a>
+    </template>
+    <div id="cardList" class="event-container">
+      <div class="card">
+        <img src="./photo/hiking-choice.jpg" alt="hiking" />
+        <div class="card-content">
+          <p class="event-datetime">event date and time</p>
+          <p class="event-name">event name</p>
+          <p>
+            <span class="event-vacancy">vacancy</span>
+            <span> / </span>
+            <span class="event-quota">quota</span>
+          </p>
         </div>
-        <div class="card">
-            <img src="./photo/hiking-choice.jpg" alt="hiking">
-            <div class="card-content">
-                <p class="card-title">event date and time</p>
-                <p class="card-title">event name</p>
-                <p class="card-title">vacancy</p>
-            </div>
+      </div>
+      <div class="card">
+        <img src="./photo/hiking-choice.jpg" alt="hiking" />
+        <div class="card-content">
+          <p class="card-title">event date and time</p>
+          <p class="card-title">event name</p>
+          <p class="card-title">vacancy</p>
         </div>
+      </div>
+      <div class="card">
+        <img src="./photo/hiking-choice.jpg" alt="hiking" />
+        <div class="card-content">
+          <p class="card-title">event date and time</p>
+          <p class="card-title">event name</p>
+          <p class="card-title">vacancy</p>
+        </div>
+      </div>
     </div>
 
-
     <script>
-        let params = new URL(document.location).searchParams;
-        let id = params.get("id")
-
-        console.log({ id });
-
-        // async function getCategory() {
-        //     let res = await fetch(`/category?id=${id}`)
-        //     let categoryData = await res.json()
-        //     console.log({ res });
-        //     console.log({ categoryData });
-        //     document.querySelector("#title").textContent=data[0].category
-
-        // }
-        // getCategory()
-
-        async function getEventsByCategory() {
-            let res = await fetch(`/category?id=${id}`)
-            let data = await res.json()
-            console.log({ res });
-            console.log({ data });
-            document.querySelector(".event-datetime").textContent=data.eventData[0].event_date + ' ' + data.eventData[0].event_time
-            document.querySelector(".event-name").textContent=data.eventData[0].name
-            document.querySelector(".event-vacancy").textContent=data.eventData[0].vacancy
-            document.querySelector(".event-quota").textContent=data.eventData[0].quota
-
-
+      function demo() {
+        // ajax load
+        let json = {
+          events: [
+            {
+              id: 8,
+              category_id: 1,
+              name: "Yaga 101",
+            },
+            {
+              id: 2,
+              category_id: 2,
+              name: "Summer Party",
+            },
+          ],
+        };
+        cardList.textContent = "";
+        for (let event of json.events) {
+          let node = cardTemplate.content.cloneNode(true);
+          node.querySelector(
+            "a"
+          ).href = `/event-detail0${event.category_id}.html?id=${event.id}`;
+          node.querySelector(".event-name").textContent = event.name;
+          cardList.appendChild(node);
         }
-        getEventsByCategory()
+      }
+      demo();
 
-   
+      let params = new URL(document.location).searchParams;
+      let id = params.get("id");
+
+      console.log({ id });
+
+      // async function getCategory() {
+      //     let res = await fetch(`/category?id=${id}`)
+      //     let categoryData = await res.json()
+      //     console.log({ res });
+      //     console.log({ categoryData });
+      //     document.querySelector("#title").textContent=data[0].category
+
+      // }
+      // getCategory()
+
+      async function getEventsByCategory() {
+        let res = await fetch(`/category?id=${id}`);
+        let data = await res.json();
+        console.log({ res });
+        console.log({ data });
+        document.querySelector(".event-datetime").textContent =
+          data.eventData[0].event_date + " " + data.eventData[0].event_time;
+        document.querySelector(".event-name").textContent =
+          data.eventData[0].name;
+        document.querySelector(".event-vacancy").textContent =
+          data.eventData[0].vacancy;
+        document.querySelector(".event-quota").textContent =
+          data.eventData[0].quota;
+      }
+      getEventsByCategory();
     </script>
-</body>
-
+  </body>
 </html>

@@ -109,126 +109,23 @@ values ('Hiking at Lion Rock', 1, '2023-08-06', '13:00:00', null, 'Lion Rock', 1
 ('Hiking at Victoria Peak', 2, '2023-08-17', '13:00:00', null, 'Victoria Peak', 7, 7, 'active', now(), now());
 
 
+-- update event table
+alter table event
+add column about text;
 
-
-
--- UP-TO-DATE FINAL VERSION
-# Visualize on https://erd.surge.sh
-#
-# Relationship Types
-#  -    - one to one
-#  -<   - one to many
-#  >-   - many to one
-#  >-<  - many to many
-#  -0   - one to zero or one
-#  0-   - zero or one to one
-#  0-0  - zero or one to zero or one
-#  -0<  - one to zero or many
-#  >0-  - zero or many to one
-#
-////////////////////////////////////
-
-
-user
-----
-id pk
-email varchar(64)
-password varchar(64)
-role enum('admin','member')
-created_at timestamp
-updated_at timestamp
-
-
-event
-----
-id pk
-creator_id fk >- user.id
-name text
-category_id fk >- category.id
-date date
-time time
-agency varchar(64)
-venue varchar(64)
-vacancy integer
-quota integer
-status enum('active','expired','cancelled')
-created_at timestamp
-updated_at timestamp
-
-
-preference
------
-id pk
-category integer
-created_at timestamp
-updated_at timestamp
-
-
-participants_events
------
-id pk
-user_id fk >- user.id
-event_id fk >- event.id
-created_at timestamp
-updated_at timestamp
-
-
-users_preferences
------
-id pk
-user_id fk >- user.id
-category_id fk >- category.id
-created_at timestamp
-updated_at timestamp
-
-
-# user (497, 355)
-# view: (0, 0)
-# event (864, 639)
-# preference (146, 136)
-# users_preferences (478, 136)
-# zoom: 0.900
-# participants_events (867, 352)
--- just take a look on updated table on 6 Aug by chloe
-CREATE TABLE "user" (
-    id serial primary key,
-    email varchar(64) not null,
-    password varchar(64) not null,
-    role user_role not null,
-    created_at timestamp not null,
-    updated_at timestamp not null
+delete from event;
+insert into event
+(name, about, venue)
+values
+(
+ 'yoga101'
+,'
+Yoga is an ancient practice that originated in India over 5,000 years ago. It is a holistic system that emphasizes the union of the mind, body, and spirit. The word "yoga" comes from the Sanskrit word "yuj," which means to yoke or unite.
+Yoga includes a variety of practices, such as physical postures (asanas), breathing exercises (pranayama), meditation, and ethical guidelines. The physical postures, or asanas, are the most commonly known aspect of yoga in the West. They are designed to strengthen and stretch the body while promoting relaxation and reducing stress.
+Yoga has numerous health benefits, both physical and mental. It can improve flexibility, balance, strength, and endurance, as well as reduce the risk of chronic diseases such as heart disease, diabetes, and high blood pressure. Yoga is also effective in reducing stress, anxiety, and depression and promoting mental well-being.
+There are many different styles of yoga, each with its own unique approach and focus. Some popular types of yoga include Hatha yoga, Vinyasa yoga, Bikram yoga, and Kundalini yoga.
+Yoga can be practiced by people of all ages and fitness levels. It is a non-competitive practice that encourages self-awareness, self-acceptance, and self-care. With regular practice, yoga can help individuals lead a more balanced, peaceful, and healthy life.
+'
+,'1103 Exchange Tower , Kowloon Bay , KLN'
 );
 
-CREATE table "event"(
-    id serial primary key,
-    name varchar(255),
-    creator_id integer,
-    foreign key (creator_id) references "user"(id),
-    event_date date,
-    event_time time,
-    agency varchar(64),
-    venue  varchar(255),
-    vacancy integer,
-    quota integer,
-    status statusEnum default 'active',
-    created_at timestamp,
-    updated_at timestamp,
-    category_id integer REFERENCES "category"(id)
-);
-
-CREATE TABLE "category" (
-    id serial primary key,
-    category varchar(60),
-    created_at timestamp not null,
-    updated_at timestamp not null
-);
-
-CREATE TABLE "users_categories" (
-    id serial primary key,
-    user_id integer,
-    FOREIGN KEY (user_id) REFERENCES "user"(id),
-    category_id integer,
-    FOREIGN KEY (category_id) REFERENCES "category"(id),
-    created_at timestamp not null,
-    updated_at timestamp not null
-);
