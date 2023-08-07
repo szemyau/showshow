@@ -80,7 +80,7 @@ userRoutes.post('/signup', validateRegistration, async (req: Request, res: Respo
         /*sql*/`
         insert into "user" (email, password, role, created_at, updated_at) values ($1, $2, $3, now(), now())
         returning id`,
-    [email, password, 1],
+    [email, password, '1'],
   );
 
   const insertedUserId = result.rows[0].id;
