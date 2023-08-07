@@ -15,6 +15,7 @@
 
 }
 
+/* nav-bar */
 .navbar-nav {
     display: flex;
     justify-content: flex-end;
@@ -39,25 +40,43 @@
     opacity: 0.5;
 }
 
+/*  card-images  */
+.card {
+    width: 10rem;
+}
+
+.card-title {
+    display: flex;
+    justify-content: center;
+}
+
 .about-your-choices {
     font-size: 1rem;
     font-family: Arial, Helvetica, sans-serif;
     text-transform: uppercase;
-    padding: 1rem;
     font-weight: bold;
+    margin: 0.5rem;
+}
+
+#choices-container {
+    background-color: pink;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    /* overflow: auto; */
+    overflow-x: scroll;
+    white-space: nowrap;
 }
 
 .category-photo-container {
-    width: 22rem;
+    /* width: 22rem; */
     height: 20rem;
-    padding: 1rem;
+    /* padding: 1rem; */
+    align-items: baseline;
+    justify-content: space-evenly;
+    display: inline-block;
+    gap: 3px;
 }
 
 a.btn.btn-primary {
     size: 1rem;
-}
-
-#choices-container {
-    height: 10rem;
-    background-color: pink;
 }

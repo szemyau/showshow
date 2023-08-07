@@ -9,6 +9,7 @@
     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/home.css">
 
+
 </head>
 
 <body>
@@ -24,19 +25,22 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Upcoming events</a>
+            <a class="nav-link active" href="/showshow/public/home.html">Home</a>
           </li>
+          <!-- not yet create past-event html -->
           <li class="nav-item">
-            <a class="nav-link active" href="#">Past events</a>
+            <a class="nav-link active" href="/showshow/public/past-event.html">Past events</a>
           </li>
+
           <li class="nav-item">
             <a class="nav-link active" href="#">Create an event</a>
           </li>
+          <!-- not yet create log-in html -->
           <li class="nav-item">
-            <a class="nav-link active" href="#">Log In</a>
+            <a class="nav-link active" href="/showshow/public/login.html">Log In</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Sign Up</a>
+            <a class="nav-link active" href="/showshow/public/signup.html">Sign Up</a>
           </li>
         </ul>
       </div>
@@ -47,116 +51,106 @@
   <div class="faded">
     <img src="./photo/home-banner.jpg" class="home-banner" alt="event banner">
   </div>
+
+
   <div id="choices-container">
 
-    <div class="about-your-choices">About your choices</div>
+    <div class="about-your-choices">About your choices
 
-    <!-- add id  -->
-    <div class="category-photo-container d-flex flex-wrap" id="category-container">
+      <div class="category-photo-container d-flex flex-wrap" id="category-container">
+        <!--TODO do i need to create a form to build up the connection with html and server -->
+        <form action="/selected-category">
 
+        </form>
 
-      <!-- <div class="card" style="width:10rem;" id="health">
-        <img src="./photo/yoga-choice.jpg" class="card-img-top" alt="health">
-        <div class="card-body">
-          <div class="card-title d-flex justify-content-center">Health</div>
-          <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+        <!-- <div class="card" id="hiking">
+          <img src="./photo/hiking-category.jpg" class="card-img-top" alt="hiking">
+          <div class="card-body">
+            <div class="card-title">Hiking</div>
+            <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
+          </div>
         </div>
-      </div>
 
-      <div class="card" style="width: 10rem;" id="music">
-        <img src="./photo/music.jpg" class="card-img-top" alt="music">
-        <div class="card-body">
-          <div class="card-title d-flex justify-content-center">Music</div>
-          <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+        <div class="card" id="health">
+          <img src="./photo/health-cagtegory.jpg" class="card-img-top" alt="health">
+          <div class="card-body">
+            <div class="card-title">Health</div>
+            <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+          </div>
         </div>
-      </div>
 
-      <div class="card" style="width: 10rem;" id="vr-game">
-        <img src="./photo/vr-game.jpg" class="card-img-top" alt="vr-game">
-        <div class="card-body">
-          <div class="card-title d-flex justify-content-center">VR Game</div>
-          <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+        <div class="card" id="music">
+          <img src="./photo/music-cagtegory.jpg" class="card-img-top" alt="music">
+          <div class="card-body">
+            <div class="card-title">Music</div>
+            <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+          </div>
         </div>
-      </div>
 
-      <div class="card" style="width: 10rem;" id="war-game">
-        <img src="./photo/war-game.jpg" class="card-img-top" alt="war-game">
-        <div class="card-body">
-          <div class="card-title d-flex justify-content-center">War Game</div>
-          <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+        <div class="card" id="vr-game">
+          <img src="./photo/vr-game-cagtegory.jpg" class="card-img-top" alt="vr-game">
+          <div class="card-body">
+            <div class="card-title">VR Game</div>
+            <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+          </div>
         </div>
+
+        <div class="card" id="war-game">
+          <img src="./photo/war-game-category.jpg" class="card-img-top" alt="war-game">
+          <div class="card-body">
+            <div class="card-title">War Game</div>
+            <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+          </div>
+        </div>
+
+        <div class="card" id="party-room">
+          <img src="./photo/party-room.jpg" class="card-img-top" alt="party-room">
+          <div class="card-body">
+            <div class="card-title">Party Room</div>
+            <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+          </div> -->
+
+
       </div>
-
-      <div class="card" style="width: 10rem;" id="war-game">
-        <img src="./photo/party-room.jpg" class="card-img-top" alt="party-room">
-        <div class="card-body">
-          <div class="card-title d-flex justify-content-center">Party Room</div>
-          <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
-        </div> -->
-
     </div>
   </div>
-  </div>
-  <br>
 
-  <div class="about-your-choices">Look for more</div>
-
-
-  <!-- <div class="category-photo-container d-flex flex-wrap">
-
-    <div class="card" style="width: 10rem;" id="hiking">
-      <img src="./photo/hiking-choice.jpg" class="card-img" alt="hiking">
-      <div class="card-body">
-        <div class="card-title d-flex justify-content-center">Hiking</div>
-        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
-      </div>
-    </div>
-    <div class="card" style="width:10rem;" id="health">
-      <img src="./photo/yoga-choice.jpg" class="card-img-top" alt="health">
-      <div class="card-body">
-        <div class="card-title d-flex justify-content-center">Health</div>
-        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
-      </div>
-    </div>
-
-    <div class="card" style="width: 10rem;" id="music">
-      <img src="./photo/music.jpg" class="card-img-top" alt="music">
-      <div class="card-body">
-        <div class="card-title d-flex justify-content-center">Music</div>
-        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
-      </div>
-    </div>
-
-    <div class="card" style="width: 10rem;" id="vr-game">
-      <img src="./photo/vr-game.jpg" class="card-img-top" alt="vr-game">
-      <div class="card-body">
-        <div class="card-title d-flex justify-content-center">VR Game</div>
-        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
-      </div>
-    </div>
-
-    <div class="card" style="width: 10rem;" id="war-game">
-      <img src="./photo/war-game.jpg" class="card-img-top" alt="war-game">
-      <div class="card-body">
-        <div class="card-title d-flex justify-content-center">War Game</div>
-        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
-      </div>
-    </div>
-
-    <div class="card" style="width: 10rem;" id="war-game">
-      <img src="./photo/party-room.jpg" class="card-img-top" alt="party-room">
-      <div class="card-body">
-        <div class="card-title d-flex justify-content-center">Party Room</div>
-        <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
-      </div>
-    </div>
-
-  </div> -->
-  <script src="/showshow/public/js/home.js"></script>
+  <!-- <div class="about-your-choices">Look for more</div> -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
+
+  <script src="/showshow/public/js/home.js"></script>
+
+  <script>
+    let categoryList = document.querySelector('.category-photo-container')
+
+    function loadCategory(category) {
+      let div = document.createElement('div')
+      div.classList.add('card')
+      div.setAttribute("id", category) // set variable as id's value
+
+      //insert variable as photo src, alt, card-title
+      div.innerHTML = /* html */`
+     <img src="./photo/${category}-category.jpg" class="card-img" alt="${category}">  
+          <div class="card-body">
+            <div class="card-title">${category}</div>
+            <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
+          </div>`
+
+      div.querySelector('a').href += '?id=' +
+        categoryList.appendChild(div) + category.id  //TODO need to add function(category)
+    }
+
+    loadCategory('hiking')
+    loadCategory('health')
+    loadCategory('music')
+    loadCategory('party-room')
+    loadCategory('vr-game')
+    loadCategory('war-game')
+
+  </script>
 </body>
 
 </html>
