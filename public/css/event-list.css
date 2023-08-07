@@ -1,3 +1,26 @@
+:root {
+    --company-logo: cursive;
+    --font-color: rgb(255 48 48 / 80%);
+}
+
+.company_name {
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 1.5rem;
+font-weight: bold;
+margin-right: auto;
+font-family: var(--company-logo);
+color: var(--font-color);
+
+}
+
+/* nav-bar */
+.navbar-nav {
+display: flex;
+justify-content: flex-end;
+}
+
 .event-container {
     display: flex;
     flex-direction: column;

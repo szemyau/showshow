@@ -3,17 +3,62 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Events</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./css/category.css" />
+    <link rel="stylesheet" href="/css/event-list.css" />
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <div class="company_name">Sshow</div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo03"
+          aria-controls="navbarTogglerDemo03"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarTogglerDemo03"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="/home.html">Home</a>
+            </li>
+            <!-- not yet create past-event html -->
+            <li class="nav-item">
+              <a class="nav-link active" href="/past-event.html">Past events</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link active" href="/create-event.html"
+                >Create an event</a
+              >
+            </li>
+            <!-- not yet create log-in html -->
+            <li class="nav-item">
+              <a class="nav-link active" href="/login.html">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/signup.html">Sign Up</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <template id="cardTemplate">
       <a class="card">
         <img src="./photo/hiking.jpg" alt="hiking" />
@@ -29,7 +74,6 @@
       </a>
     </template>
 
-    
     <div id="cardList" class="event-container">
       <!-- <div class="card">
         <img src="./photo/hiking-choice.jpg" alt="hiking" />
@@ -43,28 +87,38 @@
           </p>
         </div>
       </div> -->
-
     </div>
 
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+
     <script>
-      function demo() {
+      async function loadEventList() {
+        //  let params = new URL(document.location).searchParams;
+        let params = new URLSearchParams(location.search);
+        let id = params.get("id");
+
         // ajax load
-        let json = {
-          let res = await fetch(`/event-list?id=${id}`);
-          let data = await res.json();
-          events: [
-            {
-              id: 8,
-              category_id: 1,
-              name: "Yaga 101",
-            },
-            {
-              id: 2,
-              category_id: 2,
-              name: "Summer Party",
-            },
-          ],
-        };
+        let res = await fetch(`/event-list?id=${id}`);
+        let json = await res.json();
+        // let json = {
+
+        //   events: [
+        //     {
+        //       id: 8,
+        //       category_id: 1,
+        //       name: "Yaga 101",
+        //     },
+        //     {
+        //       id: 2,
+        //       category_id: 2,
+        //       name: "Summer Party",
+        //     },
+        //   ],
+        // };
         cardList.textContent = "";
         for (let event of json.events) {
           let node = cardTemplate.content.cloneNode(true);
@@ -75,12 +129,9 @@
           cardList.appendChild(node);
         }
       }
-      demo();
+      loadEventList();
 
-      let params = new URL(document.location).searchParams;
-      let id = params.get("id");
-
-      console.log({ id });
+      // console.log({ id });
 
       // async function getCategory() {
       //     let res = await fetch(`/category?id=${id}`)
@@ -92,21 +143,21 @@
       // }
       // getCategory()
 
-      async function getEventsByCategory() {
-        let res = await fetch(`/event-list?id=${id}`);
-        let data = await res.json();
-        console.log({ res });
-        console.log({ data });
-        document.querySelector(".event-datetime").textContent =
-          data.eventData[0].event_date + " " + data.eventData[0].event_time;
-        document.querySelector(".event-name").textContent =
-          data.eventData[0].name;
-        document.querySelector(".event-vacancy").textContent =
-          data.eventData[0].vacancy;
-        document.querySelector(".event-quota").textContent =
-          data.eventData[0].quota;
-      }
-      getEventsByCategory();
+      // async function getEventsByCategory() {
+      //   let res = await fetch(`/event-list?id=${id}`);
+      //   let data = await res.json();
+      //   console.log({ res });
+      //   console.log({ data });
+      //   document.querySelector(".event-datetime").textContent =
+      //     data.eventData[0].event_date + " " + data.eventData[0].event_time;
+      //   document.querySelector(".event-name").textContent =
+      //     data.eventData[0].name;
+      //   document.querySelector(".event-vacancy").textContent =
+      //     data.eventData[0].vacancy;
+      //   document.querySelector(".event-quota").textContent =
+      //     data.eventData[0].quota;
+      // }
+      // getEventsByCategory();
     </script>
   </body>
 </html>
