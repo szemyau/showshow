@@ -4,7 +4,7 @@ import { userRoutes } from "./routes/user.routes";
 import { categoryRoutes } from "./routes/category.routes";
 import path from "path";
 import { client } from "./database";
-import { eventRoutes } from "./event";
+import { eventRoutes } from "./routes/event.routes";
 import { HttpError } from "./http-error";
 
 let app = express();
@@ -18,7 +18,7 @@ app.use(eventRoutes);
 
 app.get("/", (req, res) => res.redirect("/category-list.html"));
 
-// try to insert selected categories into database; change insert data into 
+// try to insert selected categories into database; change insert data into
 app.get("/category-list", async (req, res, next) => {
   try {
     let categoryID = req.query.category;
@@ -60,14 +60,11 @@ app.get("/selected-category", async (req, res, next) => {
 });
 
 //TODO BY CHLOE
-app.get('/category-result', async (req, res, next) => {
-  let userId = 1 //req.session.user_id
+app.get("/category-result", async (req, res, next) => {
+  let userId = 1; //req.session.user_id
 
-  let result = await client.query(`select * from user_category`)
-
-})
-
-
+  let result = await client.query(`select * from user_category`);
+});
 
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
   res.status(err.statusCode || 500);
