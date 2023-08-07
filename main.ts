@@ -18,7 +18,10 @@ app.use(eventRoutes);
 
 app.get("/", (req, res) => res.redirect("/category-list.html"));
 
-// try to insert selected categories into database; change insert data into 
+// insert selected categories into database table 'category'
+
+
+// based on selected categories, then insert them into database
 app.get("/category-list", async (req, res, next) => {
   try {
     let categoryID = req.query.category;
@@ -41,6 +44,8 @@ app.get("/category-list", async (req, res, next) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+
 
 //TODO how to render selected categories into home.html by chloe
 app.get("/selected-category", async (req, res, next) => {

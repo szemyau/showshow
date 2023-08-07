@@ -28,7 +28,8 @@ CREATE TABLE "category" (
     id serial primary key,
     category varchar(60),
     created_at timestamp not null,
-    updated_at timestamp not null
+    updated_at timestamp not null,
+    image varchar(255)
 );
 
 CREATE TABLE "users_categories" (
