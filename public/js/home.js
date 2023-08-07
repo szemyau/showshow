@@ -1,4 +1,54 @@
-// successful dom
+// cant load js logic
+
+// let categoryList = document.querySelector('.category-photo-container')
+
+// function loadCategory(category) {
+//     let div = document.createElement('div')
+//     div.classList.add('card')
+//     div.setAttribute("id", category) // set variable as id's value
+
+//     //insert variable as photo src, alt, card-title
+//     div.innerHTML = /* html */`
+//  <img src="./photo/${category}-category.jpg" class="card-img" alt="${category}">  
+//       <div class="card-body">
+//         <div class="card-title">${category}</div>
+//         <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
+//       </div>`
+
+//     div.querySelector('a').href += '?id=' +
+//         categoryList.appendChild(div) + category.id  //TODO need to add function(category)
+// }
+
+// loadCategory('hiking')
+// loadCategory('health')
+// loadCategory('music')
+// loadCategory('party-room')
+// loadCategory('vr-game')
+// loadCategory('war-game')
+
+
+
+
+
+// let categoryList = document.querySelector('.category-photo-container')
+
+// let div = document.createElement('div')
+// div.classList.add('card')
+// div.setAttribute("id", "hiking") // id = variable
+
+// div.innerHTML = /* html */`
+// <img src="./photo/hiking-category.jpg" class="card-img" alt="hiking">
+// <img src="./photo/hiking-category.jpg" class="card-img" alt="hiking">
+//           <div class="card-body">
+//             <div class="card-title">Hiking</div>
+//             <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
+//           </div>
+// </div>`
+
+
+
+
+//  // successful dom
 // let categoryList = document.querySelector('.category-photo-container')
 
 // //create photo container

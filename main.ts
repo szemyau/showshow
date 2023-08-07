@@ -15,24 +15,47 @@ app.use(userRoutes)
 app.use(categoryRoutes)
 
 // try to insert selected categories into database
-
 app.get('/select-category', async (req, res, next) => {
-    let categoryID = req.query.category
-    const selectedIDs = Array.isArray(req.query)
-        ? categoryID
-        : [categoryID];
+    try {
+        let categoryID = req.query.category
+        const selectedIDs = Array.isArray(req.query)
+            ? categoryID
+            : [categoryID];
 
-    // Perform further processing with the selectedIDs array
-    console.log(categoryID);
+        // Perform further processing with the selectedIDs array
+        console.log(categoryID);
 
-    // let data = await client.query( /*sql*/
-    //     `insert into category (category, created_at, updated_at)` 
-    //     values($1, now(), now()), [categoryID]
+        let data = await client.query( /*sql*/
+            `insert into "category" (category, created_at, updated_at) 
+        values ($1, now(), now()) returning id`,
+            [categoryID]
+        )
+        // res.send('Data stored successfully!');
 
-    // )
-    res.send('Data stored successfully!');
+        res.redirect('/home.html');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
 
-    // res.redirect('/home.html');
+})
+
+//TODO how to render selected categories into home.html
+app.get('/selected-category', async (req, res, next) => {
+    try {
+        let data = await client.query(/*sql*/
+            `select category from "category"`,
+            [req.query.category],
+        )
+        let categories = data.rows
+        res.json(categories)
+        console.log(categories);
+
+        // console.log(data);
+        // res.render('otherPage',);
+    } catch (error) {
+        next(error)
+    }
 })
 
 // try to extract req.query
@@ -65,6 +88,7 @@ app.get('/select-category', async (req, res, next) => {
 // })
 
 // testing using select-category as main page first, then return home.html as the first page 
+
 app.get('/', (req, res) =>
     res.redirect('/select-category.html'))
 
@@ -72,15 +96,15 @@ app.get('/', (req, res) =>
 app.get('/category', async (req, res) => {
     try {
         let id = req.query.id;
-    
+
         let categoryData = (await client.query(`SELECT * FROM category WHERE id = $1`, [id])).rows;
         let eventData = (await client.query(`SELECT * FROM event WHERE category_id = $1`, [id])).rows;
-    
+
         let response = {
-        categoryData: categoryData,
-        eventData: eventData
+            categoryData: categoryData,
+            eventData: eventData
         };
-    
+
         res.json(response);
     } catch (error) {
         console.error('Error retrieving category and event data:', error);
