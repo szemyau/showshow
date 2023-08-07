@@ -1,3 +1,45 @@
+
+let categoryList = document.querySelector('.category-photo-container')
+
+function loadCategory(category) {
+    let div = document.createElement('div')
+    div.classList.add('card')
+    div.setAttribute("id", category) // set variable as id's value
+
+    //insert variable as photo src, alt, card-title
+    div.innerHTML = /* html */`
+     <img src="/photo/${category}-category.jpg" class="card-img" alt="${category}">  
+          <div class="card-body">
+            <div class="card-title">${category}</div>
+            <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
+          </div>`
+
+    div.querySelector('a').href += '?id=' +
+        categoryList.appendChild(div) + category.id  //TODO need to add function(category)
+}
+
+// loadCategory('hiking')
+// loadCategory('health')
+// loadCategory('music')
+// loadCategory('party-room')
+// loadCategory('vr-game')
+// loadCategory('war-game')
+
+// assume database input info into browser
+// let result = [{ id: 1, name: "hiking", image: "hiking-category.jpg" }, { id: 2, name: "music", image: "music-category.jpg" }]
+// for (let record of result) {
+//     loadCategory(record.name)
+// }
+
+
+async function getUserCategory() {
+    let res = await fetch("/")
+}
+
+
+
+
+
 // cant load js logic
 
 // let categoryList = document.querySelector('.category-photo-container')
