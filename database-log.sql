@@ -108,7 +108,7 @@ values ('Hiking at Lion Rock', 1, '2023-08-06', '13:00:00', null, 'Lion Rock', 1
 ('Hiking at Tai Mo Shan', 2, '2023-08-16', '13:00:00', null, 'Tai Mo Shan', 5, 5, 'active', now(), now()),
 ('Hiking at Victoria Peak', 2, '2023-08-17', '13:00:00', null, 'Victoria Peak', 7, 7, 'active', now(), now());
 
-
+-- start from 7 Aug
 -- update event table
 alter table event
 add column about text;
@@ -129,5 +129,12 @@ Yoga can be practiced by people of all ages and fitness levels. It is a non-comp
 ,'1103 Exchange Tower , Kowloon Bay , KLN'
 );
 
--- 
+-- add column 'image' into table 'category' by chloe
+alter table "category" add column image varchar(255);
 
+-- insert info into table category
+insert into "category" (category, created_at, updated_at, image) values 
+($1, $2, $3, $4), ($5, $6, $7, $8), ($9, $10, $11, $12), ($13, $14, $15, $16), ($17, $18, $19, $20), ($21, $22, $23, $24)
+
+
+    
