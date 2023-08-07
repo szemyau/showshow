@@ -59,9 +59,9 @@
 
       <div class="category-photo-container d-flex flex-wrap" id="category-container">
         <!--TODO do i need to create a form to build up the connection with html and server -->
-        <form action="/selected-category">
+        <!-- <form action="/selected-category">
 
-        </form>
+        </form> -->
 
         <!-- <div class="card" id="hiking">
           <img src="./photo/hiking-category.jpg" class="card-img-top" alt="hiking">
@@ -121,34 +121,34 @@
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
 
-  <script src="/showshow/public/js/home.js"></script>
+  <script src="/js/home.js"></script>
 
   <script>
-    let categoryList = document.querySelector('.category-photo-container')
+    // let categoryList = document.querySelector('.category-photo-container')
 
-    function loadCategory(category) {
-      let div = document.createElement('div')
-      div.classList.add('card')
-      div.setAttribute("id", category) // set variable as id's value
+    // function loadCategory(category) {
+    //   let div = document.createElement('div')
+    //   div.classList.add('card')
+    //   div.setAttribute("id", category) // set variable as id's value
 
-      //insert variable as photo src, alt, card-title
-      div.innerHTML = /* html */`
-     <img src="./photo/${category}-category.jpg" class="card-img" alt="${category}">  
-          <div class="card-body">
-            <div class="card-title">${category}</div>
-            <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
-          </div>`
+    //   //insert variable as photo src, alt, card-title
+    //   div.innerHTML = /* html */`
+    //  <img src="/photo/${category}-category.jpg" class="card-img" alt="${category}">
+    //       <div class="card-body">
+    //         <div class="card-title">${category}</div>
+    //         <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
+    //       </div>`
 
-      div.querySelector('a').href += '?id=' +
-        categoryList.appendChild(div) + category.id  //TODO need to add function(category)
-    }
+    //   div.querySelector('a').href += '?id=' +
+    //     categoryList.appendChild(div) + category.id  //TODO need to add function(category)
+    // }
 
-    loadCategory('hiking')
-    loadCategory('health')
-    loadCategory('music')
-    loadCategory('party-room')
-    loadCategory('vr-game')
-    loadCategory('war-game')
+    // loadCategory('hiking')
+    // loadCategory('health')
+    // loadCategory('music')
+    // loadCategory('party-room')
+    // loadCategory('vr-game')
+    // loadCategory('war-game')
 
   </script>
 </body>
