@@ -62,15 +62,19 @@
     <div id="cardList"></div>
     <template id="cardTemplate">
       <a class="card">
-        <img src="./photo/hiking.jpg" alt="hiking" />
+        <img src="./photo/hiking.jpg" alt="hiking" class="event-image" />
         <div class="card-content">
-          <p class="event-datetime">event date and time</p>
+          <p>
+            <span class="event-date">date</span>
+            <span class="event-time">time</span>
+          </p>
           <p class="event-name">event name</p>
           <p>
             <span class="event-vacancy">vacancy</span>
             <span> / </span>
             <span class="event-quota">quota</span>
           </p>
+          <p class="event-status">event status</p>
         </div>
       </a>
     </template>
@@ -94,16 +98,19 @@
         let cardList = document.querySelector("#cardList");
 
         cardList.textContent = "";
-        for (let event of json.eventData) {
+        for (let event of json) {
           let node = cardTemplate.content.cloneNode(true);
           node.querySelector(
             "a"
           ).href = `/event-detail0${event.category_id}.html?id=${event.id}`;
-          node.querySelector(".event-datetime").textContent =
-            event.event_date + event.event_time;
+          node.querySelector(".event-image").textContent = event.image;
+          node.querySelector(".event-date").textContent =
+            event.event_date.substring(0, 10);
+          node.querySelector(".event-time").textContent = event.event_time;
           node.querySelector(".event-name").textContent = event.name;
           node.querySelector(".event-vacancy").textContent = event.vacancy;
           node.querySelector(".event-quota").textContent = event.quota;
+          node.querySelector(".event-status").textContent = event.status;
 
           cardList.appendChild(node);
         }
