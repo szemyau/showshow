@@ -1,101 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Category</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        body {
-            margin: 0;
-        }
+      body {
+        margin: 0;
+      }
 
-        .previous-and-next-page {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
+      .previous-and-next-page {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+      }
 
-        button {
-            font-size: 1.5rem;
-            border: none;
-            background-color: white;
-            padding: 1rem;
-        }
+      .category-explain {
+        margin: 1rem;
+        text-align: -webkit-center;
+      }
 
-        .category-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 0 -10px;
-        }
+      button {
+        font-size: 1.5rem;
+        border: none;
+        background-color: white;
+        padding: 1rem;
+      }
 
-        .interest-choices {
-            flex: 35%;
-            max-width: 100%;
-            padding: 1.5rem;
-        }
+      .categoryListContainer {
+        display: flex;
+        flex-wrap: wrap;
+      }
 
-        img {
-            width: 100%;
-            height: 100%;
-            border-radius: 0.5rem;
-        }
+      .interest-choices {
+        width: 50%;
+        font-size: x-large;
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        margin-top: 4rem;
+      }
 
-        label {
-            display: flex;
-            justify-content: center;
-            flex-direction: row-reverse;
-            font-size: 1rem;
-        }
+      img {
+        width: 70%;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      label {
+        display: flex;
+        justify-content: center;
+        flex-direction: row-reverse;
+        font-size: 1rem;
+        margin-top: 1rem;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <form action="/category-result" method="get" name="selectCategory">
+      <div class="previous-and-next-page">
+        <button id="previous"><i class="fa-solid fa-chevron-left"></i></button>
+        <span class="category-explain"
+          >Pick your favorite interests to find events related to them</span
+        >
+        <button id="next"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
 
-    <!-- method: get -> post -->
-    <form action="/select-category" method="get" name="selectCategory">
-        <div class="previous-and-next-page">
-            <button id="previous"><i class="fa-solid fa-chevron-left"></i></button>
-            <button id="next"><i class="fa-solid fa-chevron-right"></i></button>
+      <template id="categoryTemplate" class="categoryListContainer">
+        <div class="interest-choices">
+          <img src="/photo/health.jpg" class="img-thumbnail" alt="health" />
+          <label>
+            <span> Health </span>
+            <input type="checkbox" name="category" value="health" />
+          </label>
         </div>
+      </template>
 
-        <div class="category-row">
-            <div class="interest-choices">
-                <img src="./photo/health.jpg" class="img-thumbnail" alt="health">
-                <label>Health<input type="checkbox" name="category" value="health"></label>
-            </div>
-            <div class="interest-choices">
-                <img src="./photo/hiking.jpg" alt="hiking">
-                <label>Hiking<input type="checkbox" name="category" value="hiking"></label>
-            </div>
-        </div>
+      <div>
+        <!-- <div class="interest-choices" id="1">
+            <img src="/photo/health.jpg" class="img-thumbnail" alt="health" />
+            <label
+              >Health<input type="checkbox" name="category" value="health"
+            /></label>
+          </div>
+  
+          <div class="interest-choices" id="2">
+            <img src="/photo/hiking.jpg" alt="hiking" />
+            <label
+              >Hiking<input type="checkbox" name="category" value="hiking"
+            /></label>
+          </div>
 
-        <div class="category-row">
-            <div class="interest-choices">
-                <img src="./photo/music.jpg" alt="music">
-                <label>Music<input type="checkbox" name="category" value="music"></label>
-            </div>
-            <div class="interest-choices">
-                <img src="./photo/party-room-category.jpg" alt="music">
-                <label>Party Room<input type="checkbox" name="category" value="party-room"></label>
-            </div>
-        </div>
-
-        <div class="category-row">
-            <div class="interest-choices">
-                <img src="./photo/vr-game.jpg" alt="VR Game">
-                <label>VR Game<input type="checkbox" name="category" value="vr-game"></label>
-            </div>
-            <div class="interest-choices">
-                <img src="./photo/war-game.jpg" alt="VR Game">
-                <label>War Game<input type="checkbox" name="category" value="war-game"></label>
-            </div>
-        </div>
+          <div class="interest-choices" id="3">
+            <img src="/photo/music.jpg" alt="music" />
+            <label
+              >Music<input type="checkbox" name="category" value="music"
+            /></label>
+          </div>
+  
+          <div class="interest-choices" id="4">
+            <img src="/photo/party-room.jpg" alt="music" />
+            <label
+              >Party Room<input
+                type="checkbox"
+                name="category"
+                value="party-room"
+            /></label>
+          </div>
+  
+          <div class="interest-choices" id="5">
+            <img src="/photo/vr-game.jpg" alt="VR Game" />
+            <label
+              >VR Game<input type="checkbox" name="category" value="vr-game"
+            /></label>
+          </div>
+  
+          <div class="interest-choices" id="6">
+            <img src="/photo/war-game.jpg" alt="VR Game" />
+            <label
+              >War Game<input type="checkbox" name="category" value="war-game"
+            /></label>
+          </div>
+        </div> -->
+      </div>
     </form>
 
-    <script src="./js/select-category.js"></script>
-</body>
+    <script src="/select-category.js"></script>
+    <script>
+      // TODO database info
+      async function loadCategoryList() {
+        let res = await fetch("/category-list", {
+          headers: { Accept: "application/json" },
+        });
 
+        let json = await res.json();
+        if (json.error) {
+          alert(json.error);
+          return;
+        }
+        console.log(json);
+
+        let categoryList = document.querySelector(".categoryListContainer");
+
+        for (let category of json) {
+          let node = categoryTemplate.content.cloneNode(true);
+          node.querySelector("img").src = category.image;
+          node.querySelector("img").alt = category.name;
+          node.querySelector("label span").textContent = category.name;
+          node.querySelector("label input").value = category.id;
+          categoryList.appendChild(node);
+        }
+
+        return;
+
+        // for (let category of json.categories) {
+        //   //  start to create html element by using div container first
+        //   let node = document.createElement("div");
+        //   node.classList.add("interest-choices");
+
+        //   //then insert data into div
+        //   node.innerHTML = /* html */ `
+        //   <img src=${category.image} class="img-thumbnail" alt=${category.name}>
+        //   <label>${category.name}<input type="checkbox" name="category" value=${category.id}></label>`;
+
+        //   //insert all elements into div
+        //   categoryList.appendChild(node);
+        // }
+      }
+
+      loadCategoryList();
+    </script>
+  </body>
 </html>

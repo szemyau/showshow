@@ -1,7 +1,65 @@
+async function loadUserCategory() {
 
-let categoryList = document.querySelector('.category-photo-container')
+  let res = await fetch("/userCategoryList", {
+    headers: { Accept: "application/json" },
+  });
 
-function loadCategory(category) {
+  let json = await res.json();
+        if (json.error) {
+          alert(json.error);
+          return;
+        }
+        console.log(json);
+
+  let userCategories = document.querySelector('.category-photo-container')
+
+for (let category of json) {
+  let node = categoryTemplate.content.cloneNode(true);
+  node.querySelector("img").src = category.user_image ;
+  node.querySelector("img").alt = category.name ;
+  node.querySelector(".card-title").textContent = category.name ;
+  node.querySelector("a").href = `/event-list${category.category_id}.html?id=${category.id}`; //TODO dont know correct or not
+  userCategories.appendChild(node)
+}
+return;
+
+}
+
+loadUserCategory();
+  
+  
+
+// successful dom for about your choices on 8 Aug
+// let categoryList = document.querySelector('.category-photo-container')
+
+// function loadUserCategory(category) {
+//   let div = document.createElement('div')
+//   div.classList.add('card')
+//   div.setAttribute("id", category) // set variable as id's value
+
+//   //insert variable as photo src, alt, card-title
+//   div.innerHTML = /* html */`
+//      <img src="/photo/${category}-category.jpg" class="card-img" alt="${category}">  
+//           <div class="card-body">
+//             <div class="card-title">${category}</div>
+//             <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
+//           </div>`
+
+//   div.querySelector('a').href += '?id=' +
+//     categoryList.appendChild(div) + category.id  //TODO need to add function(category)
+// }
+
+// loadUserCategory('Hiking')
+// loadUserCategory('Health')
+// loadUserCategory('Party-Room')
+// loadUserCategory('VR-Game')
+// loadUserCategory('War-Game')
+// loadUserCategory('Music')
+
+// successful dom for look for more on 8 Aug
+let categoryListTwo = document.querySelector('.another-container')
+
+function loadAnotherCategory(category) {
   let div = document.createElement('div')
   div.classList.add('card')
   div.setAttribute("id", category) // set variable as id's value
@@ -15,30 +73,23 @@ function loadCategory(category) {
           </div>`
 
   div.querySelector('a').href += '?id=' +
-    categoryList.appendChild(div) + category.id  //TODO need to add function(category)
+  categoryListTwo.appendChild(div) + category.id  //TODO need to add function(category)
 }
 
-// loadCategory('hiking')
-// loadCategory('health')
-// loadCategory('music')
-// loadCategory('party-room')
-// loadCategory('vr-game')
-// loadCategory('war-game')
+// loadAnotherCategory('Hiking')
 
-// TODO assume database input info into browser
-// let result = [{ id: 1, name: "hiking", image: "hiking-category.jpg" }, { id: 2, name: "music", image: "music-category.jpg" }]
-// for (let record of result) {
-//     loadCategory(record.name)
+
+
+// // TODO assume database input info into browser
+// // let result = [{ id: 1, name: "hiking", image: "hiking-category.jpg" }, { id: 2, name: "music", image: "music-category.jpg" }]
+// // for (let record of result) {
+// //     loadCategory(record.name)
+// // }
+
+
+// async function getUserCategory() {
+//   let res = await fetch("/")
 // }
-
-
-async function getUserCategory() {
-  let res = await fetch("/")
-}
-
-
-
-
 
 // cant load js logic
 

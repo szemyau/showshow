@@ -10,7 +10,7 @@ eventRoutes.get("/events/:id", async (req, res, next) => {
     if (!event_id) {
       throw new HttpError(400, "Invalid event_id");
     }
-    // extract data from sql, then sent out to font-end
+    // extract data from sql, then sent out to front-end
     let result = await client.query(
       /* sql */ `
         select

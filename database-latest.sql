@@ -26,10 +26,11 @@ CREATE table "event"(
 
 CREATE TABLE "category" (
     id serial primary key,
-    category varchar(60),
+    name varchar(60),
     created_at timestamp not null,
     updated_at timestamp not null,
-    image varchar(255)
+    image varchar(255),
+    userImage varchar(255)
 );
 
 CREATE TABLE "users_categories" (
