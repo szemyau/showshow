@@ -6,6 +6,8 @@
     <title>Showshow - Sign Up and Create Account</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/css/signup.css" />
 
 </head>
@@ -17,7 +19,7 @@
                     <h1 class="signup-header-text">Create an account</h1>
                 </div>
                 <div class="signup-login-block">
-                    <button class="btn btn-link signup-login-button" type="button">Log in</button>
+                    <button class="btn btn-link signup-login-button" type="button" onclick="window.location.href='/login.html'">Log in</button>
                 </div>                       
             </div>
 
@@ -27,11 +29,14 @@
                     </div>
 
                     <div class="input-group mb-3 password-container_primary">
-                        <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password">            
+                        <input type="password" id="password1" name="password" class="password form-control" placeholder="Password" aria-label="Password">
+                        <i id="togglePassword1" class="far fa-eye" onclick="togglePassword('password1', 'togglePassword1')"></i>           
                     </div>
 
                     <div class="input-group mb-3 confirm-password-container_primary">
-                        <input type="password" name="confirmPassword" class="form-control" placeholder="Confirm password" aria-label="Confirm password">            
+                        <input type="password" id="password2" name="confirmPassword" class="password form-control" placeholder="Confirm password" aria-label="Confirm password">            
+                        <i id="togglePassword2" class="far fa-eye" onclick="togglePassword('password2', 'togglePassword2')"></i>           
+
                     </div>
 
                     <div>
@@ -49,37 +54,8 @@
         </div>
     </div>
 
-    <script>
-        document.querySelector("#details-container_primary").addEventListener("submit",async(event)=>{
-            event.preventDefault()
-
-            const form = event.target
-            const formObject = {
-                email: form.email.value,
-                password: form.password.value,
-                confirmPassword: form.confirmPassword.value,
-            }
-
-            const res = await fetch('/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formObject),
-            })
-
-            const result = await res.json()
-
-            if(res.ok){
-                window.location="/select-category.html"
-            }
-        })
-
-
-    </script>
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="js/signup.js"> </script>
 
 </body>
 </html>

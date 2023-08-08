@@ -58,3 +58,7 @@ justify-content: flex-end;
 .card p {
     text-align: left;
 }
+
+.event-time {
+    margin-left: 20px;
+  }

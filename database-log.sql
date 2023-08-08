@@ -115,7 +115,7 @@ add column about text;
 
 delete from event;
 insert into event
-(name, about, venue)
+(name, about, venue, contact)
 values
 (
  'yoga101'
@@ -138,6 +138,9 @@ alter table category rename column category to name;
 -- add column 'userImage' into table 'category' by chloe
 alter table "category" add column user_image varchar(255);
 
+
+alter table event
+add column contact text;
 
 
     
