@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Category</title>
+    <title>Category List</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -132,50 +132,6 @@
       </div>
     </form>
 
-    <script src="/select-category.js"></script>
-    <script>
-      // TODO database info
-      async function loadCategoryList() {
-        let res = await fetch("/category-list", {
-          headers: { Accept: "application/json" },
-        });
-
-        let json = await res.json();
-        if (json.error) {
-          alert(json.error);
-          return;
-        }
-        console.log(json);
-
-        let categoryList = document.querySelector(".categoryListContainer");
-
-        for (let category of json) {
-          let node = categoryTemplate.content.cloneNode(true);
-          node.querySelector("img").src = category.image;
-          node.querySelector("img").alt = category.name;
-          node.querySelector("label span").textContent = category.name;
-          node.querySelector("label input").value = category.id;
-          categoryList.appendChild(node);
-        }
-
-        return;
-
-        // for (let category of json.categories) {
-        //   //  start to create html element by using div container first
-        //   let node = document.createElement("div");
-        //   node.classList.add("interest-choices");
-
-        //   //then insert data into div
-        //   node.innerHTML = /* html */ `
-        //   <img src=${category.image} class="img-thumbnail" alt=${category.name}>
-        //   <label>${category.name}<input type="checkbox" name="category" value=${category.id}></label>`;
-
-        //   //insert all elements into div
-        //   categoryList.appendChild(node);
-        // }
-      }
-
-      loadCategoryList();
-    </script>
+    <script src="/js/category-list.js"></script>
   </body>
 </html>
