@@ -115,7 +115,9 @@ values ('Hiking at Lion Rock', 1, '2023-08-06', '13:00:00', null, 'Lion Rock', 1
 alter table event
 add column about text;
 
---delete from event;
+
+--delete from event is not supported 
+delete from event;
 
 --insert data table event;
 insert into event
@@ -145,6 +147,10 @@ alter table "category" add column user_image varchar(255);
 
 alter table event
 add column contact text;
+
+-- add column 'message' into table 'participants_events' by Katy
+alter table "participants_events" add column message text;
+
 
 
 
