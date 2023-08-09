@@ -25,7 +25,9 @@ CREATE table "event"(
     quota integer,
     status statusEnum default 'active',
     created_at timestamp,
-    updated_at timestamp
+    updated_at timestamp,
+    about text,
+    contact text
 );
 
 -- already changed the table name from preference to category
@@ -113,9 +115,13 @@ values ('Hiking at Lion Rock', 1, '2023-08-06', '13:00:00', null, 'Lion Rock', 1
 alter table event
 add column about text;
 
+
+--delete from event is not supported 
 delete from event;
+
+--insert data table event;
 insert into event
-(name, about, venue, contact)
+(name, about, venue)
 values
 (
  'yoga101'
@@ -144,6 +150,7 @@ add column contact text;
 
 -- add column 'message' into table 'participants_events' by Katy
 alter table "participants_events" add column message text;
+
 
 
 

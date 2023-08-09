@@ -15,6 +15,7 @@ async function loadUserCategory() {
 
 for (let category of json) {
   let node = categoryTemplate.content.cloneNode(true);
+  console.log(node);
   node.querySelector("img").src = category.user_image ;
   node.querySelector("img").alt = category.name ;
   node.querySelector(".card-title").textContent = category.name ;
