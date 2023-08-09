@@ -1,13 +1,113 @@
+body{
+    background-image: linear-gradient( 135deg, #FAB2FF 10%, #3629b4 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 #app{
-margin: 0.5rem;
+margin: 1rem;
 }
 
-.form-control{
-    margin: 1rem;
+/* start from event registration form */
+.web-title{
+    text-align: center;
+    color: white;
+    text-decoration: underline;
+    text-transform: capitalize;
+    font-weight: bold;
+    /* border-bottom: 3px solid white; */
+}
+
+form{
+    background-color: white;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    overflow: auto;
+}
+
+input[type=text] {
+    width: 100%;
+    /* padding: 12px 20px; */
+    padding: 5px 5px; 
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid rgb(4, 3, 3);
+  }
+
+button, input, optgroup, select, textarea{
+    margin-right: 0.5rem;
+}
+
+.submit-button{
+    display: flex;  
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.form-container{
+    gap:1rem;
 }
 
 
-.upload-img-container{
+/* Output of Form  */
+
+.list-group-item:last-child{
+    margin-top: 1rem;
+    height: 8rem;
+}
+
+img, svg{
+    width: 10rem;
+    border-radius: 0.5rem;
+}
+
+.event-list {
+    list-style: none;
+    padding: 0;
+    border-radius: 0.5rem;
+  }
+  
+  .list-group-item {
+    overflow: auto;
+  }
+  
+  .event-details {
+    flex: 1;
+  }
+  
+  .event-text {
+    /* Add your custom styles for event-text */
+  }
+  
+  .event-content {
+    /* Add your custom styles for event-content */
+  }
+  
+  .event-actions {
     display: flex;
-    margin: 0.5rem;
-}
+    flex-direction: column;
+  }
+  
+  img {
+    width: 10rem;
+    border-radius: 0.5rem;
+    object-fit: cover;
+    /* margin-right: 10px; */
+  }
+  
+  .buttons {
+    /* Add your custom styles for the buttons container */
+  }
+  
+  .edit-me {
+    /* Add your custom styles for the edit button */
+  }
+  
+  .delete-me {
+    /* Add your custom styles for the delete button */
+  }

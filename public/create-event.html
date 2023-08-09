@@ -83,60 +83,103 @@
       </div>
     </nav>
 
-    <!-- start to create event box ; input area-->
     <div id="app">
+      <!-- start to create event box ; input area-->
+      <div class="web-title">event registration form</div>
       <form
         action="/create-event"
         method="post"
-        enctype="multipart/form-data"
-        onsubmit="submitEvent(event)"
         title="create event"
+        onsubmit="SubmitEvent(event)"
       >
-        <!-- <div class="d-flex align-items-center"></div> -->
-        <div class="d-flex align-items-center">
-          <input
-            autofocus
-            autocomplete="off"
-            class="form-control mr-3"
-            type="text"
-            style="flex: 1"
-          />
-        </div>
-        <div class="upload-img-container">
-          <input type="file" name="image" />
-          <button class="btn btn-primary">Create Event</button>
+        <label
+          >Event Category
+          <select class="choose-your-category" name="event_category">
+            <option>Hiking</option>
+            <option>Health</option>
+            <option>Music</option>
+            <option>Party-Room</option>
+            <option>War-Game</option>
+            <option>VR-Game</option>
+          </select>
+        </label>
+        <input
+          type="text"
+          name="event_name"
+          class="fname"
+          placeholder="Input your event name"
+        />
+        <input
+          type="text"
+          name="event_content"
+          class="fname"
+          placeholder="What will happen?"
+        />
+        <label
+          >Date & Time
+          <div class="date-and-time">
+            <input type="date" class="event_date" /><input
+              type="time"
+              class="event_time"
+            />
+          </div>
+        </label>
+        <label
+          >Location
+          <input type="text" name="venue" />
+        </label>
+        <label
+          >Choose a event photo:
+          <input type="file" name="event_image" />
+        </label>
+        <div class="submit-button">
+          <input type="submit" class="submit" value="Create your event" />
         </div>
       </form>
-
       <!-- output area -->
-      <ul class="list-group pb-5">
-        <li
+      <ul class="list-group event-list pb-5">
+        <li class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+            <div class="event-details">
+              <span class="event-text">Event Name </span>
+              <img src="/photo/party-room.jpg" alt="Event Photo 1" />
+            </div>
+            <div class="event-actions">
+            <div class="event-time">Event Time</div>
+            <div class="event-location">Event Location</div>
+            <div class="event-content">Event Content</div>
+              <div class="buttons">
+                <button class="edit-me btn btn-secondary btn-sm mr-1">Edit</button>
+                <button class="delete-me btn btn-danger btn-sm">Delete</button>
+              </div>
+            </div>
+          </li>
+
+
+        <!-- <li class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+            <div class="event-details">
+              <span class="event-text">Event Name 1</span>
+              <div class="event-content">Event Content 1</div>
+            </div>
+            <div class="event-actions">
+              <img src="/photo/party-room1.jpg" alt="Event Photo 1" />
+              <div class="buttons">
+                <button class="edit-me btn btn-secondary btn-sm mr-1">Edit</button>
+                <button class="delete-me btn btn-danger btn-sm">Delete</button>
+              </div>
+            </div> -->
+          </li>
+
+        <!-- <li
           class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
         >
-          <span class="item-text">Fake example item #1</span>
+          <span class="event-text">Event Name</span>
+          <img src="/photo/party-room.jpg" />
+          <div class="event-content">Event Content</div>
           <div>
             <button class="edit-me btn btn-secondary btn-sm mr-1">Edit</button>
             <button class="delete-me btn btn-danger btn-sm">Delete</button>
           </div>
-        </li>
-        <li
-          class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
-        >
-          <span class="item-text">Fake example item #2</span>
-          <div>
-            <button class="edit-me btn btn-secondary btn-sm mr-1">Edit</button>
-            <button class="delete-me btn btn-danger btn-sm">Delete</button>
-          </div>
-        </li>
-        <li
-          class="list-group-item list-group-item-action d-flex align-items-center justify-content-between"
-        >
-          <span class="item-text">Fake example item #3</span>
-          <div>
-            <button class="edit-me btn btn-secondary btn-sm mr-1">Edit</button>
-            <button class="delete-me btn btn-danger btn-sm">Delete</button>
-          </div>
-        </li>
+        </li> -->
       </ul>
     </div>
 
