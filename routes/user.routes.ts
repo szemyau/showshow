@@ -1,34 +1,40 @@
-import { Router } from "express";
+import express, { Router, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 import expressSession from "express-session";
 import { client } from "../database";
 import { UserCollection } from "../userCollection";
-import { Request, Response } from "express";
-import { checkPassword } from "../hash";
+import { checkPassword, hashPassword } from "../hash";
+import bcrypt from "bcrypt";
+import cookieParser from "cookie-parser";
 
 export let userRoutes = Router();
 
-// userRoutes.use(
-//     expressSession({
-//       secret: 'Tecky Academy teaches typescript',
-//       resave: true,
-//       saveUninitialized: true,
-//     }),
-//   )
+declare module "express-session" {
+  interface SessionData {
+    user?: {
+      id: number;
+      email: string;
+      passwordHash: string;
+    };
+  }
+}
 
-// declare module 'express-session' {
-// interface SessionData {
-//     user?: {
-//     id: number
-//     username: string
-//     }
-// }
-// }
+// Set up middlewares
+userRoutes.use(express.urlencoded({ extended: true }));
+userRoutes.use(cookieParser());
+userRoutes.use(
+  expressSession({
+    secret: "super secret key",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+  })
+);
 
 export type User = {
   id: number;
   email: string;
-  password: string;
+  passwordHash: string;
 };
 
 // sign up
@@ -65,37 +71,108 @@ userRoutes.post(
       return res.status(400).json({ errors: errorMessages });
     }
 
-    let email = req.body.email;
-    let password = req.body.password;
-    let confirmPassword = req.body.confirmPassword;
+    try {
+      let email = req.body.email;
+      let password = req.body.password;
+      let confirmPassword = req.body.confirmPassword;
 
-    // check confirmPassword is same as password
-    if (confirmPassword != password) {
-      res.status(400).json("Password not match");
-      return;
-    }
+      // check confirmPassword is same as password
+      if (confirmPassword != password) {
+        res.status(400).json("Password not match");
+        return;
+      }
 
-    let result = await client.query(
-      /*sql*/ `
+      let result = await client.query(
+        /*sql*/ `
         insert into "user" (email, password, role, created_at, updated_at) values ($1, $2, $3, now(), now())
         returning id`,
-      [email, password, "1"]
-    );
+        [email, password, "member"]
+      );
 
-    const insertedUserId = result.rows[0].id;
+      const insertedUserId = result.rows[0].id;
 
-    console.log(`insertedUserId:`, insertedUserId);
-    res.json({});
+      console.log(`insertedUserId:`, insertedUserId);
+      // res.send("Registration successful");
+      res.status(200);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
   }
 );
 
 // login
-userRoutes.get("/users", (req, res) => {
-  res
-    .json
-    // users.map(user => ({
-    //     id: user.id,
-    //     email: user.email,
-    // }))
-    ();
+userRoutes.get("/login", (req, res) => {
+  if (req.session.user) {
+    console.log(req.session.user);
+    // res.send(`Welcome back, ${req.session.user.name}!`);
+    res.send(`Welcome back, !`);
+  } else {
+    res.send("Welcome to our website!");
+  }
+});
+
+// userRoutes.get("/", (req: Request, res: Response) => {
+//   res.send(`
+//     <form method="post" action="/login">
+//       <input type="email" name="email" placeholder="Email">
+//       <input type="password" name="password" placeholder="Password">
+//       <button type="submit">Login</button>
+//     </form>
+//   `);
+// });
+
+const users: User[] = [
+  {
+    id: 1,
+    email: "user1@example.com",
+    passwordHash:
+      "$2b$10$7tA9k5BJaBt5rK6xHkRjhe4oZ2V.GlyCcX0gqvWx3f3jIc7WdK4MO", // hashed password: 'password'
+  },
+  {
+    id: 2,
+    email: "user2@example.com",
+    passwordHash:
+      "$2b$10$7tA9k5BJaBt5rK6xHkRjhe4oZ2V.GlyCcX0gqvWx3f3jIc7WdK4MO", // hashed password: 'password'
+  },
+];
+
+userRoutes.post("/login", async (req: Request, res: Response) => {
+  // Validate user credentials
+  // const user = { id: 123, email: "John@gmail.com", passwordHash: '$2b$10$7tA9k5BJaBt5rK6xHkRjhe4oZ2V.GlyCcX0gqvWx3f3jIc7WdK4MO' };
+  // req.session.user = User;
+  res.send("Login successful!");
+  const { id, email, password } = req.body;
+  const user = users.find((u) => u.id === id && u.email === email);
+  console.log({ user });
+
+  if (!user) {
+    res.status(401).send("Invalid email or password");
+    return;
+  }
+
+  const passwordMatches = await bcrypt.compare(password, user.passwordHash);
+
+  if (passwordMatches) {
+    req.session.id = user.id.toString();
+    res.cookie("sessionId", req.session.id, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    });
+    res.send("Login successful");
+  } else {
+    res.status(401).send("Invalid email or password");
+  }
+});
+
+userRoutes.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error destroying session:", err);
+    } else {
+      console.log("Session destroyed");
+    }
+  });
+  res.send("Logout successful!");
 });
