@@ -81,6 +81,18 @@ app.get("/category-result", async (req, res, next) => {
 // generate users'categories on home.html
 app.get("/userCategoryList", async (req, res, next) => {
   try {
+    let result = await client.query(/* sql */ `
+    select name, user_image 
+    from users_categories 
+    join category 
+    on users_categories.category_id = category.id 
+    where user_id=1`);
+
+    let userCategoryChoices = result.rows;
+
+    console.log(userCategoryChoices);
+
+    res.json(userCategoryChoices);
   } catch (error) {
     next(error);
   }
