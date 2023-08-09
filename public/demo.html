@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .category-list {
+        outline: 1px solid red;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .category {
+        outline: 1px solid green;
+        font-size: x-large;
+        /* flex-grow: 1; */
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="category-list">
+      <div class="category">
+        <div class="category-id">x</div>
+      </div>
+    </div>
+    <script>
+      let templateNode = document.querySelector(".category");
+      let list = templateNode.parentElement;
+      templateNode.remove();
+      let categories = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      for (let category of categories) {
+        let node = templateNode.cloneNode(true);
+        node.querySelector(".category-id").textContent = category;
+        list.appendChild(node);
+      }
+    </script>
+  </body>
+</html>

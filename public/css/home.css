@@ -40,7 +40,7 @@
     opacity: 0.5;
 }
 
-/*  card-images  */
+/*  card-images for about your choices */
 .card {
     width: 10rem;
 }
@@ -79,4 +79,18 @@
 
 a.btn.btn-primary {
     size: 1rem;
+}
+
+/* template :hover{
+    background-color: #777;
+} */
+
+/* look for more table */
+.look-for-more{
+    border-radius: 0.5rem;
+    margin: 1rem;
+    /* overflow: auto; */
+    overflow-x: scroll;
+    white-space: nowrap;
+    background-color:rgb(255 179 130 / 45%);;
 }

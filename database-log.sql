@@ -132,9 +132,12 @@ Yoga can be practiced by people of all ages and fitness levels. It is a non-comp
 -- add column 'image' into table 'category' by chloe
 alter table "category" add column image varchar(255);
 
--- insert info into table category
-insert into "category" (category, created_at, updated_at, image) values 
-($1, $2, $3, $4), ($5, $6, $7, $8), ($9, $10, $11, $12), ($13, $14, $15, $16), ($17, $18, $19, $20), ($21, $22, $23, $24)
+-- alter table category with column 'category' to 'name' by chloe
+alter table category rename column category to name;
+
+-- add column 'userImage' into table 'category' by chloe
+alter table "category" add column user_image varchar(255);
+
 
 alter table event
 add column contact text;
