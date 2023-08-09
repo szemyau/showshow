@@ -50,5 +50,6 @@ CREATE TABLE "participants_events" (
     event_id integer,
     FOREIGN KEY (event_id) REFERENCES "event"(id),
     created_at timestamp not null,
-    updated_at timestamp not null
+    updated_at timestamp not null,
+    message text
 );

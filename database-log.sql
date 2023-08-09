@@ -144,9 +144,13 @@ alter table category rename column category to name;
 -- add column 'userImage' into table 'category' by chloe
 alter table "category" add column user_image varchar(255);
 
-
+--add column 'contact' into table 'event' by Brano
 alter table event
 add column contact text;
+insert into event (contact) values 
+('We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste. Do not hesitate to contact us.
+1103 Exchange Tower , Kowloon Bay , KLN
+You can also contact us by phone 12345678 or email showshow@gmail.com, or you can send us a message here');
 
 -- add column 'message' into table 'participants_events' by Katy
 alter table "participants_events" add column message text;
