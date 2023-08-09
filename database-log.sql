@@ -142,5 +142,9 @@ alter table "category" add column user_image varchar(255);
 alter table event
 add column contact text;
 
+-- add column 'message' into table 'participants_events' by Katy
+alter table "participants_events" add column message text;
+
+
 
     
