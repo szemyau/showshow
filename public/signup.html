@@ -23,9 +23,9 @@
                 </div>                       
             </div>
 
-            <form id="details-container_primary" >
+            <form method="POST" action="/signup" class="details-container_primary" >
                     <div class="input-group mb-3 email-container_primary">
-                        <input type="text" name="email" class="form-control" placeholder="Email" aria-label="Email">            
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Enter a valid email address" aria-label="Email">            
                     </div>
 
                     <div class="input-group mb-3 password-container_primary">
@@ -51,6 +51,9 @@
                         <button type="button" class="btn btn btn-outline-info signup-with-google-button">Sign in with Google</button>
                     </div>
             </form>
+        </div>
+        <div>
+            <p>By creating an account you agree to our Terms and Conditions, Privacy Policy and to receive our emails.</p>
         </div>
     </div>
 

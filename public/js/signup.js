@@ -1,4 +1,4 @@
-document.querySelector("#details-container_primary").addEventListener("submit",async(event)=>{
+document.querySelector(".details-container_primary").addEventListener("submit",async(event)=>{
     event.preventDefault()
 
     const form = event.target
@@ -18,8 +18,21 @@ document.querySelector("#details-container_primary").addEventListener("submit",a
 
     const result = await res.json()
 
+
     if(res.ok){
-        window.location="/select-category.html"
+        window.location.href="/category-list.html"
+        const message = await response.text();
+        alert(message);
+    } else {
+      // Registration failed
+      const clonedResponse = res.clone();
+      const error = await clonedResponse.json();
+      const errorMessage = error.error;
+      const emailInput = document.querySelector("#email");
+      const errorElement = document.createElement("div");
+      errorMessage.classList.add("error-message");
+      errorMessage.textContent = errors[0];
+      emailInput.insertAdjacentElement("afterend", errorMessage);
     }
 })
 
