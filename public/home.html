@@ -10,7 +10,7 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./css/home.css" />
+    <link rel="stylesheet" href="/css/home.css" />
   </head>
 
   <body>
@@ -44,7 +44,9 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link active" href="#">Create an event</a>
+              <a class="nav-link active" href="/create-event.html"
+                >Create an event</a
+              >
             </li>
             <!-- not yet create log-in html -->
             <li class="nav-item">
@@ -152,14 +154,15 @@
 
     <!-- show the categories that client didn't choose for them to look for more categories -->
 
-    <div id="choices-containe" class="look-for-more">
+    <div class="look-for-more">
       <div class="about-your-choices">
         Look for more
 
         <div
           class="category-photo-container d-flex flex-wrap another-container"
         >
-          <template class="card" id="categoryTemplate">
+          <!-- <template class="card" id="categoryTemplate"> -->
+          <template class="card" id="categoryTemplateTwo">
             <img
               src="/photo/Hiking-category.jpg"
               class="card-img-top"
@@ -173,7 +176,7 @@
             </div>
           </template>
 
-          <div class="card" id="categoryTemplate">
+          <!-- <div class="card" id="categoryTemplate">
             <img
               src="/photo/Health-category.jpg"
               class="card-img-top"
@@ -231,7 +234,7 @@
               <div class="card-title">Party Room</div>
               <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -243,33 +246,5 @@
     ></script>
 
     <script src="/js/home.js"></script>
-
-    <script>
-      // let categoryList = document.querySelector('.category-photo-container')
-
-      // function loadCategory(category) {
-      //   let div = document.createElement('div')
-      //   div.classList.add('card')
-      //   div.setAttribute("id", category) // set variable as id's value
-
-      //   //insert variable as photo src, alt, card-title
-      //   div.innerHTML = /* html */`
-      //  <img src="/photo/${category}-category.jpg" class="card-img" alt="${category}">
-      //       <div class="card-body">
-      //         <div class="card-title">${category}</div>
-      //         <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
-      //       </div>`
-
-      //   div.querySelector('a').href += '?id=' +
-      //     categoryList.appendChild(div) + category.id  //TODO need to add function(category)
-      // }
-
-      // loadCategory('hiking')
-      // loadCategory('health')
-      // loadCategory('music')
-      // loadCategory('party-room')
-      // loadCategory('vr-game')
-      // loadCategory('war-game')
-    </script>
   </body>
 </html>

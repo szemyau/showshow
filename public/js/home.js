@@ -9,19 +9,40 @@ async function loadUserCategory() {
           alert(json.error);
           return;
         }
-        console.log(json);
 
-  let userCategories = document.querySelector('.category-photo-container')
+// let userCategories = document.querySelector('.category-photo-container')
+console.log(json);
+ 
+//for (let category of json) {
+for (let category of json.userCategoryChoices) {
+  console.log({category});
+  let node =  document.querySelector("#categoryTemplate").content.cloneNode(true);
 
-for (let category of json) {
-  let node = categoryTemplate.content.cloneNode(true);
   console.log(node);
   node.querySelector("img").src = category.user_image ;
+  console.log(category.user_image);
   node.querySelector("img").alt = category.name ;
   node.querySelector(".card-title").textContent = category.name ;
-  node.querySelector("a").href = `/event-list${category.category_id}.html?id=${category.id}`; //TODO dont know correct or not
-  userCategories.appendChild(node)
+  node.querySelector("a").href = `/event-list.html?id=${category.id}`; 
+
+  let container = document.querySelector('.category-photo-container');
+    container.appendChild(node);
+  
 }
+
+for (let category of json.anotherCategoryChoices) {
+    console.log({category});
+    let node =  document.querySelector("#categoryTemplateTwo").content.cloneNode(true);
+  
+    node.querySelector("img").src = category.user_image ;
+    node.querySelector("img").alt = category.name ;
+    node.querySelector(".card-title").textContent = category.name ;
+    node.querySelector("a").href = `/event-list.html?id=${category.id}`;
+
+    let container = document.querySelector('.another-container');
+    container.appendChild(node);
+  }
+
 return;
 
 }

@@ -1,0 +1,13 @@
+#app{
+margin: 0.5rem;
+}
+
+.form-control{
+    margin: 1rem;
+}
+
+
+.upload-img-container{
+    display: flex;
+    margin: 0.5rem;
+}
