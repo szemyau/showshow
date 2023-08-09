@@ -113,6 +113,7 @@ values ('Hiking at Lion Rock', 1, '2023-08-06', '13:00:00', null, 'Lion Rock', 1
 alter table event
 add column about text;
 
+--delete from event is not supported
 delete from event;
 insert into event
 (name, about, venue, contact)
