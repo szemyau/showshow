@@ -1,6 +1,5 @@
 import express, { Router, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
-import expressSession from "express-session";
 import { client } from "../database";
 import { UserCollection } from "../userCollection";
 import { checkPassword, hashPassword } from "../hash";
@@ -9,32 +8,22 @@ import cookieParser from "cookie-parser";
 
 export let userRoutes = Router();
 
-declare module "express-session" {
-  interface SessionData {
-    user?: {
-      id: number;
-      email: string;
-      passwordHash: string;
-    };
-  }
-}
-
 // Set up middlewares
-userRoutes.use(express.urlencoded({ extended: true }));
-userRoutes.use(cookieParser());
-userRoutes.use(
-  expressSession({
-    secret: "super secret key",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true },
-  })
-);
+//userRoutes.use(express.urlencoded({ extended: true }));
+//userRoutes.use(cookieParser());
+// userRoutes.use(
+//   expressSession({
+//     secret: "super secret key",
+//     resave: false,
+//     saveUninitialized: true,
+//     //cookie: { secure: true },
+//   })
+// );
 
 export type User = {
   id: number;
   email: string;
-  passwordHash: string;
+  // passwordHash: string;
 };
 
 // sign up
@@ -92,8 +81,11 @@ userRoutes.post(
       const insertedUserId = result.rows[0].id;
 
       console.log(`insertedUserId:`, insertedUserId);
-      // res.send("Registration successful");
+      res.json({ message: "Registration successful" });
       res.status(200);
+      console.log({ result });
+      console.log(typeof result);
+      console.log(res.status);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Internal server error" });
@@ -103,13 +95,13 @@ userRoutes.post(
 
 // login
 userRoutes.get("/login", (req, res) => {
-  if (req.session.user) {
-    console.log(req.session.user);
-    // res.send(`Welcome back, ${req.session.user.name}!`);
-    res.send(`Welcome back, !`);
-  } else {
-    res.send("Welcome to our website!");
-  }
+  // if (req.session.user) {
+  //   console.log(req.session.user);
+  //   // res.send(`Welcome back, ${req.session.user.name}!`);
+  //   res.send(`Welcome back, !`);
+  // } else {
+  //   res.send("Welcome to our website!");
+  // }
 });
 
 // userRoutes.get("/", (req: Request, res: Response) => {
@@ -141,7 +133,11 @@ userRoutes.post("/login", async (req: Request, res: Response) => {
   // Validate user credentials
   // const user = { id: 123, email: "John@gmail.com", passwordHash: '$2b$10$7tA9k5BJaBt5rK6xHkRjhe4oZ2V.GlyCcX0gqvWx3f3jIc7WdK4MO' };
   // req.session.user = User;
-  res.send("Login successful!");
+
+  /*  Validation */
+  /*  success 
+  req.session.user_id = // id here
+  */
   const { id, email, password } = req.body;
   const user = users.find((u) => u.id === id && u.email === email);
   console.log({ user });
@@ -151,10 +147,12 @@ userRoutes.post("/login", async (req: Request, res: Response) => {
     return;
   }
 
-  const passwordMatches = await bcrypt.compare(password, user.passwordHash);
+  /* get user info from db */
+
+  const passwordMatches = await bcrypt.compare(password, ""); //user.passwordHash);
 
   if (passwordMatches) {
-    req.session.id = user.id.toString();
+    req.session.user_id = -1; //user.id;
     res.cookie("sessionId", req.session.id, {
       httpOnly: true,
       secure: true,
@@ -164,6 +162,7 @@ userRoutes.post("/login", async (req: Request, res: Response) => {
   } else {
     res.status(401).send("Invalid email or password");
   }
+  //res.send("Login successful!");
 });
 
 userRoutes.post("/logout", (req, res) => {

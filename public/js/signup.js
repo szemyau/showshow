@@ -17,12 +17,10 @@ document.querySelector(".details-container_primary").addEventListener("submit",a
     })
 
     const result = await res.json()
-    console.log({ result})
-    console.log( typeof result)
 
 
     if(res.ok){
-        window.location="/category-list.html"
+        window.location.href="/category-list.html"
         const message = await response.text();
         alert(message);
     } else {
