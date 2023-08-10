@@ -43,7 +43,14 @@ button, input, optgroup, select, textarea{
     margin-right: 0.5rem;
 }
 
-.submit-button{
+.button-container{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+}
+
+.submit-button, .reset-btn {
     display: flex;  
     justify-content: center;
     margin-top: 1rem;
@@ -54,60 +61,27 @@ button, input, optgroup, select, textarea{
 }
 
 
+
 /* Output of Form  */
 
-.list-group-item:last-child{
-    margin-top: 1rem;
-    height: 8rem;
-}
+  /* image preview */
+  .event-list{
+    border-radius: 0.5rem;
+    background-color: white;
+    margin-top:1rem;
+  }
 
-img, svg{
+  img, svg{
     width: 10rem;
     border-radius: 0.5rem;
+    width: -webkit-fill-available;
+    padding: 1rem;
 }
 
-.event-list {
-    list-style: none;
-    padding: 0;
-    border-radius: 0.5rem;
-  }
-  
-  .list-group-item {
-    overflow: auto;
-  }
-  
-  .event-details {
-    flex: 1;
-  }
-  
-  .event-text {
-    /* Add your custom styles for event-text */
-  }
-  
-  .event-content {
-    /* Add your custom styles for event-content */
-  }
-  
-  .event-actions {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  img {
-    width: 10rem;
-    border-radius: 0.5rem;
-    object-fit: cover;
-    /* margin-right: 10px; */
-  }
-  
-  .buttons {
-    /* Add your custom styles for the buttons container */
-  }
-  
-  .edit-me {
-    /* Add your custom styles for the edit button */
-  }
-  
-  .delete-me {
-    /* Add your custom styles for the delete button */
-  }
+
+.img-preview{
+    text-align: center;
+    display: block;
+    background-color: gainsboro;
+}
+

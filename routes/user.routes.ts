@@ -3,8 +3,8 @@ import { body, validationResult } from "express-validator";
 import { client } from "../database";
 import { UserCollection } from "../userCollection";
 import { checkPassword, hashPassword } from "../hash";
-import bcrypt from "bcrypt";
-import cookieParser from "cookie-parser";
+// import bcrypt from "bcrypt";
+// import cookieParser from "cookie-parser";
 
 export let userRoutes = Router();
 
@@ -118,14 +118,14 @@ const users: User[] = [
   {
     id: 1,
     email: "user1@example.com",
-    passwordHash:
-      "$2b$10$7tA9k5BJaBt5rK6xHkRjhe4oZ2V.GlyCcX0gqvWx3f3jIc7WdK4MO", // hashed password: 'password'
+    //  passwordHash:
+    //   "$2b$10$7tA9k5BJaBt5rK6xHkRjhe4oZ2V.GlyCcX0gqvWx3f3jIc7WdK4MO", // hashed password: 'password'
   },
   {
     id: 2,
     email: "user2@example.com",
-    passwordHash:
-      "$2b$10$7tA9k5BJaBt5rK6xHkRjhe4oZ2V.GlyCcX0gqvWx3f3jIc7WdK4MO", // hashed password: 'password'
+    // passwordHash:
+    //   "$2b$10$7tA9k5BJaBt5rK6xHkRjhe4oZ2V.GlyCcX0gqvWx3f3jIc7WdK4MO", // hashed password: 'password'
   },
 ];
 
@@ -146,32 +146,33 @@ userRoutes.post("/login", async (req: Request, res: Response) => {
     res.status(401).send("Invalid email or password");
     return;
   }
-
-  /* get user info from db */
-
-  const passwordMatches = await bcrypt.compare(password, ""); //user.passwordHash);
-
-  if (passwordMatches) {
-    req.session.user_id = -1; //user.id;
-    res.cookie("sessionId", req.session.id, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-    });
-    res.send("Login successful");
-  } else {
-    res.status(401).send("Invalid email or password");
-  }
-  //res.send("Login successful!");
 });
 
-userRoutes.post("/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.error("Error destroying session:", err);
-    } else {
-      console.log("Session destroyed");
-    }
-  });
-  res.send("Logout successful!");
-});
+/* get user info from db */
+
+// const passwordMatches = await bcrypt.compare(password, ""); //user.passwordHash);
+
+//   if (passwordMatches) {
+//     req.session.user_id = -1; //user.id;
+//     res.cookie("sessionId", req.session.id, {
+//       httpOnly: true,
+//       secure: true,
+//       sameSite: "strict",
+//     });
+//     res.send("Login successful");
+//   } else {
+//     res.status(401).send("Invalid email or password");
+//   }
+//   //res.send("Login successful!");
+// });
+
+// userRoutes.post("/logout", (req, res) => {
+//   req.session.destroy((err) => {
+//     if (err) {
+//       console.error("Error destroying session:", err);
+//     } else {
+//       console.log("Session destroyed");
+//     }
+//   });
+//   res.send("Logout successful!");
+// })

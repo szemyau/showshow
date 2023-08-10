@@ -8,6 +8,7 @@ import { client } from "./database";
 import { eventRoutes } from "./routes/event.routes";
 import { HttpError } from "./http-error";
 import { sessionMiddleware } from "./session";
+import { createEventRoutes } from "./routes/createEvent.routes";
 
 let app = express();
 
@@ -19,6 +20,7 @@ app.use(sessionMiddleware);
 app.use(express.static("public"));
 app.use(userRoutes);
 app.use(categoryRoutes);
+app.use(createEventRoutes);
 app.use(eventRoutes);
 
 app.use("/session", (req, res) => console.log(req.session));
