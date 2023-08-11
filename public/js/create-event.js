@@ -16,29 +16,53 @@ async (event) =>{
     })
 
     let json = await res.json()
+
+    // let json = await res.redirected('/home.html')
     console.log('submit form result:', json)
+
+
     if (json.error) {
-    Swal.fire('Failed to post memo', json.error, 'error')
+        console.log(json.error);
+    Swal.fire('Failed to submit form', json.error, 'error')
     return
     } 
-    showImagePreview(json)
+
+    window.location='home.html'
+    // showImagePreview(json)
 })
 
-function showImagePreview(event) {
+// function showImagePreview(event) {
 
-    let imageDiv = document.createElement('div')
-    imageDiv.innerHTML= `<div class="event-details">
-    <img src="/photo/party-room.jpg" alt="Event Photo 1" />
-    </div>
-    <span class="img-preview">Event Image Preview</span>
-    </div>`
+//     let imageDiv = document.createElement('div')
+//     imageDiv.innerHTML= `<div class="event-details">
+//     <img src="/photo/party-room.jpg" alt="Event Photo 1" />
+//     </div>
+//     <span class="img-preview">Event Image Preview</span>
+//     </div>`
     
-    imageDiv.querySelector('img').src = event.user_create_event_image;
-    imageDiv.querySelector('img').alt = event.name;
-    eventImage.appendChild(imageDiv)
+//     imageDiv.querySelector('img').src = event.user_create_event_image;
+//     imageDiv.querySelector('img').alt = event.name;
+//     eventImage.appendChild(imageDiv)
     
-    }
+//     }
     
+
+ function loadFile(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+          var output = document.getElementById('output');
+          output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      };
+//     let img = node.querySelector('.memo-image')
+//   if (memo.filename) {
+//     img.src = '/uploads/' + memo.filename
+//   } else {
+//     img.remove()
+//   }
+//   memoList.appendChild(node)
+// }
     
     // showImagePreview({user_create_event_image:'/photo/party-room.jpg', name: 'music' })
 

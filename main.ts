@@ -29,11 +29,7 @@ app.get("/", (req, res) => res.redirect("/home.html"));
 
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
   res.status(err.statusCode || 500);
-  if (req.headers.accept?.includes("application/json")) {
-    res.json({ error: String(err) });
-  } else {
-    next(err);
-  }
+  res.json({ error: String(err) });
 });
 
 const port = 8000;
