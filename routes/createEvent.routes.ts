@@ -17,21 +17,29 @@ export let createEventRoutes = Router();
 //   res.json({});
 // });
 
-createEventRoutes.get("/create-event", async (req, res, next) => {
-  try {
-    let userID = 1; //req.session.user_id
-    // let image = toArray(files.image)[0]; //TODO what happened on it?
+// TODO guess set wrong routes
 
-    let result = await client.query(
-      /* sql */ `
-      -- select user_create_event_image
-      select user_create_event_image from "event" where user_id = $1`,
-      [userID]
-    );
-  } catch (error) {
-    next(error);
-  }
-});
+// createEventRoutes.get("/create-event", async (req, res, next) => {
+//   try {
+//     let userID = 1; //req.session.user_id
+//     // let image = toArray(files.image)[0]; //TODO what happened on it?
+
+//     // console.log(`show image :`, image);
+
+//     //here's image's name
+//     // let filename = image?.newFilename;
+
+//     // let result = await client.query(
+//     //   /* sql */ `
+//     //   -- select user_create_event_image
+//     //   select user_create_event_image from "event" where user_id = $1`,
+//     //   [filename]
+//     // );
+//     res.json({});
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 createEventRoutes.post("/create-event", (req, res, next) => {
   // set the format of the form inputs
@@ -45,69 +53,6 @@ createEventRoutes.post("/create-event", (req, res, next) => {
       return crypto.randomUUID() + "." + part.mimetype?.split("/").pop();
     },
   });
-
-  //   form.parse(req, async (err, fields, files) => {
-  //     try {
-  //       console.log({ fields, files });
-
-  //       if (err) throw new HttpError(400, String(err));
-
-  //       let image = toArray(files.image)[0];
-  // //       console.log(image);
-
-  //       // other inputs will not be shown on the front-end
-  //       let event_category = fields.event_category;
-  //       let event_name = fields.event_name;
-  //       let event_about = fields.event_about;
-  //       let event_date = fields.event_date;
-  //       let event_time = fields.event_time;
-  //       let venue = fields.venue;
-  //       let quota = fields.quota;
-
-  //       if (
-  //         !event_category ||
-  //         !event_name ||
-  //         !event_about ||
-  //         !event_date ||
-  //         !event_time ||
-  //         !venue ||
-  //         !quota
-  //       ) {
-  //         throw new HttpError(400, "missing content");
-  //       }
-
-  //       res.json({});
-
-  //       let creator_id = 1; // req.session.user_id
-
-  //       let result = await client.query(
-  //         /* sql */
-  //         `INSERT INTO "event" (name, creator_id, event_date, event_time, venue, quota,
-  //         created_at, updated_at, about, user_create_event_image, category_id)
-  //           SELECT $1, $2, $3, $4, $5, $6,
-  //           now(), now(), $7, $8, "category".id
-  //           FROM category
-  //           WHERE "category".name = $9
-  //           RETURNING id`,
-  //         [
-  //           event_name,
-  //           creator_id,
-  //           event_date,
-  //           event_time,
-  //           venue,
-  //           quota,
-  //           event_about,
-  //           image ? image.name : null,
-  //           event_category,
-  //         ]
-  //       );
-
-  //       const eventId = result.rows[0].id;
-  //       console.log(`Event inserted with ID: ${eventId}`);
-  //     } catch (error) {
-  //       next(error);
-  //     }
-  //   })
 
   form.parse(req, async (err, fields, files) => {
     try {
@@ -148,9 +93,6 @@ createEventRoutes.post("/create-event", (req, res, next) => {
         !quota
       )
         throw new HttpError(400, "missing content");
-      // res.json({});
-      // Rest of the code remains the same...
-      // Insert into database, send response, emit socket.io event, etc.
 
       let creator_id = 1; //req.session.user_id
 
@@ -187,12 +129,3 @@ createEventRoutes.post("/create-event", (req, res, next) => {
     }
   });
 });
-
-//try to understand front-end's requests and verify any mistakes when fill-in the form
-
-// createEventRoutes.post("/create-event", (req, res, next)=> {
-//     let form = formidable({
-//         uploadDir,
-
-//     })
-// })

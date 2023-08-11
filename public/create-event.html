@@ -138,21 +138,17 @@
         </label>
         <label
           >Choose a event image:
-          <input type="file" name="image" />
+          <input type="file" name="image" onchange="loadFile(event)"/>
         </label>
+
+        <img id="output"/>
+
         <div class="button-container">
           <div class="submit-button">
-            <input type="submit" class="submit" value="Create your event" />
+            <input type="submit" class="btn btn-outline-primary" value="Create your event" />
           </div>
-          <div class="reset-btn">
-            <button
-              type="button"
-              class="btn btn-outline-danger"
-              onclick="resetImage()"
-            >
-              Reset
-            </button>
-          </div>
+          <input type="reset" class="btn btn-outline-danger">
+          </input>
         </div>
       </form>
       </div>
@@ -161,13 +157,13 @@
       <!-- output area -->
 
       <!-- successful html, already created dom -->
-      <div class="event-list">
+      <!-- <div class="event-list"> -->
         <!-- <div class="event-details">
           <img src="/photo/party-room.jpg" alt="Event Photo 1" />
         </div>
         <span class="img-preview">Event Image Preview</span>
       </div> -->
-    </div>
+    <!-- </div> -->
 
 
     <!-- <li
