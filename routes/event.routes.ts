@@ -84,21 +84,21 @@ eventRoutes.get("/events/:id", async (req, res, next) => {
 });
 
 // JOIN EVENT
-eventRoutes.post(
-  "/event-detail01",
-  async (req: Request, res: Response) => {
-    try {
-  // retrieve user id from session
-      let req.session.user_id
-  // retrieve event id from params
+// eventRoutes.post(
+//   "/event-detail01",
+//   async (req: Request, res: Response) => {
+//     try {
+//   // retrieve user id from session
+//       let req.session.user_id
+//   // retrieve event id from params
 
-  //
+//   //
 
-      let message = req.body.message;
-  // save join action to database
-  let result = await client.query(
-  /*sql*/ `
-  insert into "participants_events" (user_id, event_id, message, created_at, updated_at) values ($1, $2, $3, now(), now())
-  returning id`,
-  [user_id, event_id, message]
-);
+//       let message = req.body.message;
+//   // save join action to database
+//   let result = await client.query(
+//   /*sql*/ `
+//   insert into "participants_events" (user_id, event_id, message, created_at, updated_at) values ($1, $2, $3, now(), now())
+//   returning id`,
+//   [user_id, event_id, message]
+// );
