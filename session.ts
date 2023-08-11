@@ -4,13 +4,12 @@ import expressSession from "express-session";
 declare module "express-session" {
   interface SessionData {
     user_id: number;
-    email: string;
+    // email: string;
   }
 }
 
 export const sessionMiddleware = expressSession({
   secret: "super secret key",
-  resave: false,
+  resave: true,
   saveUninitialized: true,
-  //cookie: { secure: true },
 });

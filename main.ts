@@ -16,14 +16,21 @@ app.use(express.json());
 
 app.use(sessionMiddleware);
 
+// app.use((req, res, next) => {
+//   console.log({
+//     method: req.method,
+//     url: req.url,
+//     session: req.session,
+//   });
+//   next();
+// });
+
 app.use(express.static("public"));
 app.use(userRoutes);
 app.use(categoryRoutes);
 app.use(eventRoutes);
 
-app.use("/session", (req, res) => console.log(req.session));
-
-app.get("/", (req, res) => res.redirect("/home.html"));
+app.get("/", (req, res) => res.redirect("/home.html")); // please
 
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
   res.status(err.statusCode || 500);
