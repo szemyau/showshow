@@ -36,6 +36,8 @@ document
         icon: "error",
         title: "Error",
         text: result.error,
+      }).then(function () {
+        window.location = "/login.html";
       });
       return;
     }

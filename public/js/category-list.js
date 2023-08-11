@@ -4,33 +4,17 @@ async function loadCategoryList() {
   });
 
   let json = await res.json();
+  console.log({ json });
   if (json.error) {
-    next();
     Swal.fire({
       icon: "error",
       title: "Error",
       text: json.error,
+    }).then(function () {
+      window.location = "/login.html";
     });
     return;
   }
-  //   } else {
-  //     const sweetAlertOptions = {
-  //       icon: "error",
-  //       title: "Error",
-  //       text: result.error,
-  //     };
-
-  //     // Redirect to the login page when the "OK" button is clicked
-  //     const sweetAlertCallback = () => {
-  //       res.redirect("/login");
-  //     };
-
-  //     // Display the Sweet Alert dialog and execute the callback when the user clicks "OK"
-  //     Swal.fire(sweetAlertOptions).then(sweetAlertCallback);
-  //   }
-  // }
-
-  // return;
 
   let categoryList = document.querySelector(".categoryListContainer");
 
