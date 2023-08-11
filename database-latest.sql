@@ -1,3 +1,6 @@
+create type statusEnum as enum ('active', 'expired', 'cancelled');
+
+
 CREATE TABLE "user" (
     id serial primary key,
     email varchar(64) not null,

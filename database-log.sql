@@ -159,5 +159,6 @@ alter table "participants_events" add column message text;
 alter table "event" add column user_create_event_image varchar(255);
 
 
-
-    
+ALTER TABLE users_categories
+  DROP CONSTRAINT users_preferences_preference_id_fkey,
+  ADD FOREIGN KEY (category_id) REFERENCES category(id);
