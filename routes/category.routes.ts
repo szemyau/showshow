@@ -26,7 +26,6 @@ categoryRoutes.get("/category-result", async (req, res, next) => {
     let userID = 1; //req.session.user_id
 
     let categoryIdArray = req.query.category;
-
     let selectedId = Array.isArray(categoryIdArray)
       ? categoryIdArray
       : [categoryIdArray];

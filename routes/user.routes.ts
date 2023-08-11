@@ -82,9 +82,8 @@ userRoutes.post(
   }
 );
 
-//LOGIN
+// LOGIN
 // server to check the login details
-// login additional validation
 userRoutes.post("/login", async (req: Request, res: Response) => {
   const { inputEmail, inputPassword } = req.body;
   console.log({ inputEmail });
