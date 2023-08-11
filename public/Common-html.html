@@ -1,76 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+      :root {
+        --company-logo: cursive;
+        --font-color: rgb(255 48 48 / 80%);
+      }
 
-  <style>
-    :root {
-      --company-logo: cursive;
-      --font-color: rgb(255 48 48 / 80%);
-    }
+      .company_name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-right: auto;
+        font-family: var(--company-logo);
+        color: var(--font-color);
+      }
 
-    .company_name {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-right: auto;
-      font-family: var(--company-logo);
-      color: var(--font-color);
+      /* nav-bar */
+      .navbar-nav {
+        display: flex;
+        justify-content: flex-end;
+      }
+    </style>
+  </head>
 
-    }
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+      <div class="container-fluid">
+        <div class="company_name">Sshow</div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo03"
+          aria-controls="navbarTogglerDemo03"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-    /* nav-bar */
-    .navbar-nav {
-      display: flex;
-      justify-content: flex-end;
-    }
-  </style>
-</head>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarTogglerDemo03"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="/home.html">Home</a>
+            </li>
+            <!-- not yet create past-event html -->
+            <li class="nav-item">
+              <a class="nav-link active" href="/past-event.html">Past events</a>
+            </li>
 
-<body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <div class="company_name">Sshow</div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
-        aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="/home.html">Home</a>
-          </li>
-          <!-- not yet create past-event html -->
-          <li class="nav-item">
-            <a class="nav-link active" href="/past-event.html">Past events</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link active" href="/create-event">Create an event</a>
-          </li>
-          <!-- not yet create log-in html -->
-          <li class="nav-item">
-            <a class="nav-link active" href="/login.html">Log In</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/signup.html">Sign Up</a>
-          </li>
-        </ul>
+            <li class="nav-item">
+              <a class="nav-link active" href="/create-event"
+                >Create an event</a
+              >
+            </li>
+            <!-- not yet create log-in html -->
+            <li class="nav-item">
+              <a class="nav-link active" href="/login.html">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/signup.html">Sign Up</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-    crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

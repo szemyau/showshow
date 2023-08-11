@@ -23,7 +23,9 @@ categoryRoutes.get("/category-list", async (req, res, next) => {
 // category-list.html: insert selected categories into database table 'category'
 categoryRoutes.get("/category-result", async (req, res, next) => {
   try {
-    let userID = 1; //req.session.user_id
+    // let userID = 1; //req.session.user_id
+    let userID = req.session.user_id;
+    console.log(`userid-choice:`, userID);
 
     let categoryIdArray = req.query.category;
     let selectedId = Array.isArray(categoryIdArray)
@@ -55,7 +57,6 @@ categoryRoutes.get("/category-result", async (req, res, next) => {
       return;
     }
     res.json({});
-    // res.send('Data stored successfully!');
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -65,7 +66,10 @@ categoryRoutes.get("/category-result", async (req, res, next) => {
 // generate users'categories on home.html
 categoryRoutes.get("/userCategoryList", async (req, res, next) => {
   try {
-    let userID = 1; //req.session.user_id
+    // let userID = 1; //req.session.user_id
+    let userID = req.session.user_id;
+    console.log(`userid:`, userID);
+
     let result = await client.query(
       /* sql */ `
       select category.id, user_image,name  
