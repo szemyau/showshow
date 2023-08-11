@@ -7,40 +7,6 @@ import crypto from "crypto";
 
 export let createEventRoutes = Router();
 
-// createEventRoutes.post("/create-event", async (req, res, next) => {
-//   try {
-//     client.query(
-//       /* sql */
-//       `select name, user_create_event_image from event where creator_id=1`
-//     );
-//   } catch (error) {}
-//   res.json({});
-// });
-
-// TODO guess set wrong routes
-
-// createEventRoutes.get("/create-event", async (req, res, next) => {
-//   try {
-//     let userID = 1; //req.session.user_id
-//     // let image = toArray(files.image)[0]; //TODO what happened on it?
-
-//     // console.log(`show image :`, image);
-
-//     //here's image's name
-//     // let filename = image?.newFilename;
-
-//     // let result = await client.query(
-//     //   /* sql */ `
-//     //   -- select user_create_event_image
-//     //   select user_create_event_image from "event" where user_id = $1`,
-//     //   [filename]
-//     // );
-//     res.json({});
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 createEventRoutes.post("/create-event", (req, res, next) => {
   // set the format of the form inputs
   let form = formidable({
