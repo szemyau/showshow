@@ -85,33 +85,33 @@ userRoutes.post(
 // LOGIN
 // server to check the login details
 userRoutes.post("/login", async (req: Request, res: Response) => {
-  const { inputEmail, inputPassword } = req.body;
-  console.log({ inputEmail });
-  console.log({ inputPassword });
+  const { email, password } = req.body;
+  console.log({ email });
+  console.log({ password });
 
   //check if inputemail and pw present
-  if (!inputEmail) {
+  if (!email) {
     return res.status(400).json({
-      error: "Missing username",
+      error: "Missing email",
     });
   }
-  if (!inputPassword) {
+  if (!password) {
     return res.status(400).json({
       error: "Missing password",
     });
   }
 
-  // retrieve email and password to database
+  // retrieve id and password to database
   let result = await client.query(
     /*sql*/ `
             select password,id from "user" where email = $1`,
-    [inputEmail]
+    [email]
   );
   console.log({ result });
   // Accessing the returned rows
   let rows = result.rows;
   // check input Password is same as database password
-  let passwordMatches = checkPassword(inputPassword, rows[0].password);
+  let passwordMatches = checkPassword(password, rows[0].password);
   if (!passwordMatches) {
     res.status(400).json({ error: "Email or password not match" });
     return;
