@@ -14,20 +14,29 @@ async function loadUserCategory() {
 // console.log(json);
  
 //for (let category of json) {
-for (let category of json.userCategoryChoices) {
-  console.log({category});
-  let node =  document.querySelector("#categoryTemplate").content.cloneNode(true);
- 
-  node.querySelector("img").src = category.user_image ;
-  console.log(category.user_image);
-  node.querySelector("img").alt = category.name ;
-  node.querySelector(".card-title").textContent = category.name ;
-  node.querySelector("a").href = `/event-list.html?id=${category.id}`; 
-
-  let container = document.querySelector('.category-photo-container');
-    container.appendChild(node);
-  
+let container = document.querySelector('.category-photo-container');
+if (json.userCategoryChoices.length < 1) {
+   
+  let div = document.createElement('div')
+  div.innerHTML = `<a href="/category-list.html"> + </a>  `
+  container.appendChild(div);
 }
+else{
+  for (let category of json.userCategoryChoices) {
+    console.log({category});
+    let node =  document.querySelector("#categoryTemplate").content.cloneNode(true);
+   
+    node.querySelector("img").src = category.user_image ;
+    console.log(category.user_image);
+    node.querySelector("img").alt = category.name ;
+    node.querySelector(".card-title").textContent = category.name ;
+    node.querySelector("a").href = `/event-list.html?id=${category.id}`; 
+  
+    container.appendChild(node);
+    
+  }
+}
+
 
 for (let category of json.anotherCategoryChoices) {
     console.log({category});
