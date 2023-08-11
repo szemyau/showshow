@@ -132,7 +132,9 @@
           You can also contact us by phone 12345678 or email showshow@gmail.com,
           or you can send us a message here:
         </p>
-        <form action="/action_page.php" target="_blank">
+        <!-- <form action="/action_page.php" target="_blank"> -->
+        <form method="POST" action="" id="join-form">
+          m
           <p>
             <input
               class="w3-input w3-padding-16"
@@ -167,11 +169,15 @@
               type="text"
               placeholder="Message \ Special requirements"
               required
-              name="Message"
+              name="message"
             />
           </p>
           <p>
-            <button class="w3-button w3-light-grey w3-section" type="submit">
+            <button
+              class="w3-button w3-light-grey w3-section"
+              type="submit"
+              name="join"
+            >
               Join
             </button>
           </p>
