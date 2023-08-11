@@ -1,10 +1,12 @@
 let eventImage = document.querySelector('.event-list')
-document.querySelector("#create-form").addEventListener("submit",(e)=>{
-    submitForm(e)
 
-})
+// document.querySelector("#create-form").addEventListener("submit",(e)=>{
+//     submitForm(e)
+// })
 
-async function submitForm(event) {
+let submitForm = document.querySelector("#create-form")
+submitForm.addEventListener("submit",
+async (event) =>{
     event.preventDefault()
 
     let form = event.target
@@ -20,7 +22,7 @@ async function submitForm(event) {
     return
     } 
     showImagePreview(json)
-}
+})
 
 function showImagePreview(event) {
 

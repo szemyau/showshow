@@ -17,7 +17,24 @@ export let createEventRoutes = Router();
 //   res.json({});
 // });
 
+createEventRoutes.get("/create-event", async (req, res, next) => {
+  try {
+    let userID = 1; //req.session.user_id
+    // let image = toArray(files.image)[0]; //TODO what happened on it?
+
+    let result = await client.query(
+      /* sql */ `
+      -- select user_create_event_image
+      select user_create_event_image from "event" where user_id = $1`,
+      [userID]
+    );
+  } catch (error) {
+    next(error);
+  }
+});
+
 createEventRoutes.post("/create-event", (req, res, next) => {
+  // set the format of the form inputs
   let form = formidable({
     uploadDir,
     allowEmptyFiles: false,
@@ -28,17 +45,83 @@ createEventRoutes.post("/create-event", (req, res, next) => {
       return crypto.randomUUID() + "." + part.mimetype?.split("/").pop();
     },
   });
+
+  //   form.parse(req, async (err, fields, files) => {
+  //     try {
+  //       console.log({ fields, files });
+
+  //       if (err) throw new HttpError(400, String(err));
+
+  //       let image = toArray(files.image)[0];
+  // //       console.log(image);
+
+  //       // other inputs will not be shown on the front-end
+  //       let event_category = fields.event_category;
+  //       let event_name = fields.event_name;
+  //       let event_about = fields.event_about;
+  //       let event_date = fields.event_date;
+  //       let event_time = fields.event_time;
+  //       let venue = fields.venue;
+  //       let quota = fields.quota;
+
+  //       if (
+  //         !event_category ||
+  //         !event_name ||
+  //         !event_about ||
+  //         !event_date ||
+  //         !event_time ||
+  //         !venue ||
+  //         !quota
+  //       ) {
+  //         throw new HttpError(400, "missing content");
+  //       }
+
+  //       res.json({});
+
+  //       let creator_id = 1; // req.session.user_id
+
+  //       let result = await client.query(
+  //         /* sql */
+  //         `INSERT INTO "event" (name, creator_id, event_date, event_time, venue, quota,
+  //         created_at, updated_at, about, user_create_event_image, category_id)
+  //           SELECT $1, $2, $3, $4, $5, $6,
+  //           now(), now(), $7, $8, "category".id
+  //           FROM category
+  //           WHERE "category".name = $9
+  //           RETURNING id`,
+  //         [
+  //           event_name,
+  //           creator_id,
+  //           event_date,
+  //           event_time,
+  //           venue,
+  //           quota,
+  //           event_about,
+  //           image ? image.name : null,
+  //           event_category,
+  //         ]
+  //       );
+
+  //       const eventId = result.rows[0].id;
+  //       console.log(`Event inserted with ID: ${eventId}`);
+  //     } catch (error) {
+  //       next(error);
+  //     }
+  //   })
+
   form.parse(req, async (err, fields, files) => {
     try {
-      // console.log(req.body);
-      // console.log({ err, fields, files });
-      console.log({ fields, files });
+      // console.log({ fields, files });
 
       if (err) throw new HttpError(400, String(err));
 
       //ensure clients input all fields in the form
       let image = toArray(files.image)[0];
+      // console.log(`show image :`, image);
+
+      //here's image's name
       let filename = image?.newFilename;
+      console.log(`show filename: `, filename);
 
       // other inputs will be not showed on the front-end
       let event_category = fields.event_category;
@@ -65,14 +148,48 @@ createEventRoutes.post("/create-event", (req, res, next) => {
         !quota
       )
         throw new HttpError(400, "missing content");
-      res.json({});
+      // res.json({});
       // Rest of the code remains the same...
       // Insert into database, send response, emit socket.io event, etc.
+
+      let creator_id = 1; //req.session.user_id
+
+      let result = await client.query(
+        /* sql */
+        `insert into "event" (name, creator_id, event_date, event_time, venue, quota, 
+    created_at, updated_at, about, user_create_event_image, category_id)
+      select $1, $2, $3, $4, $5, $6, 
+      now(), now(), $7, $8, "category".id 
+      from category 
+      where "category".name = $9 
+      returning id`,
+
+        [
+          event_name,
+          creator_id,
+          event_date,
+          event_time,
+          venue,
+          quota,
+          event_about,
+          filename,
+          event_category,
+        ]
+      );
+
+      const eventId = result.rows[0].id;
+
+      console.log(`Event inserted with ID: ${eventId}`);
+
+      res.json({}); // Send response after successful database insertion
     } catch (error) {
       next(error);
     }
   });
 });
+
+//try to understand front-end's requests and verify any mistakes when fill-in the form
+
 // createEventRoutes.post("/create-event", (req, res, next)=> {
 //     let form = formidable({
 //         uploadDir,

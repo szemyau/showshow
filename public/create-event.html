@@ -86,14 +86,15 @@
     <div id="app">
       <!-- start to create event box ; input area-->
       <div class="web-title">event registration form</div>
-      <form
+      <div class="form-list">
+        <form
         action="/create-event"
         method="post"
         title="create event"
         enctype="multipart/form-data"
        id="create-form"
       >
-      <!-- onsubmit="submitForm(event)" -->
+        
         <label
           >Event Category
           <select class="choose-your-category" name="event_category">
@@ -129,7 +130,7 @@
         </label>
         <label
           >Location
-          <input type="text" name="venue" />
+          <input type="text" name="venue" placeholder="Input your event location"/>
         </label>
         <label>
           Number of participants:
@@ -154,6 +155,8 @@
           </div>
         </div>
       </form>
+      </div>
+     
 
       <!-- output area -->
 

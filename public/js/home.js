@@ -11,14 +11,13 @@ async function loadUserCategory() {
         }
 
 // let userCategories = document.querySelector('.category-photo-container')
-console.log(json);
+// console.log(json);
  
 //for (let category of json) {
 for (let category of json.userCategoryChoices) {
   console.log({category});
   let node =  document.querySelector("#categoryTemplate").content.cloneNode(true);
-
-  console.log(node);
+ 
   node.querySelector("img").src = category.user_image ;
   console.log(category.user_image);
   node.querySelector("img").alt = category.name ;
