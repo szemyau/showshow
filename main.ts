@@ -33,7 +33,7 @@ app.use(categoryRoutes);
 app.use(createEventRoutes);
 app.use(eventRoutes);
 
-app.get("/", (req, res) => res.redirect("/home.html")); // please
+app.get("/", (req, res) => res.redirect("/home.html"));
 
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
   res.status(err.statusCode || 500);

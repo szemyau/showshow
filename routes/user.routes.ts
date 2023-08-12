@@ -9,7 +9,6 @@ import bcrypt from "bcrypt";
 export let userRoutes = Router();
 
 export type User = {
-  // id: number;
   email: string;
   password: string;
 };
@@ -132,4 +131,44 @@ userRoutes.post("/logout", (req, res) => {
     }
   });
   res.send("Logout successful!").redirect("/home.html");
+});
+
+userRoutes.get("/role", async (req, res, next) => {
+  try {
+    if (req.session.user_id) {
+      let result = await client.query(
+        /* sql */ `
+				select email, role
+				from "user"
+				where id = $1
+			`,
+        [req.session.user_id]
+      );
+      let user = result.rows[0];
+      console.log(`role: ${user}`);
+      if (!user) {
+        req.session.destroy((err) => {
+          if (err) {
+            next(err);
+          } else {
+            res.json({
+              role: "member",
+            });
+          }
+        });
+        return;
+      }
+      res.json({});
+      //     role: user.is_admin ? 'admin' : 'user',
+      //     username: user.username,
+      //   })
+      // } else {
+      //   res.json({
+      //     role: 'guest',
+      //   })
+      // }
+    }
+  } catch (error) {
+    next(error);
+  }
 });
