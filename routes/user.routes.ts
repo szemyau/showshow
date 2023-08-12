@@ -3,8 +3,7 @@ import { body, validationResult } from "express-validator";
 import { client } from "../database";
 import { UserCollection } from "../userCollection";
 import { checkPassword, hashPassword } from "../hash";
-import bcrypt from "bcrypt";
-// import cookieParser from "cookie-parser";
+import "../session";
 
 export let userRoutes = Router();
 
