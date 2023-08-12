@@ -3,7 +3,8 @@ import { client } from "../database";
 
 export let categoryRoutes = Router();
 
-//show category list on category-list.html
+// select image
+//show category list on category-list.html by chloe
 categoryRoutes.get("/category-list", async (req, res, next) => {
   try {
     let result = await client.query(/* sql */ `
@@ -20,7 +21,7 @@ categoryRoutes.get("/category-list", async (req, res, next) => {
   }
 });
 
-// category-list.html: insert selected categories into database table 'category'
+// category-list.html: insert selected categories into database table 'category' by chloe
 categoryRoutes.get("/category-result", async (req, res, next) => {
   try {
     // let userID = 1; //req.session.user_id
@@ -63,7 +64,7 @@ categoryRoutes.get("/category-result", async (req, res, next) => {
   }
 });
 
-// generate users'categories on home.html
+// generate users'categories on home.html by chloe
 categoryRoutes.get("/userCategoryList", async (req, res, next) => {
   try {
     // let userID = 1; //req.session.user_id

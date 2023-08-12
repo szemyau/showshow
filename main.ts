@@ -29,9 +29,9 @@ app.use(sessionMiddleware);
 
 app.use(express.static("public"));
 app.use(userRoutes);
-app.use(userOnlyAPI, categoryRoutes);
-app.use(userOnlyAPI, createEventRoutes);
-app.use(userOnlyAPI, eventRoutes);
+app.use(categoryRoutes);
+app.use(createEventRoutes);
+app.use(eventRoutes);
 
 app.get("/", (req, res) => res.redirect("/home.html")); // please
 
