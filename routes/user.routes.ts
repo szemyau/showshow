@@ -145,6 +145,7 @@ userRoutes.get("/role", async (req, res, next) => {
         [req.session.user_id]
       );
       let user = result.rows[0];
+      console.log(`role: ${user}`);
       if (!user) {
         req.session.destroy((err) => {
           if (err) {
