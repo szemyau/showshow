@@ -1,8 +1,10 @@
 import { Router } from "express";
 import { client } from "../database";
 import { HttpError } from "../http-error";
+import { sessionMiddleware } from "../session";
 
 export let eventRoutes = Router();
+eventRoutes.use(sessionMiddleware);
 
 // loading tables category and event data pass to frontend
 eventRoutes.get("/event-list", async (req, res) => {
@@ -78,6 +80,31 @@ eventRoutes.get("/events/:id", async (req, res, next) => {
       throw new HttpError(404, "event not found");
     }
     res.json({ event });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// JOIN EVENT
+eventRoutes.post("/event-detail/:id", async (req, res, next) => {
+  try {
+    let user_id = req.session.user_id;
+    let event_id = +req.params.id;
+    let message = req.body.message;
+
+    console.log({ user_id });
+    console.log({ event_id });
+    console.log({ message });
+
+    // save join action to database
+    let result = await client.query(
+      /*sql*/ `
+      insert into "participants_events" (user_id, event_id, message, created_at, updated_at) values ($1, $2, $3, now(), now())
+      returning id`,
+      [user_id, event_id, message]
+    );
+
+    res.status(200).json({});
   } catch (error) {
     next(error);
   }

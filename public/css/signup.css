@@ -63,7 +63,7 @@ body {
     left: 0;
     right: 0;
     margin: 30px auto;
-    border-radius: 100px;
+    border-radius: 10px;
     background: #fff;
     position: relative;
     display: inline-block;
@@ -118,11 +118,6 @@ body {
     z-index: 2;
 }
 
-.error-message {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-}
 
 /* mobile version */
 

@@ -155,9 +155,10 @@ You can also contact us by phone 12345678 or email showshow@gmail.com, or you ca
 -- add column 'message' into table 'participants_events' by Katy
 alter table "participants_events" add column message text;
 
+-- add column 'user_create_event_image' into table 'event' by chloe on 10 Aug
+alter table "event" add column user_create_event_image varchar(255);
 
 
-
-
-
-    
+ALTER TABLE users_categories
+  DROP CONSTRAINT users_preferences_preference_id_fkey,
+  ADD FOREIGN KEY (category_id) REFERENCES category(id);

@@ -4,30 +4,18 @@ import { client } from "../database";
 import { UserCollection } from "../userCollection";
 import { checkPassword, hashPassword } from "../hash";
 import bcrypt from "bcrypt";
-import cookieParser from "cookie-parser";
+// import cookieParser from "cookie-parser";
 
 export let userRoutes = Router();
 
-// Set up middlewares
-//userRoutes.use(express.urlencoded({ extended: true }));
-//userRoutes.use(cookieParser());
-// userRoutes.use(
-//   expressSession({
-//     secret: "super secret key",
-//     resave: false,
-//     saveUninitialized: true,
-//     //cookie: { secure: true },
-//   })
-// );
-
 export type User = {
-  id: number;
   email: string;
-  // passwordHash: string;
+  password: string;
 };
 
-// sign up
-// validation function
+//SIGN UP
+// server to check the signup details
+// validation function by library
 const validateRegistration = [
   body("email")
     .isEmail()
@@ -48,7 +36,7 @@ const validateRegistration = [
     ),
 ];
 
-// save data to database
+// signup additional validation
 userRoutes.post(
   "/signup",
   validateRegistration,
@@ -57,7 +45,8 @@ userRoutes.post(
     if (!errors.isEmpty()) {
       const errorMessages = errors.array().map((error) => error.msg);
       console.log(errorMessages);
-      return res.status(400).json({ errors: errorMessages });
+      res.status(400).json({ error: errorMessages[0] });
+      return;
     }
 
     try {
@@ -66,26 +55,25 @@ userRoutes.post(
       let confirmPassword = req.body.confirmPassword;
 
       // check confirmPassword is same as password
-      if (confirmPassword != password) {
-        res.status(400).json("Password not match");
+      if (confirmPassword !== password) {
+        res.status(400).json({ error: "Password not match" });
         return;
       }
 
+      // validation pass, then hash password
+      let hashedPassword = await hashPassword(password);
+
+      // save signup details to database
       let result = await client.query(
         /*sql*/ `
         insert into "user" (email, password, role, created_at, updated_at) values ($1, $2, $3, now(), now())
         returning id`,
-        [email, password, "member"]
+        [email, hashedPassword, "member"]
       );
 
       const insertedUserId = result.rows[0].id;
-
       console.log(`insertedUserId:`, insertedUserId);
-      res.json({ message: "Registration successful" });
-      res.status(200);
-      console.log({ result });
-      console.log(typeof result);
-      console.log(res.status);
+      res.status(200).json({});
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Internal server error" });
@@ -93,78 +81,47 @@ userRoutes.post(
   }
 );
 
-// login
-userRoutes.get("/login", (req, res) => {
-  // if (req.session.user) {
-  //   console.log(req.session.user);
-  //   // res.send(`Welcome back, ${req.session.user.name}!`);
-  //   res.send(`Welcome back, !`);
-  // } else {
-  //   res.send("Welcome to our website!");
-  // }
-});
-
-// userRoutes.get("/", (req: Request, res: Response) => {
-//   res.send(`
-//     <form method="post" action="/login">
-//       <input type="email" name="email" placeholder="Email">
-//       <input type="password" name="password" placeholder="Password">
-//       <button type="submit">Login</button>
-//     </form>
-//   `);
-// });
-
-const users: User[] = [
-  {
-    id: 1,
-    email: "user1@example.com",
-    passwordHash:
-      "$2b$10$7tA9k5BJaBt5rK6xHkRjhe4oZ2V.GlyCcX0gqvWx3f3jIc7WdK4MO", // hashed password: 'password'
-  },
-  {
-    id: 2,
-    email: "user2@example.com",
-    passwordHash:
-      "$2b$10$7tA9k5BJaBt5rK6xHkRjhe4oZ2V.GlyCcX0gqvWx3f3jIc7WdK4MO", // hashed password: 'password'
-  },
-];
-
+// LOGIN
+// server to check the login details
 userRoutes.post("/login", async (req: Request, res: Response) => {
-  // Validate user credentials
-  // const user = { id: 123, email: "John@gmail.com", passwordHash: '$2b$10$7tA9k5BJaBt5rK6xHkRjhe4oZ2V.GlyCcX0gqvWx3f3jIc7WdK4MO' };
-  // req.session.user = User;
+  const { email, password } = req.body;
+  console.log({ email });
+  console.log({ password });
 
-  /*  Validation */
-  /*  success 
-  req.session.user_id = // id here
-  */
-  const { id, email, password } = req.body;
-  const user = users.find((u) => u.id === id && u.email === email);
-  console.log({ user });
+  //check if inputemail and pw present
+  if (!email) {
+    return res.status(400).json({
+      error: "Missing email",
+    });
+  }
+  if (!password) {
+    return res.status(400).json({
+      error: "Missing password",
+    });
+  }
 
-  if (!user) {
-    res.status(401).send("Invalid email or password");
+  // retrieve id and password to database
+  let result = await client.query(
+    /*sql*/ `
+            select password,id from "user" where email = $1`,
+    [email]
+  );
+  console.log({ result });
+  // Accessing the returned rows
+  let rows = result.rows;
+  // check input Password is same as database password
+  let passwordMatches = checkPassword(password, rows[0].password);
+  if (!passwordMatches) {
+    res.status(400).json({ error: "Email or password not match" });
     return;
   }
 
-  /* get user info from db */
-
-  const passwordMatches = await bcrypt.compare(password, ""); //user.passwordHash);
-
-  if (passwordMatches) {
-    req.session.user_id = -1; //user.id;
-    res.cookie("sessionId", req.session.id, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-    });
-    res.send("Login successful");
-  } else {
-    res.status(401).send("Invalid email or password");
-  }
-  //res.send("Login successful!");
+  // retrieve session details
+  req.session.user_id = rows[0].id;
+  res.json("login success");
 });
 
+// logout
 userRoutes.post("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -173,5 +130,44 @@ userRoutes.post("/logout", (req, res) => {
       console.log("Session destroyed");
     }
   });
-  res.send("Logout successful!");
+  res.send("Logout successful!").redirect("/home.html");
+});
+
+userRoutes.get("/role", async (req, res, next) => {
+  try {
+    if (req.session.user_id) {
+      let result = await client.query(
+        /* sql */ `
+				select email, role
+				from "user"
+				where id = $1
+			`,
+        [req.session.user_id]
+      );
+      let user = result.rows[0];
+      if (!user) {
+        req.session.destroy((err) => {
+          if (err) {
+            next(err);
+          } else {
+            res.json({
+              role: "member",
+            });
+          }
+        });
+        return;
+      }
+      res.json({});
+      //     role: user.is_admin ? 'admin' : 'user',
+      //     username: user.username,
+      //   })
+      // } else {
+      //   res.json({
+      //     role: 'guest',
+      //   })
+      // }
+    }
+  } catch (error) {
+    next(error);
+  }
 });
