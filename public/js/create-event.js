@@ -1,15 +1,33 @@
 let eventImage = document.querySelector(".event-list");
+let submitForm = document.querySelector("#create-form");
+
+async function loadCategories() {
+  let res = await fetch("/categories");
+  let json = await res.json();
+  if (json.error) {
+    console.log(json.error);
+    Swal.fire("Failed to load categories", json.error, "error");
+    return;
+  }
+  submitForm.event_category.textContent = "";
+  for (let category of json.categories) {
+    let option = document.createElement("option");
+    option.value = category.id;
+    option.textContent = category.name;
+    submitForm.event_category.appendChild(option);
+  }
+}
+loadCategories();
 
 // document.querySelector("#create-form").addEventListener("submit",(e)=>{
 //     submitForm(e)
 // })
 
-let submitForm = document.querySelector("#create-form");
 submitForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   let form = event.target;
-  let res = await fetch("/create-event", {
+  let res = await fetch(form.action, {
     method: form.method,
     body: new FormData(form),
   });
@@ -25,7 +43,8 @@ submitForm.addEventListener("submit", async (event) => {
     return;
   }
 
-  window.location = "home.html";
+  // window.location = "home.html";
+  window.location = "/event-profile.html";
   // showImagePreview(json)
 });
 

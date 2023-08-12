@@ -27,6 +27,7 @@ async function loadUserCategory() {
     // const templateElement = document.getElementById("chosenCategoryList2");
     // templateElement.removeAttribute("data-template");
 
+    // put image into specific area
     for (let category of json.userCategoryChoices) {
       let node = chosenCategoryTemplate.content.cloneNode(true);
 
