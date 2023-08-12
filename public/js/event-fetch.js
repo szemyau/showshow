@@ -26,6 +26,7 @@ document
     });
 
     form.reset();
+    location.reload();
 
     // get back data once ready
     const result = await res.json();

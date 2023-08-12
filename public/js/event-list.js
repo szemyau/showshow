@@ -46,34 +46,3 @@ async function loginStatus() {
   }
 }
 loginStatus();
-
-//logout call
-// async function logout(event) {
-//   event.preventDefault();
-//   let form = event.target;
-//   // let res = await fetch('/login');
-//   let res = await fetch(form.action, {
-//     method: form.method,
-//   });
-//   let json = await res.json();
-//   console.log("logout result:", json);
-//   if (json.error) {
-//     Swal.fire("Failed to logout", json.error, "error");
-//     return;
-//   }
-
-//   try {
-//     if (res.ok) {
-//       // Login successful
-//       document.querySelector("#login_button").style.display = "none";
-//       document.querySelector("#signup_button").style.display = "none";
-//       document.querySelector("#logout_button").style.display = "block";
-//     } else {
-//       // Login failed
-//       alert(data.message);
-//       // }
-//     }
-//   } catch (error) {
-//     console.error("Login request failed:", error);
-//   }
-// }

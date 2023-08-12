@@ -197,6 +197,8 @@ eventRoutes.get("/event-list", userOnlyAPI, async (req, res) => {
 eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
   try {
     let event_id = +req.params.id;
+    let user_id = req.session.user_id;
+
     if (!event_id) {
       throw new HttpError(400, "Invalid event_id");
     }
@@ -210,11 +212,46 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
     `,
       [event_id]
     );
+
+    // disable the join button if user joined already
+    console.log(`load into event details page and check joined or not`);
+
+    let joined = await client.query(
+      /* sql */ `
+    select
+      id
+    from participants_events
+    where user_id = $1 and event_id = $2
+`,
+      [user_id, event_id]
+    );
+    let isJoined = joined.rows[0];
+    console.log({ isJoined });
+
     let event = result.rows[0];
     if (!event) {
       throw new HttpError(404, "event not found");
     }
-    res.json({ event });
+    res.json({ isJoined, event });
+
+    // // disable the join button if user joined already
+    // console.log(`load into event details page and check joined or not`);
+    // let joined = await client.query(
+    //   /* sql */ `
+    //     select
+    //       id
+    //     from participants_events
+    //     where user_id = $1 and event_id = $2
+    // `,
+    //   [user_id, event_id]
+    // );
+    // let isJoined = joined.rows[0];
+    // console.log({ isJoined });
+    // if (isJoined) {
+    //   res.json({ isJoined });
+    //   return;
+    // }
+    // res.json({ event });
   } catch (error) {
     next(error);
   }
@@ -230,6 +267,7 @@ eventRoutes.post("/event-detail/:id", userOnlyAPI, async (req, res, next) => {
     console.log({ user_id });
     console.log({ event_id });
     console.log({ message });
+    console.log(`going to save join details to database`);
 
     // save join action to database
     let result = await client.query(

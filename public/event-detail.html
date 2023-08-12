@@ -173,6 +173,7 @@
           </p>
           <p>
             <button
+              id="join-button"
               class="w3-button w3-light-grey w3-section"
               type="submit"
               name="join"
@@ -198,6 +199,13 @@
           return;
         }
         console.log(json.event);
+        console.log(json.isJoined);
+
+        if (json.isJoined) {
+          button = document.querySelector("#join-button");
+          document.querySelector("#join-button").setAttribute("disabled", "");
+        }
+
         let content = document.querySelector("#about .content");
         content.textContent = "";
         json.event.about.split("\n").forEach((text) => {
