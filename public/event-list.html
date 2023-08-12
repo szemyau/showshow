@@ -100,9 +100,7 @@
         cardList.textContent = "";
         for (let event of json) {
           let node = cardTemplate.content.cloneNode(true);
-          node.querySelector(
-            "a"
-          ).href = `/event-detail0${event.category_id}.html?id=${event.id}`;
+          node.querySelector("a").href = `/event-detail.html?id=${event.id}`;
           node.querySelector(".event-image").textContent = event.image;
           node.querySelector(".event-date").textContent =
             event.event_date.substring(0, 10);

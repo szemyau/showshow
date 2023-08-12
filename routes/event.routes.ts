@@ -86,7 +86,7 @@ eventRoutes.get("/events/:id", async (req, res, next) => {
 });
 
 // JOIN EVENT
-eventRoutes.post("/event-detail01/:id", async (req, res, next) => {
+eventRoutes.post("/event-detail/:id", async (req, res, next) => {
   try {
     let user_id = req.session.user_id;
     let event_id = +req.params.id;

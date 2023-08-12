@@ -17,7 +17,7 @@ document
     };
 
     // ajax to call server
-    const res = await fetch(`/event-detail01/${id}`, {
+    const res = await fetch(`/event-detail/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
