@@ -107,3 +107,20 @@ function loadAnotherCategory(category) {
   div.querySelector("a").href +=
     "?id=" + categoryListTwo.appendChild(div) + category.id; //TODO need to add function(category)
 }
+
+// check if login or not
+async function loginStatus() {
+  console.log(`loginstatus function run`);
+  let res = await fetch("/role");
+  console.log(`check login status: ${res}`);
+  if (res) {
+    document.querySelector("#login_button").style.display = "none";
+    document.querySelector("#signup_button").style.display = "none";
+    document.querySelector("#logout_button").style.display = "block";
+  } else {
+    document.querySelector("#login_button").style.display = "block";
+    document.querySelector("#signup_button").style.display = "block";
+    document.querySelector("#logout_button").style.display = "none";
+  }
+}
+loginStatus();

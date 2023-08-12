@@ -109,6 +109,13 @@ userRoutes.post("/login", async (req: Request, res: Response) => {
   console.log({ result });
   // Accessing the returned rows
   let rows = result.rows;
+  console.log({ rows });
+  // check if email is registered
+  if (rows.length == 0) {
+    res.status(400).json({ error: "Email not registered" });
+    return;
+  }
+
   // check input Password is same as database password
   let passwordMatches = checkPassword(password, rows[0].password);
   if (!passwordMatches) {
@@ -135,17 +142,19 @@ userRoutes.post("/logout", (req, res) => {
 
 userRoutes.get("/role", async (req, res, next) => {
   try {
-    if (req.session.user_id) {
+    let user_id = req.session.user_id;
+    console.log(`role: ${user_id}`);
+    if (user_id) {
       let result = await client.query(
         /* sql */ `
 				select email, role
 				from "user"
 				where id = $1
 			`,
-        [req.session.user_id]
+        [user_id]
       );
       let user = result.rows[0];
-      console.log(`role: ${user}`);
+      console.log(`run user route ts role: ${user}`);
       if (!user) {
         req.session.destroy((err) => {
           if (err) {

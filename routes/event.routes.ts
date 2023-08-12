@@ -2,12 +2,13 @@ import { Router } from "express";
 import { client } from "../database";
 import { HttpError } from "../http-error";
 import { sessionMiddleware } from "../session";
+import { userOnlyAPI } from "../guard";
 
 export let eventRoutes = Router();
 eventRoutes.use(sessionMiddleware);
 
 // loading tables category and event data pass to frontend
-eventRoutes.get("/event-list", async (req, res) => {
+eventRoutes.get("/event-list", userOnlyAPI, async (req, res) => {
   try {
     let id = req.query.id;
 
@@ -59,7 +60,7 @@ eventRoutes.get("/event-list", async (req, res) => {
 });
 
 // event details data
-eventRoutes.get("/events/:id", async (req, res, next) => {
+eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
   try {
     let event_id = +req.params.id;
     if (!event_id) {
@@ -86,7 +87,7 @@ eventRoutes.get("/events/:id", async (req, res, next) => {
 });
 
 // JOIN EVENT
-eventRoutes.post("/event-detail/:id", async (req, res, next) => {
+eventRoutes.post("/event-detail/:id", userOnlyAPI, async (req, res, next) => {
   try {
     let user_id = req.session.user_id;
     let event_id = +req.params.id;
