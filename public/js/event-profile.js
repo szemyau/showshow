@@ -64,3 +64,20 @@ async function deleteEvent(button) {
   });
   toast.fire({ icon: "success", title: "Deleted Event #" + id });
 }
+
+// check if login or not <add katy's logout function>
+async function loginStatus() {
+  console.log(`loginstatus function run`);
+  let res = await fetch("/role");
+  console.log(`check login status: ${res}`);
+  if (res) {
+    document.querySelector("#login_button").style.display = "none";
+    document.querySelector("#signup_button").style.display = "none";
+    document.querySelector("#logout_button").style.display = "block";
+  } else {
+    document.querySelector("#login_button").style.display = "block";
+    document.querySelector("#signup_button").style.display = "block";
+    document.querySelector("#logout_button").style.display = "none";
+  }
+}
+loginStatus();

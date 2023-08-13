@@ -30,6 +30,7 @@ eventRoutes.get("/categories", async (req, res, next) => {
   }
 });
 
+// defines a data validation schema using the object() function
 let createEventParser = object({
   fields: object({
     event_category: id(),

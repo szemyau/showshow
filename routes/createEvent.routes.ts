@@ -4,11 +4,12 @@ import formidable from "formidable";
 import { toArray, uploadDir } from "../upload";
 import { HttpError } from "../http-error";
 import crypto from "crypto";
+import { userOnlyAPI } from "../guard";
 
 export let createEventRoutes = Router();
 
 // show event profile on event-profile.html
-createEventRoutes.get("/create-event", async (req, res, next) => {
+createEventRoutes.get("/create-event", userOnlyAPI, async (req, res, next) => {
   try {
     let result = await client.query(
       /* sql */ `

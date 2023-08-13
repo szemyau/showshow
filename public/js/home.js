@@ -36,66 +36,43 @@ async function loadUserCategory() {
   }
   renderTemplate(anotherCategoryList, json);
   console.log(`anotherCategoryList:`, anotherCategoryList);
-  // end;
-
-  // for (let category of json.anotherCategoryChoices) {
-  //   let node = moreCategoryTemplate.content.cloneNode(true);
-
-  //   node.querySelector("img").src = category.user_image;
-  //   node.querySelector("img").alt = category.name;
-  //   node.querySelector(".card-title").textContent = category.name;
-  //   node.querySelector("a").href = `/event-list.html?id=${category.id}`;
-
-  //   moreCategoryList.appendChild(node);
-  //   console.log(moreCategoryList);
-  // }
 }
 
 loadUserCategory();
 
-// successful dom for about your choices on 8 Aug
-// let categoryList = document.querySelector('.category-photo-container')
+// check if login or not <add katy's logout function>
+async function loginStatus() {
+  console.log(`loginstatus function run`);
+  let res = await fetch("/role");
+  console.log(`check login status: ${res}`);
+  if (res) {
+    document.querySelector("#login_button").style.display = "none";
+    document.querySelector("#signup_button").style.display = "none";
+    document.querySelector("#logout_button").style.display = "block";
+  } else {
+    document.querySelector("#login_button").style.display = "block";
+    document.querySelector("#signup_button").style.display = "block";
+    document.querySelector("#logout_button").style.display = "none";
+  }
+}
+loginStatus();
 
-// function loadUserCategory(category) {
-//   let div = document.createElement('div')
-//   div.classList.add('card')
-//   div.setAttribute("id", category) // set variable as id's value
+// successful dom for look for more on 8 Aug
+// let categoryListTwo = document.querySelector(".another-container");
+
+// function loadAnotherCategory(category) {
+//   let div = document.createElement("div");
+//   div.classList.add("card");
+//   div.setAttribute("id", category); // set variable as id's value
 
 //   //insert variable as photo src, alt, card-title
-//   div.innerHTML = /* html */`
+//   div.innerHTML = /* html */ `
 //      <img src="/photo/${category}-category.jpg" class="card-img" alt="${category}">
 //           <div class="card-body">
 //             <div class="card-title">${category}</div>
 //             <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
-//           </div>`
+//           </div>`;
 
-//   div.querySelector('a').href += '?id=' +
-//     categoryList.appendChild(div) + category.id  //TODO need to add function(category)
+//   div.querySelector("a").href +=
+//     "?id=" + categoryListTwo.appendChild(div) + category.id;
 // }
-
-// loadUserCategory('Hiking')
-// loadUserCategory('Health')
-// loadUserCategory('Party-Room')
-// loadUserCategory('VR-Game')
-// loadUserCategory('War-Game')
-// loadUserCategory('Music')
-
-// successful dom for look for more on 8 Aug
-let categoryListTwo = document.querySelector(".another-container");
-
-function loadAnotherCategory(category) {
-  let div = document.createElement("div");
-  div.classList.add("card");
-  div.setAttribute("id", category); // set variable as id's value
-
-  //insert variable as photo src, alt, card-title
-  div.innerHTML = /* html */ `
-     <img src="/photo/${category}-category.jpg" class="card-img" alt="${category}">  
-          <div class="card-body">
-            <div class="card-title">${category}</div>
-            <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
-          </div>`;
-
-  div.querySelector("a").href +=
-    "?id=" + categoryListTwo.appendChild(div) + category.id; //TODO need to add function(category)
-}
