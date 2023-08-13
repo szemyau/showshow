@@ -226,32 +226,13 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
       [user_id, event_id]
     );
     let isJoined = joined.rows[0];
-    console.log({ isJoined });
+    console.log(`participants_events: { isJoined }`);
 
     let event = result.rows[0];
     if (!event) {
       throw new HttpError(404, "event not found");
     }
     res.json({ isJoined, event });
-
-    // // disable the join button if user joined already
-    // console.log(`load into event details page and check joined or not`);
-    // let joined = await client.query(
-    //   /* sql */ `
-    //     select
-    //       id
-    //     from participants_events
-    //     where user_id = $1 and event_id = $2
-    // `,
-    //   [user_id, event_id]
-    // );
-    // let isJoined = joined.rows[0];
-    // console.log({ isJoined });
-    // if (isJoined) {
-    //   res.json({ isJoined });
-    //   return;
-    // }
-    // res.json({ event });
   } catch (error) {
     next(error);
   }
