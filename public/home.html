@@ -14,6 +14,7 @@
   </head>
 
   <body>
+    <!-- home.html -> home.css -> home.js -> category.routes.ts -->
     <!-- nav bar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
       <div class="container-fluid">
@@ -44,9 +45,11 @@
                 >Create an event</a
               >
             </li>
-            
+
             <li class="nav-item">
-              <a class="nav-link active" href="/event-profile.html">Event Profile</a>
+              <a class="nav-link active" href="/event-profile.html"
+                >Event Profile</a
+              >
             </li>
 
             <li class="nav-item">
@@ -60,7 +63,6 @@
       </div>
     </nav>
 
-    <!-- based on your selected categories to generate your choices -->
     <div class="faded mt-5">
       <img
         src="./photo/home-banner.jpg"
@@ -69,7 +71,7 @@
       />
     </div>
 
-    <!-- about client's category choices -->
+    <!-- based on your selected categories to generate your choices -->
     <div id="choices-container">
       <div class="about-your-choices">
         About your choices
@@ -82,7 +84,7 @@
         </div>
 
         <template class="card" id="chosenCategoryTemplate">
-          <div>
+          <div class="card-border">
             <img
               src="/photo/Hiking-category.jpg"
               class="card-img-top"
@@ -99,125 +101,19 @@
       </div>
     </div>
 
-
+    <!-- categories other than client selected -->
     <div id="choices-container">
       <div class="about-your-choices">
-        About your choices 2
-
-        <div
-          class="category-photo-container d-flex justify-content-center"
-          id="chosenCategoryList2"
-          data-template="chosenCategory"
-          data-bind="userCategoryChoices"
-        >
-          <!-- <a class="add-link" href="/category-list.html"> + </a> -->
-        </div>
-
-        <template class="card" data-name="chosenCategory">
-          <div>
-            <img data-src="user_image" class="card-img-top" data-alt="name" />
-            <div class="card-body">
-              <div class="card-title" data-text="name"></div>
-              <a data-href="link" class="btn btn-primary btn-sm">
-                Go somewhere
-              </a>
-            </div>
-          </div>
-        </template>
-      </div>
-    </div>
-
-    
-    <div id="choices-container-2">
-      <div class="about-your-choices">
         Look for more
 
         <div
           class="category-photo-container d-flex justify-content-center"
-          id="moreCategoryList"
-        ></div>
-
-        <template class="card" id="moreCategoryTemplate">
-          <div>
-            <img
-              src="/photo/Hiking-category.jpg"
-              class="card-img-top"
-              alt="hiking"
-            />
-            <div class="card-body">
-              <div class="card-title">Hiking</div>
-              <a href="/category.html" class="btn btn-primary btn-sm">
-                Go somewhere
-              </a>
-            </div>
-          </div>
-        </template>
-      </div>
-    </div>
-
-    <!-- <div id="choices-container">
-      <div class="about-your-choices">
-        Look for more
-
-        <div
-          class="category-photo-container d-flex flex-wrap another-container"
-          id="moreCategoryList"
-        ></div>
-
-        <template class="card" id="moreCategoryTemplate">
-          <img
-            src="/photo/Hiking-category.jpg"
-            class="card-img-top"
-            alt="hiking"
-          />
-          <div class="card-body">
-            <div class="card-title">Hiking</div>
-            <a href="/category.html" class="btn btn-primary btn-sm"
-              >Go somewhere</a
-            >
-          </div>
-        </template>
-      </div>
-    </div> -->
-
-    <!-- <div class="look-for-more">
-      <div class="about-your-choices">
-        Look for more
-
-        <div
-          class="category-photo-container d-flex flex-wrap another-container"
-          id="moreCategoryList"
-        ></div>
-
-        <template class="card" id="moreCategoryTemplate">
-          <img
-            src="/photo/Hiking-category.jpg"
-            class="card-img-top"
-            alt="hiking"
-          />
-          <div class="card-body">
-            <div class="card-title">Hiking</div>
-            <a href="/category.html" class="btn btn-primary btn-sm"
-              >Go somewhere</a
-            >
-          </div>
-        </template>
-      </div>
-    </div> -->
-
-    <div id="choices-container">
-      <div class="about-your-choices another-container">
-        Look for more
-
-        <div
-          class="category-photo-container d-flex justify-content-center"
-          id="moreCategoryList"
-          data-template="moreCategoryList"
+          id="anotherCategoryList"
+          data-template="user_categories"
           data-bind="anotherCategoryChoices"
-        >
-
-        <template class="card" data-name="anotherCategory">
-          <div>
+        ></div>
+        <template class="card" data-name="user_categories">
+          <div class="card-border">
             <img data-src="user_image" class="card-img-top" data-alt="name" />
             <div class="card-body">
               <div class="card-title" data-text="name"></div>
@@ -229,60 +125,6 @@
         </template>
       </div>
     </div>
-
-    <!-- <div id="choices-container">
-      <div class="about-your-choices">
-        About your choices 2
-
-        <div
-          class="category-photo-container d-flex justify-content-center"
-          id="chosenCategoryList2"
-          data-template="chosenCategory"
-          data-bind="userCategoryChoices"
-        >
-          <a class="add-link" href="/category-list.html"> + </a>
-        </div>
-
-        <template class="card" data-name="chosenCategory">
-          <div>
-            <img data-src="user_image" class="card-img-top" data-alt="name" />
-            <div class="card-body">
-              <div class="card-title" data-text="name"></div>
-              <a data-href="link" class="btn btn-primary btn-sm">
-                Go somewhere
-              </a>
-            </div>
-          </div>
-        </template>
-      </div>
-    </div> -->
-
-    <!-- show the categories that client didn't choose for them to look for more categories -->
-
-    <!-- <div class="look-for-more">
-      <div class="about-your-choices">
-        Look for more
-
-        <div
-          class="category-photo-container d-flex flex-wrap another-container"
-          id="moreCategoryList"
-        ></div>
-
-        <template class="card" id="moreCategoryTemplate">
-          <img
-            src="/photo/Hiking-category.jpg"
-            class="card-img-top"
-            alt="hiking"
-          />
-          <div class="card-body">
-            <div class="card-title">Hiking</div>
-            <a href="/category.html" class="btn btn-primary btn-sm"
-              >Go somewhere</a
-            >
-          </div>
-        </template>
-      </div>
-    </div> -->
 
     <script src="https://cdn.jsdelivr.net/npm/data-template@1.4/base.js"></script>
 

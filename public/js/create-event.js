@@ -19,10 +19,6 @@ async function loadCategories() {
 }
 loadCategories();
 
-// document.querySelector("#create-form").addEventListener("submit",(e)=>{
-//     submitForm(e)
-// })
-
 submitForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -43,10 +39,17 @@ submitForm.addEventListener("submit", async (event) => {
     return;
   }
 
-  // window.location = "home.html";
   window.location = "/event-profile.html";
-  // showImagePreview(json)
 });
+
+function loadFile(event) {
+  var reader = new FileReader();
+  reader.onload = function () {
+    var output = document.getElementById("output");
+    output.src = reader.result;
+  };
+  reader.readAsDataURL(event.target.files[0]);
+}
 
 // function showImagePreview(event) {
 
@@ -63,14 +66,6 @@ submitForm.addEventListener("submit", async (event) => {
 
 //     }
 
-function loadFile(event) {
-  var reader = new FileReader();
-  reader.onload = function () {
-    var output = document.getElementById("output");
-    output.src = reader.result;
-  };
-  reader.readAsDataURL(event.target.files[0]);
-}
 //     let img = node.querySelector('.memo-image')
 //   if (memo.filename) {
 //     img.src = '/uploads/' + memo.filename
