@@ -52,3 +52,50 @@ async function loadUserCategory() {
 }
 
 loadUserCategory();
+
+// successful dom for about your choices on 8 Aug
+// let categoryList = document.querySelector('.category-photo-container')
+
+// function loadUserCategory(category) {
+//   let div = document.createElement('div')
+//   div.classList.add('card')
+//   div.setAttribute("id", category) // set variable as id's value
+
+//   //insert variable as photo src, alt, card-title
+//   div.innerHTML = /* html */`
+//      <img src="/photo/${category}-category.jpg" class="card-img" alt="${category}">
+//           <div class="card-body">
+//             <div class="card-title">${category}</div>
+//             <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
+//           </div>`
+
+//   div.querySelector('a').href += '?id=' +
+//     categoryList.appendChild(div) + category.id  //TODO need to add function(category)
+// }
+
+// loadUserCategory('Hiking')
+// loadUserCategory('Health')
+// loadUserCategory('Party-Room')
+// loadUserCategory('VR-Game')
+// loadUserCategory('War-Game')
+// loadUserCategory('Music')
+
+// successful dom for look for more on 8 Aug
+let categoryListTwo = document.querySelector(".another-container");
+
+function loadAnotherCategory(category) {
+  let div = document.createElement("div");
+  div.classList.add("card");
+  div.setAttribute("id", category); // set variable as id's value
+
+  //insert variable as photo src, alt, card-title
+  div.innerHTML = /* html */ `
+     <img src="/photo/${category}-category.jpg" class="card-img" alt="${category}">  
+          <div class="card-body">
+            <div class="card-title">${category}</div>
+            <a href="/showshow/public/category.html" class="btn btn-primary btn-sm">Go somewhere</a>
+          </div>`;
+
+  div.querySelector("a").href +=
+    "?id=" + categoryListTwo.appendChild(div) + category.id; //TODO need to add function(category)
+}

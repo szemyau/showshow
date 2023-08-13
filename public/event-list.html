@@ -50,10 +50,24 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link active" href="/login.html">Log In</a>
+              <a class="nav-link active" id="login_button" href="/login.html"
+                >Log In</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/signup.html">Sign Up</a>
+              <a
+                class="nav-link active"
+                id="logout_button"
+                style="display: none"
+                href="/login.html"
+                onclick="logout()"
+                >Log Out</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" id="signup_button" href="/signup.html"
+                >Sign Up</a
+              >
             </li>
           </ul>
         </div>
@@ -86,37 +100,7 @@
       crossorigin="anonymous"
     ></script>
 
-    <script>
-      async function loadEventList() {
-        let params = new URLSearchParams(location.search);
-        let id = params.get("id");
-
-        // loop to load the event date with category id
-        let res = await fetch(`/event-list?id=${id}`);
-        let json = await res.json();
-        console.log(res);
-        console.log(json);
-        let cardList = document.querySelector("#cardList");
-
-        cardList.textContent = "";
-        for (let event of json) {
-          let node = cardTemplate.content.cloneNode(true);
-          node.querySelector("a").href = `/event-detail.html?id=${event.id}`;
-          node.querySelector(".event-image").textContent = event.image;
-          node.querySelector(".event-date").textContent =
-            event.event_date.substring(0, 10);
-          node.querySelector(".event-time").textContent = event.event_time;
-          node.querySelector(".event-name").textContent = event.name;
-          node.querySelector(".event-vacancy").textContent = event.vacancy;
-          node.querySelector(".event-quota").textContent = event.quota;
-          node.querySelector(".event-status").textContent = event.status;
-
-          cardList.appendChild(node);
-        }
-      }
-      loadEventList();
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/event-list.js"></script>
   </body>
 </html>

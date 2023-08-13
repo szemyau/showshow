@@ -100,3 +100,20 @@ function loadFile(event) {
 
 // showEvent({name:'go to hiking',user_create_event_image:"/photo/party-room.jpg",
 // event_date:'2023-08-10', event_time:'11:00', event_location: 'Wong Tai Sin' })
+
+// check if login or not
+async function loginStatus() {
+  console.log(`loginstatus function run`);
+  let res = await fetch("/role");
+  console.log(`check login status: ${res}`);
+  if (res) {
+    document.querySelector("#login_button").style.display = "none";
+    document.querySelector("#signup_button").style.display = "none";
+    document.querySelector("#logout_button").style.display = "block";
+  } else {
+    document.querySelector("#login_button").style.display = "block";
+    document.querySelector("#signup_button").style.display = "block";
+    document.querySelector("#logout_button").style.display = "none";
+  }
+}
+loginStatus();

@@ -163,7 +163,7 @@ eventRoutes.delete("/events/by-me/:id", userOnlyAPI, async (req, res, next) => {
 /* END used by event-profile.html by chloe */
 
 // loading tables category and event data pass to frontend
-eventRoutes.get("/event-list", async (req, res) => {
+eventRoutes.get("/event-list", userOnlyAPI, async (req, res) => {
   try {
     let id = req.query.id;
 
@@ -215,9 +215,11 @@ eventRoutes.get("/event-list", async (req, res) => {
 });
 
 // event details data
-eventRoutes.get("/events/:id", async (req, res, next) => {
+eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
   try {
     let event_id = +req.params.id;
+    let user_id = req.session.user_id;
+
     if (!event_id) {
       throw new HttpError(400, "Invalid event_id");
     }
@@ -231,18 +233,34 @@ eventRoutes.get("/events/:id", async (req, res, next) => {
     `,
       [event_id]
     );
+
+    // disable the join button if user joined already
+    console.log(`load into event details page and check joined or not`);
+
+    let joined = await client.query(
+      /* sql */ `
+    select
+      id
+    from participants_events
+    where user_id = $1 and event_id = $2
+`,
+      [user_id, event_id]
+    );
+    let isJoined = joined.rows[0];
+    console.log(`participants_events: { isJoined }`);
+
     let event = result.rows[0];
     if (!event) {
       throw new HttpError(404, "event not found");
     }
-    res.json({ event });
+    res.json({ isJoined, event });
   } catch (error) {
     next(error);
   }
 });
 
 // JOIN EVENT
-eventRoutes.post("/event-detail/:id", async (req, res, next) => {
+eventRoutes.post("/event-detail/:id", userOnlyAPI, async (req, res, next) => {
   try {
     let user_id = req.session.user_id;
     let event_id = +req.params.id;
@@ -251,6 +269,7 @@ eventRoutes.post("/event-detail/:id", async (req, res, next) => {
     console.log({ user_id });
     console.log({ event_id });
     console.log({ message });
+    console.log(`going to save join details to database`);
 
     // save join action to database
     let result = await client.query(

@@ -53,10 +53,20 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link active" href="/login.html">Log In</a>
+              <a class="nav-link active" id="login_button" href="/login.html">Log In</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="/signup.html">Sign Up</a>
+              <a
+                class="nav-link active"
+                id="logout_button"
+                style="display: none"
+                href="/login.html"
+                onclick="logout()"
+                >Log Out</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" id="signup_button" href="/signup.html">Sign Up</a>
             </li>
           </ul>
         </div>

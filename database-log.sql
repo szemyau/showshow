@@ -121,7 +121,7 @@ delete from event;
 
 --insert data table event;
 insert into event
-(name, about, venue, contact)
+(name, about, venue)
 values
 (
  'yoga101'
