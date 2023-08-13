@@ -1,87 +1,90 @@
-body{
-    background-image: linear-gradient( 135deg, #FAB2FF 10%, #3629b4 100%);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+body {
+  background-image: linear-gradient(135deg, #fab2ff 10%, #3629b4 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-#app{
-margin: 1rem;
+#app {
+  margin: 1rem;
 }
 
 /* start from event registration form */
-.web-title{
-    text-align: center;
-    color: white;
-    text-decoration: underline;
-    text-transform: capitalize;
-    font-weight: bold;
-    /* border-bottom: 3px solid white; */
+.web-title {
+  text-align: center;
+  color: white;
+  text-decoration: underline;
+  text-transform: capitalize;
+  font-weight: bold;
+  margin-top: 4rem;
+  /* border-bottom: 3px solid white; */
 }
 
-form{
-    background-color: white;
-    padding: 1.5rem;
-    margin-top: 1rem;
-    max-width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-    overflow: auto;
+form {
+  background-color: white;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  overflow: auto;
 }
 
-input[type=text] {
-    width: 100%;
-    /* padding: 12px 20px; */
-    padding: 5px 5px; 
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 2px solid rgb(4, 3, 3);
-  }
-
-button, input, optgroup, select, textarea{
-    margin-right: 0.5rem;
+input[type="text"] {
+  width: 100%;
+  /* padding: 12px 20px; */
+  padding: 5px 5px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid rgb(4, 3, 3);
 }
 
-.button-container{
-    display: flex;
-    align-items: baseline;
-    justify-content: space-around;
-    flex-direction: row-reverse;
+button,
+input,
+optgroup,
+select,
+textarea {
+  margin-right: 0.5rem;
 }
 
-.submit-button, .reset-btn {
-    display: flex;  
-    justify-content: center;
-    margin-top: 1rem;
+.button-container {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  flex-direction: row-reverse;
 }
 
-.form-container{
-    gap:1rem;
+.submit-button,
+.reset-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
-
+.form-container {
+  gap: 1rem;
+}
 
 /* Output of Form  */
 
-  /* image preview */
-  .event-list{
-    border-radius: 0.5rem;
-    background-color: white;
-    margin-top:1rem;
-  }
-
-  img, svg{
-    width: 10rem;
-    border-radius: 0.5rem;
-    width: -webkit-fill-available;
-    padding: 1rem;
+/* image preview */
+.event-list {
+  border-radius: 0.5rem;
+  background-color: white;
+  margin-top: 1rem;
 }
 
-
-.img-preview{
-    text-align: center;
-    display: block;
-    background-color: gainsboro;
+img,
+svg {
+  width: 10rem;
+  border-radius: 0.5rem;
+  width: -webkit-fill-available;
+  padding: 1rem;
 }
 
+.img-preview {
+  text-align: center;
+  display: block;
+  background-color: gainsboro;
+}

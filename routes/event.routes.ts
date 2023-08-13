@@ -123,7 +123,7 @@ select
 , event.contact
 , event.created_at
 , creator.email as creator_email
-, event.contact
+, event.about
 
 from event
 inner join "user" as creator on creator.id = event.creator_id
@@ -132,8 +132,29 @@ order by event.id desc
     `,
       [req.session.user_id]
     );
+
+    // using data template's data-bind to receive 'events'
     let events = result.rows;
     res.json({ events });
+  } catch (error) {
+    next(error);
+  }
+});
+
+//delete what events u created
+eventRoutes.delete("/events/by-me/:id", userOnlyAPI, async (req, res, next) => {
+  try {
+    let id = +req.params.id;
+    if (!id) throw new HttpError(400, "invalid event id");
+
+    let deleteEvent = await client.query(
+      /* sql */ `
+    delete from event 
+    where id = $1`,
+      [id]
+    );
+
+    res.json({ deleteEvent });
   } catch (error) {
     next(error);
   }
