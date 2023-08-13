@@ -135,11 +135,20 @@
               </div>
               <div class="btn-container">
                 <!-- edit button -->
-                <button aria-label="修正 event" class="bottom-right edit-btn">
+                <button
+                  aria-label="修正 event"
+                  class="bottom-right edit-btn"
+                  data-onclick="edit"
+                >
                   <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
                 </button>
                 <!-- delete button -->
-                <button aria-label="撤回 event" class="top-right del-btn">
+                <button
+                  aria-label="撤回 event"
+                  class="top-right del-btn"
+                  onclick="deleteEvent(this)"
+                  data-value="id"
+                >
                   <i class="fa-solid fa-trash" aria-hidden="true"></i>
                 </button>
               </div>
@@ -156,6 +165,7 @@
     ></script>
 
     <script src="https://cdn.jsdelivr.net/npm/data-template@1.5/base.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="/js/event-profile.js"></script>
   </body>

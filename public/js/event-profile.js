@@ -18,28 +18,49 @@ async function loadEventProfile() {
     event.created_at = new Date(event.created_at).toLocaleString();
     event.event_date = new Date(event.event_date).toLocaleDateString();
     event.event_time = event.event_time.replace(/:00$/, "");
+    event.edit = function () {
+      console.log("edit event:", event);
+      event.created_at = new Date(event.created_at).toLocaleString();
+      event.event_date = new Date(event.event_date).toLocaleDateString();
+      event.event_time = event.event_time.replace(/:00$/, "");
+    };
   }
   renderTemplate(eventList, json); //eventList = html "id"
 
-  console.log(`events:`, json.events);
-  console.log(`delete event:`, json.deleteEvent);
+  // console.log(`events:`, json.events);
+  // console.log(`delete event:`, json.deleteEvent);
   // for (let event of json.deleteEvent) {
   //   console.log(event);
 
-  cardContainer
-    .querySelector(".del-btn")
-    .addEventListener("click", () => deleteEvent());
+  // cardContainer
+  //   .querySelector(".del-btn")
+  //   .addEventListener("click", () => deleteEvent());
 }
 // do i need to renderTemplate? i guess no becaz i only need to render html one time only
 
 loadEventProfile();
 
-async function deleteEvent() {
+async function deleteEvent(button) {
+  let id = button.value;
+  console.log("delete event", id);
   let res = await fetch("/events/" + id, { method: "DELETE" });
   let json = await res.json();
   if (json.error && res.status != 404) {
     Swal.fire("Failed to delete memo", json.error, "error");
     return;
   }
-  cardContainer.remove();
+  let node = button.closest(".card");
+  node.remove();
+  let toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+  toast.fire({ icon: "success", title: "Deleted Event #" + id });
 }
