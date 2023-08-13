@@ -11,8 +11,11 @@
       crossorigin="anonymous"
     />
     <link
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="/css/event-profile.css" />
 
@@ -97,35 +100,48 @@
     <!-- main body https://mdbootstrap.com/docs/standard/extended/profiles/ -->
     <section class="vh-100">
       <div class="container py-5">
+        <!-- using container to store duplicate info, set data-template = database table name; data-bind = the output of result.row in server  -->
         <div id="eventList" data-template="event" data-bind="events"></div>
         <template data-name="event">
           <div class="card" style="border-radius: 15px; margin-bottom: 1rem">
             <!-- content -->
-            <div class="card-body p-4">
-              <h3 class="mb-3" data-text="name">Event Name</h3>
-              <p class="small mb-0">
-                <i class="fas fa-star fa-lg text-warning"></i>
-                <span class="mx-2">|</span> Updated by
-                <strong data-text="creator_email">MDBootstrap</strong> on
-                <span class="created_at" data-text="created_at"
-                  >11 April , 2021</span
-                >
-              </p>
-              <hr class="my-4" />
-              <div class="text-muted small" id="event_data">
-                Event Date: <span data-text="event_date"></span>
+            <div class="card-container">
+              <div class="card-body p-4">
+                <h3 class="mb-3" data-text="name">Event Name</h3>
+                <p class="small mb-0">
+                  <i class="fas fa-star fa-lg text-warning"></i>
+                  <span class="mx-2">|</span> Updated by
+                  <strong data-text="creator_email">MDBootstrap</strong> on
+                  <span class="created_at" data-text="created_at"
+                    >11 April , 2021</span
+                  >
+                </p>
+                <hr class="my-4" />
+                <div class="text-muted small" id="event_data">
+                  Event Date: <span data-text="event_date"></span>
+                </div>
+                <div class="text-muted small" id="event_time">
+                  Event Time: <span data-text="event_time"></span>
+                </div>
+                <div class="text-muted small" id="venue">
+                  Location: <span data-text="venue"></span>
+                </div>
+                <div class="text-muted small" id="content">
+                  Event Content: <span data-text="about"></span>
+                </div>
+                <div class="text-muted small" id="about" data-show="contact">
+                  Event Contact: <span data-text="contact"></span>
+                </div>
               </div>
-              <div class="text-muted small" id="event_time">
-                Event Time: <span data-text="event_time"></span>
-              </div>
-              <div class="text-muted small" id="venue">
-                Location: <span data-text="venue"></span>
-              </div>
-              <div class="text-muted small" id="content">
-                Event Content: <span data-text="about"></span>
-              </div>
-              <div class="text-muted small" id="about" data-show="contact">
-                Event Contact: <span data-text="contact"></span>
+              <div class="btn-container">
+                <!-- edit button -->
+                <button aria-label="修正 event" class="bottom-right edit-btn">
+                  <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+                </button>
+                <!-- delete button -->
+                <button aria-label="撤回 event" class="top-right del-btn">
+                  <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                </button>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 async function loadUserCategory() {
   let res = await fetch("/userCategoryList", {
-    headers: { Accept: "application/json" },
+    headers: { Accept: "application/json" }, //what type of data the client expect to receive
   });
 
   let json = await res.json();
@@ -9,27 +9,17 @@ async function loadUserCategory() {
     return;
   }
 
-  console.log(json);
-
+  // console.log(json);
   // json.userCategoryChoices.push(...json.userCategoryChoices);
   // json.userCategoryChoices.pop();
 
   if (json.userCategoryChoices.length > 0) {
     chosenCategoryList.textContent = "";
 
-    // beeno demo data template
-    // for (let category of json.userCategoryChoices) {
-    //   category.link = `/event-list.html?id=${category.id}`;
-    // }
-    // renderTemplate(chosenCategoryList2, json);
-    // end
-
-    // const templateElement = document.getElementById("chosenCategoryList2");
-    // templateElement.removeAttribute("data-template");
-
-    // put image into specific area
+    // extract categories selected by client
     for (let category of json.userCategoryChoices) {
-      let node = chosenCategoryTemplate.content.cloneNode(true);
+      // userCategoryChoices = extract from server
+      let node = chosenCategoryTemplate.content.cloneNode(true); // combine html and server
 
       node.querySelector("img").src = category.user_image;
       node.querySelector("img").alt = category.name;
@@ -40,24 +30,25 @@ async function loadUserCategory() {
     }
   }
 
-  // beeno demo data template
+  // using data template to generate the choices which are selected by client
   for (let category of json.anotherCategoryChoices) {
     category.link = `/event-list.html?id=${category.id}`;
   }
-  renderTemplate(moreCategoryList, json);
+  renderTemplate(anotherCategoryList, json);
+  console.log(`anotherCategoryList:`, anotherCategoryList);
   // end;
 
-  for (let category of json.anotherCategoryChoices) {
-    let node = moreCategoryTemplate.content.cloneNode(true);
+  // for (let category of json.anotherCategoryChoices) {
+  //   let node = moreCategoryTemplate.content.cloneNode(true);
 
-    node.querySelector("img").src = category.user_image;
-    node.querySelector("img").alt = category.name;
-    node.querySelector(".card-title").textContent = category.name;
-    node.querySelector("a").href = `/event-list.html?id=${category.id}`;
+  //   node.querySelector("img").src = category.user_image;
+  //   node.querySelector("img").alt = category.name;
+  //   node.querySelector(".card-title").textContent = category.name;
+  //   node.querySelector("a").href = `/event-list.html?id=${category.id}`;
 
-    moreCategoryList.appendChild(node);
-    console.log(moreCategoryList);
-  }
+  //   moreCategoryList.appendChild(node);
+  //   console.log(moreCategoryList);
+  // }
 }
 
 loadUserCategory();

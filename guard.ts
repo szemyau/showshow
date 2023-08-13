@@ -7,6 +7,7 @@ export function userOnlyAPI(
   res: express.Response,
   next: express.NextFunction
 ) {
+  //TODO Delete later
   if (!req.session.user_id) {
     req.session.user_id = 1;
   }

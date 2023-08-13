@@ -69,7 +69,7 @@ categoryRoutes.get("/userCategoryList", async (req, res, next) => {
   try {
     // let userID = 1; //req.session.user_id
     let userID = req.session.user_id;
-    console.log(`userid:`, userID);
+    // console.log(`userid:`, userID);
 
     let result = await client.query(
       /* sql */ `
@@ -92,7 +92,7 @@ categoryRoutes.get("/userCategoryList", async (req, res, next) => {
     );
 
     let anotherCategoryChoices = anotherResult.rows;
-    console.log({ userCategoryChoices, anotherCategoryChoices });
+    // console.log({ userCategoryChoices, anotherCategoryChoices });
 
     res.json({ userCategoryChoices, anotherCategoryChoices });
   } catch (error) {

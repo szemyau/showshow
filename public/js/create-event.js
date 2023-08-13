@@ -19,10 +19,6 @@ async function loadCategories() {
 }
 loadCategories();
 
-// document.querySelector("#create-form").addEventListener("submit",(e)=>{
-//     submitForm(e)
-// })
-
 submitForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -43,10 +39,17 @@ submitForm.addEventListener("submit", async (event) => {
     return;
   }
 
-  // window.location = "home.html";
   window.location = "/event-profile.html";
-  // showImagePreview(json)
 });
+
+function loadFile(event) {
+  var reader = new FileReader();
+  reader.onload = function () {
+    var output = document.getElementById("output");
+    output.src = reader.result;
+  };
+  reader.readAsDataURL(event.target.files[0]);
+}
 
 // function showImagePreview(event) {
 
@@ -63,14 +66,6 @@ submitForm.addEventListener("submit", async (event) => {
 
 //     }
 
-function loadFile(event) {
-  var reader = new FileReader();
-  reader.onload = function () {
-    var output = document.getElementById("output");
-    output.src = reader.result;
-  };
-  reader.readAsDataURL(event.target.files[0]);
-}
 //     let img = node.querySelector('.memo-image')
 //   if (memo.filename) {
 //     img.src = '/uploads/' + memo.filename
@@ -105,3 +100,20 @@ function loadFile(event) {
 
 // showEvent({name:'go to hiking',user_create_event_image:"/photo/party-room.jpg",
 // event_date:'2023-08-10', event_time:'11:00', event_location: 'Wong Tai Sin' })
+
+// check if login or not
+async function loginStatus() {
+  console.log(`loginstatus function run`);
+  let res = await fetch("/role");
+  console.log(`check login status: ${res}`);
+  if (res) {
+    document.querySelector("#login_button").style.display = "none";
+    document.querySelector("#signup_button").style.display = "none";
+    document.querySelector("#logout_button").style.display = "block";
+  } else {
+    document.querySelector("#login_button").style.display = "block";
+    document.querySelector("#signup_button").style.display = "block";
+    document.querySelector("#logout_button").style.display = "none";
+  }
+}
+loginStatus();

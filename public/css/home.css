@@ -3,6 +3,13 @@
   --font-color: rgb(255 48 48 / 80%);
 }
 
+/* body {
+  background-image: linear-gradient(135deg, #fab2ff 10%, #3629b4 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+} */
+
 .company_name {
   display: flex;
   justify-content: center;
@@ -49,40 +56,36 @@
   justify-content: center;
 }
 
+.card-border {
+  background: border-box;
+  border: 1px solid #c1c1c1;
+  border-radius: 0.5rem;
+}
+
 .about-your-choices {
   font-size: 1rem;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
   text-transform: uppercase;
   font-weight: bold;
   padding: 0.5rem;
 }
 
 #choices-container {
-  background-color: pink;
+  /* background-color: pink; */
   border-radius: 0.5rem;
-  margin: 1rem;
   /* overflow: auto; */
   white-space: nowrap;
   position: relative;
+  margin: 0.5rem;
 }
 
 .category-photo-container {
-  gap: 3px;
+  gap: 4px;
   overflow-x: scroll;
 }
 
 a.btn.btn-primary {
   size: 1rem;
-}
-
-/* look for more table */
-.look-for-more {
-  border-radius: 0.5rem;
-  margin: 1rem;
-  /* overflow: auto; */
-  overflow-x: scroll;
-  white-space: nowrap;
-  background-color: rgb(255 179 130 / 45%);
 }
 
 /* new elements in selectors */
