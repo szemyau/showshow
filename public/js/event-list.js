@@ -19,7 +19,10 @@ async function loadEventList() {
       0,
       10
     );
-    node.querySelector(".event-time").textContent = event.event_time;
+    node.querySelector(".event-time").textContent = event.event_time.replace(
+      /:00$/,
+      ""
+    );
     node.querySelector(".event-name").textContent = event.name;
     node.querySelector(".event-vacancy").textContent = event.vacancy;
     node.querySelector(".event-quota").textContent = event.quota;

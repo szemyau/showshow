@@ -205,7 +205,10 @@ eventRoutes.get("/event-list", userOnlyAPI, async (req, res) => {
     ).rows;
 
     let eventData = (
-      await client.query(`SELECT * FROM event WHERE category_id = $1`, [id])
+      await client.query(
+        `SELECT * FROM event WHERE category_id = $1 order by desc`,
+        [id]
+      )
     ).rows;
 
     let response: any = [];
@@ -293,8 +296,8 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
 });
 
 // JOIN EVENT
-// eventRoutes.post("/event-detail/:id", userOnlyAPI, async (req, res, next) => {
-eventRoutes.post("/event-detail", userOnlyAPI, async (req, res, next) => {
+eventRoutes.post("/event-detail/:id", userOnlyAPI, async (req, res, next) => {
+  // eventRoutes.post("/event-detail", userOnlyAPI, async (req, res, next) => {
   try {
     let user_id = req.session.user_id;
     let event_id = +req.params.id;
@@ -314,6 +317,8 @@ eventRoutes.post("/event-detail", userOnlyAPI, async (req, res, next) => {
     );
 
     res.status(200).json({});
+
+    console.log(`saved join details to database`);
   } catch (error) {
     next(error);
   }
