@@ -3,7 +3,6 @@ import { body, validationResult } from "express-validator";
 import { client } from "../database";
 import { UserCollection } from "../userCollection";
 import { checkPassword, hashPassword } from "../hash";
-import "../session";
 
 export let userRoutes = Router();
 
@@ -124,11 +123,13 @@ userRoutes.post("/login", async (req: Request, res: Response) => {
 
   // retrieve session details
   req.session.user_id = rows[0].id;
-  res.json("login success");
+  res.json({});
 });
 
 // logout
-userRoutes.post("/logout", (req, res) => {
+userRoutes.get("/logout", (req, res) => {
+  console.log("here");
+
   req.session.destroy((err) => {
     if (err) {
       console.error("Error destroying session:", err);
@@ -136,13 +137,15 @@ userRoutes.post("/logout", (req, res) => {
       console.log("Session destroyed");
     }
   });
-  res.send("Logout successful!").redirect("/home.html");
+  res.json({});
+
+  //res.send("Logout successful!").redirect("/home.html");
 });
 
 userRoutes.get("/role", async (req, res, next) => {
   try {
     let user_id = req.session.user_id;
-    console.log(`role: ${user_id}`);
+    console.log(`get role: ${user_id}`);
     if (user_id) {
       let result = await client.query(
         /* sql */ `
@@ -153,20 +156,20 @@ userRoutes.get("/role", async (req, res, next) => {
         [user_id]
       );
       let user = result.rows[0];
-      console.log(`run user route ts role: ${user}`);
+      console.log(`run user route ts role:`);
+      console.log({ user });
+
       if (!user) {
         req.session.destroy((err) => {
           if (err) {
             next(err);
-          } else {
-            res.json({
-              role: "member",
-            });
           }
         });
+        res.json({ error: "User Nnot Found" });
         return;
       }
-      res.json({});
+      res.json({ isLogin: true });
+      return;
       //     role: user.is_admin ? 'admin' : 'user',
       //     username: user.username,
       //   })
@@ -176,6 +179,8 @@ userRoutes.get("/role", async (req, res, next) => {
       //   })
       // }
     }
+    res.json({ isLogin: false });
+    return;
   } catch (error) {
     next(error);
   }

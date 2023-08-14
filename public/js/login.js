@@ -50,3 +50,28 @@ function togglePassword(inputId, iconId) {
     icon.classList.add("fa-eye");
   }
 }
+
+// check if login or not
+async function loginStatus() {
+  console.log(`loginstatus function run`);
+  let res = await fetch("/role");
+
+  let result = await res.json();
+
+  if (result.error) {
+    return;
+  }
+
+  console.log(`check login status:`);
+  console.log({ result });
+
+  if (result.isLogin) {
+    document.querySelector("#login_button").style.display = "none";
+    document.querySelector("#signup_button").style.display = "none";
+    document.querySelector("#logout_button").style.display = "block";
+  } else {
+    document.querySelector("#login_button").style.display = "block";
+    document.querySelector("#signup_button").style.display = "block";
+    document.querySelector("#logout_button").style.display = "none";
+  }
+}

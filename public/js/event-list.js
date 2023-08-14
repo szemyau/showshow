@@ -1,3 +1,28 @@
+// check if login or not
+async function loginStatus() {
+  console.log(`loginstatus function run`);
+  let res = await fetch("/role");
+
+  let result = await res.json();
+
+  if (result.error) {
+    return;
+  }
+
+  console.log(`check login status:`);
+  console.log({ result });
+
+  if (result.isLogin) {
+    document.querySelector("#login_button").style.display = "none";
+    document.querySelector("#signup_button").style.display = "none";
+    document.querySelector("#logout_button").style.display = "block";
+  } else {
+    document.querySelector("#login_button").style.display = "block";
+    document.querySelector("#signup_button").style.display = "block";
+    document.querySelector("#logout_button").style.display = "none";
+  }
+}
+
 async function loadEventList() {
   console.log(`loadEventList function run`);
   let params = new URLSearchParams(location.search);
@@ -6,8 +31,8 @@ async function loadEventList() {
   // loop to load the event date with category id
   let res = await fetch(`/event-list?id=${id}`);
   let json = await res.json();
-  console.log(`load res: {res}`);
-  console.log(`load json: {json}`);
+  console.log(`load res: ${res}`);
+  console.log(`load json: ${json}`);
   let cardList = document.querySelector("#cardList");
 
   cardList.textContent = "";
@@ -31,21 +56,9 @@ async function loadEventList() {
     cardList.appendChild(node);
   }
 }
-loadEventList();
 
-// check if login or not
-async function loginStatus() {
-  console.log(`loginstatus function run`);
-  let res = await fetch("/role");
-  console.log(`check login status: ${res}`);
-  if (res) {
-    document.querySelector("#login_button").style.display = "none";
-    document.querySelector("#signup_button").style.display = "none";
-    document.querySelector("#logout_button").style.display = "block";
-  } else {
-    document.querySelector("#login_button").style.display = "block";
-    document.querySelector("#signup_button").style.display = "block";
-    document.querySelector("#logout_button").style.display = "none";
-  }
+async function main() {
+  await loginStatus();
+  await loadEventList();
 }
-loginStatus();
+main();

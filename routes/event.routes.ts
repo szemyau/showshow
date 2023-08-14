@@ -196,7 +196,7 @@ eventRoutes.patch("/events/:id", userOnlyAPI, async (req, res, next) => {
 /* END used by event-profile.html by chloe */
 
 // loading tables category and event data pass to frontend
-eventRoutes.get("/event-list", userOnlyAPI, async (req, res) => {
+eventRoutes.get("/event-list", userOnlyAPI, async (req, res, next) => {
   try {
     let id = req.query.id;
 
@@ -206,7 +206,7 @@ eventRoutes.get("/event-list", userOnlyAPI, async (req, res) => {
 
     let eventData = (
       await client.query(
-        `SELECT * FROM event WHERE category_id = $1 order by desc`,
+        `SELECT * FROM event WHERE category_id = $1 order by event_date desc`,
         [id]
       )
     ).rows;
@@ -276,7 +276,6 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
 
     // disable the join button if user joined already
     console.log(`load into event details page and check joined or not`);
-
     let joined = await client.query(
       /* sql */ `
     select
