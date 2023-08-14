@@ -115,7 +115,11 @@ userRoutes.post("/login", async (req: Request, res: Response) => {
   }
 
   // check input Password is same as database password
-  let passwordMatches = checkPassword(password, rows[0].password);
+  let passwordMatches = await checkPassword(password, rows[0].password);
+  console.log(password);
+  console.log(rows[0].password);
+  console.log({ passwordMatches });
+
   if (!passwordMatches) {
     res.status(400).json({ error: "Email or password not match" });
     return;
