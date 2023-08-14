@@ -306,6 +306,8 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
     }
     res.json({ isJoined, event });
   } catch (error) {
+    console.log(error);
+
     next(error);
   }
 });
