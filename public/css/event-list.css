@@ -64,3 +64,17 @@ justify-content: flex-end;
   }
 
 
+  /* mobile version */
+
+@media screen and (max-width: 768px) {
+    /* CSS styles applied for screens 768px and larger */
+    body {
+    }
+
+    .card img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+    }

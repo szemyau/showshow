@@ -64,10 +64,6 @@ document
     console.log(`1 join event result:`);
     console.log({ result });
 
-    await Swal.fire("Joined successfully!", "See you later!", "success");
-    await form.reset();
-    await location.reload();
-
     if (result.error) {
       Swal.fire({
         icon: "error",
@@ -76,4 +72,9 @@ document
       });
       return;
     }
+
+    Swal.fire("Joined successfully!", "See you later!", "success");
+    form.reset();
+
+    loadEventDetail();
   });
