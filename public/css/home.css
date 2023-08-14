@@ -86,6 +86,7 @@
 
 a.btn.btn-primary {
   size: 1rem;
+  display: block;
 }
 
 /* new elements in selectors */
@@ -97,4 +98,9 @@ a.btn.btn-primary {
 #chosenCategoryList > a {
   text-decoration: none;
   font-size: 5rem;
+}
+
+/* new elements */
+.card-img, .card-img-bottom, .card-img-top {
+  width: 10rem;
 }
