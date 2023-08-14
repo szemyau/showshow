@@ -260,7 +260,8 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
 });
 
 // JOIN EVENT
-eventRoutes.post("/event-detail/:id", userOnlyAPI, async (req, res, next) => {
+// eventRoutes.post("/event-detail/:id", userOnlyAPI, async (req, res, next) => {
+eventRoutes.post("/event-detail", userOnlyAPI, async (req, res, next) => {
   try {
     let user_id = req.session.user_id;
     let event_id = +req.params.id;

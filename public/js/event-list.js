@@ -6,8 +6,8 @@ async function loadEventList() {
   // loop to load the event date with category id
   let res = await fetch(`/event-list?id=${id}`);
   let json = await res.json();
-  console.log(res);
-  console.log(json);
+  console.log(`load res: {res}`);
+  console.log(`load json: {json}`);
   let cardList = document.querySelector("#cardList");
 
   cardList.textContent = "";
