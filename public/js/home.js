@@ -44,8 +44,17 @@ loadUserCategory();
 async function loginStatus() {
   console.log(`loginstatus function run`);
   let res = await fetch("/role");
-  console.log(`check login status: ${res}`);
-  if (res) {
+
+  let result = await res.json();
+
+  if (result.error) {
+    return;
+  }
+
+  console.log(`check login status:`);
+  console.log({ result });
+
+  if (result.isLogin) {
     document.querySelector("#login_button").style.display = "none";
     document.querySelector("#signup_button").style.display = "none";
     document.querySelector("#logout_button").style.display = "block";
@@ -55,8 +64,8 @@ async function loginStatus() {
     document.querySelector("#logout_button").style.display = "none";
   }
 }
-loginStatus();
 
+loginStatus();
 // successful dom for look for more on 8 Aug
 // let categoryListTwo = document.querySelector(".another-container");
 
@@ -76,3 +85,10 @@ loginStatus();
 //   div.querySelector("a").href +=
 //     "?id=" + categoryListTwo.appendChild(div) + category.id;
 // }
+
+async function logout() {
+  console.log("logout");
+  let res = await fetch("/logout");
+  let result = await res.json();
+  await loginStatus();
+}

@@ -58,8 +58,7 @@ document
     };
 
     // ajax to call server
-    // const res = await fetch(`/event-detail/${id}`, {
-    const res = await fetch("/event-detail", {
+    const res = await fetch("/event-detail/" + event_id, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,42 +66,22 @@ document
       body: JSON.stringify(formObject),
     });
 
-    // console.log(`action to reset form and auto reload`);
-    // form.reset();
-    // location.reload();
-    // console.log(`action to reset form and auto reload DONE`);
-    // Swal.fire("Joined successfully!", "See you later!", "success");
-
     // get back data once ready
     const result = await res.json();
-    console.log(`join event result:`);
+    console.log(`1 join event result:`);
     console.log({ result });
 
-    // console.log(`action to reset form and auto reload`);
-    // form.reset();
-    // location.reload();
-    // console.log(`action to reset form and auto reload DONE`);
-    // Swal.fire("Joined successfully!", "See you later!", "success");
-
     if (result.error) {
-      console.log(json.error);
-      Swal.fire("Failed to submit form", json.error, "error");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: result.error,
+      });
       return;
-      //   Swal.fire({
-      // icon: "error",
-      // title: "Error",
-      // text: result.error,
-    } else {
-      Swal.fire("Joined successfully!", "See you later!", "success");
-      console.log(`action to reset form and auto reload`);
-      form.reset();
-      location.reload();
-      console.log(`action to reset form and auto reload DONE`);
-      // window.location = "/login.html";
     }
-    return;
+
+    Swal.fire("Joined successfully!", "See you later!", "success");
+    form.reset();
+
+    loadEventDetail();
   });
-//   return;
-// }
-// if no more error, redirect to select category
-//   });

@@ -196,7 +196,7 @@ eventRoutes.patch("/events/:id", userOnlyAPI, async (req, res, next) => {
 /* END used by event-profile.html by chloe */
 
 // loading tables category and event data pass to frontend
-eventRoutes.get("/event-list", userOnlyAPI, async (req, res) => {
+eventRoutes.get("/event-list", userOnlyAPI, async (req, res, next) => {
   try {
     let id = req.query.id;
 
@@ -205,7 +205,10 @@ eventRoutes.get("/event-list", userOnlyAPI, async (req, res) => {
     ).rows;
 
     let eventData = (
-      await client.query(`SELECT * FROM event WHERE category_id = $1`, [id])
+      await client.query(
+        `SELECT * FROM event WHERE category_id = $1 order by event_date desc`,
+        [id]
+      )
     ).rows;
 
     let response: any = [];
@@ -273,7 +276,6 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
 
     // disable the join button if user joined already
     console.log(`load into event details page and check joined or not`);
-
     let joined = await client.query(
       /* sql */ `
     select
@@ -303,13 +305,15 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
     }
     res.json({ isJoined, event });
   } catch (error) {
+    console.log(error);
+
     next(error);
   }
 });
 
 // JOIN EVENT
-// eventRoutes.post("/event-detail/:id", userOnlyAPI, async (req, res, next) => {
-eventRoutes.post("/event-detail", userOnlyAPI, async (req, res, next) => {
+eventRoutes.post("/event-detail/:id", userOnlyAPI, async (req, res, next) => {
+  // eventRoutes.post("/event-detail", userOnlyAPI, async (req, res, next) => {
   try {
     let user_id = req.session.user_id;
     let event_id = +req.params.id;
@@ -329,6 +333,8 @@ eventRoutes.post("/event-detail", userOnlyAPI, async (req, res, next) => {
     );
 
     res.status(200).json({});
+
+    console.log(`saved join details to database`);
   } catch (error) {
     next(error);
   }
