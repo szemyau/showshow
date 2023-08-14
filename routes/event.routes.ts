@@ -262,10 +262,14 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
     // extract data from sql, then sent out to front-end
     let result = await client.query(
       /* sql */ `
-        select
-          about
-        from event
-        where id = $1
+      select event.id,creator_id,
+      event.name,
+      event.updated_at,
+      event_date,
+      event_time,
+      venue,
+      about, topup_image,bottom_image,user_create_event_image from event join category on event.category_id =category.id
+    where event.id = $1
     `,
       [event_id]
     );
@@ -282,7 +286,18 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
 `,
       [user_id, event_id]
     );
-    let isJoined = joined.rows[0];
+
+    let isJoined;
+
+    let joinRecord = joined.rows;
+    if (joinRecord.length > 0) {
+      isJoined = true;
+    } else {
+      isJoined = false;
+    }
+
+    console.log({ isJoined });
+
     console.log(`participants_events: { isJoined }`);
 
     let event = result.rows[0];

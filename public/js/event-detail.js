@@ -1,5 +1,6 @@
+let event_id = new URLSearchParams(location.search).get("id");
+
 async function loadEventDetail() {
-  let event_id = new URLSearchParams(location.search).get("id");
   let res = await fetch("/events/" + event_id, {
     headers: { Accept: "application/json" },
   });
@@ -79,26 +80,20 @@ document
       console.log(json.error);
       Swal.fire("Failed to submit form", json.error, "error");
       return;
+      //   Swal.fire({
+      // icon: "error",
+      // title: "Error",
+      // text: result.error,
+    } else {
+      Swal.fire("Joined successfully!", "See you later!", "success");
+      console.log(`action to reset form and auto reload`);
+      form.reset();
+      location.reload();
+      console.log(`action to reset form and auto reload DONE`);
+      // window.location = "/login.html";
     }
-    await Swal.fire("Joined successfully!", "See you later!", "success");
-
-    // window.location = "/event-detail.html";
+    return;
   });
-
-//   Swal.fire({
-// icon: "error",
-// title: "Error",
-// text: result.error,
-//   }.then(function () {
-//     Swal.fire("Joined successfully!", "See you later!", "success");
-//     console.log(`action to reset form and auto reload`);
-//     form.reset();
-//     location.reload();
-//     console.log(`action to reset form and auto reload DONE`);
-//     // window.location = "/login.html";
-//   })
-//   return;
-// });
 //   return;
 // }
 // if no more error, redirect to select category
