@@ -205,7 +205,10 @@ eventRoutes.get("/event-list", userOnlyAPI, async (req, res) => {
     ).rows;
 
     let eventData = (
-      await client.query(`SELECT * FROM event WHERE category_id = $1`, [id])
+      await client.query(
+        `SELECT * FROM event WHERE category_id = $1 order by desc`,
+        [id]
+      )
     ).rows;
 
     let response: any = [];
@@ -259,10 +262,14 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
     // extract data from sql, then sent out to front-end
     let result = await client.query(
       /* sql */ `
-        select
-          about
-        from event
-        where id = $1
+      select event.id,creator_id,
+      event.name,
+      event.updated_at,
+      event_date,
+      event_time,
+      venue,
+      about, topup_image,bottom_image,user_create_event_image from event join category on event.category_id =category.id
+    where event.id = $1
     `,
       [event_id]
     );
@@ -279,7 +286,18 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
 `,
       [user_id, event_id]
     );
-    let isJoined = joined.rows[0];
+
+    let isJoined;
+
+    let joinRecord = joined.rows;
+    if (joinRecord.length > 0) {
+      isJoined = true;
+    } else {
+      isJoined = false;
+    }
+
+    console.log({ isJoined });
+
     console.log(`participants_events: { isJoined }`);
 
     let event = result.rows[0];
@@ -288,12 +306,15 @@ eventRoutes.get("/events/:id", userOnlyAPI, async (req, res, next) => {
     }
     res.json({ isJoined, event });
   } catch (error) {
+    console.log(error);
+
     next(error);
   }
 });
 
 // JOIN EVENT
 eventRoutes.post("/event-detail/:id", userOnlyAPI, async (req, res, next) => {
+  // eventRoutes.post("/event-detail", userOnlyAPI, async (req, res, next) => {
   try {
     let user_id = req.session.user_id;
     let event_id = +req.params.id;
@@ -313,6 +334,8 @@ eventRoutes.post("/event-detail/:id", userOnlyAPI, async (req, res, next) => {
     );
 
     res.status(200).json({});
+
+    console.log(`saved join details to database`);
   } catch (error) {
     next(error);
   }

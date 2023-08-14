@@ -6,8 +6,8 @@ async function loadEventList() {
   // loop to load the event date with category id
   let res = await fetch(`/event-list?id=${id}`);
   let json = await res.json();
-  console.log(res);
-  console.log(json);
+  console.log(`load res: {res}`);
+  console.log(`load json: {json}`);
   let cardList = document.querySelector("#cardList");
 
   cardList.textContent = "";
@@ -19,7 +19,10 @@ async function loadEventList() {
       0,
       10
     );
-    node.querySelector(".event-time").textContent = event.event_time;
+    node.querySelector(".event-time").textContent = event.event_time.replace(
+      /:00$/,
+      ""
+    );
     node.querySelector(".event-name").textContent = event.name;
     node.querySelector(".event-vacancy").textContent = event.vacancy;
     node.querySelector(".event-quota").textContent = event.quota;
