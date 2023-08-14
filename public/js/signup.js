@@ -32,9 +32,14 @@ document
       });
       return;
     }
-
-    // if no more error, redirect to select category
-    window.location.href = "/category-list.html";
+    // add window alert to let client know register successfully by chloe
+    await Swal.fire(
+      "You have successfully registered!",
+      "You clicked the button!",
+      "success"
+    );
+    // if no more error, redirect to select category => change to login.html by chloe
+    window.location.href = "/login.html";
   });
 
 // password visiblility (the eye)

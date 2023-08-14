@@ -30,6 +30,7 @@ eventRoutes.get("/categories", async (req, res, next) => {
   }
 });
 
+// defines a data validation schema using the object() function
 let createEventParser = object({
   fields: object({
     event_category: id(),
@@ -142,24 +143,56 @@ order by event.id desc
 });
 
 //delete what events u created
-eventRoutes.delete("/events/by-me/:id", userOnlyAPI, async (req, res, next) => {
+eventRoutes.delete("/events/:id", userOnlyAPI, async (req, res, next) => {
   try {
     let id = +req.params.id;
     if (!id) throw new HttpError(400, "invalid event id");
 
-    let deleteEvent = await client.query(
+    let result = await client.query(
       /* sql */ `
     delete from event 
-    where id = $1`,
-      [id]
+    where id = $1
+      and creator_id = $2`,
+      [id, req.session.user_id]
     );
 
-    res.json({ deleteEvent });
+    res.json({ deleted: result.rowCount });
   } catch (error) {
     next(error);
   }
 });
 
+//edit what events u created
+eventRoutes.patch("/events/:id", userOnlyAPI, async (req, res, next) => {
+  try {
+    let id = +req.params.id;
+    if (!id) throw new HttpError(400, "invalid event id");
+
+    let result = await client.query(/* sql */ `
+      update event
+      set name = $1
+    , event_date = $2
+    , event_time = $3
+    , venue = $4
+    , about = $5
+    , contact = $6
+    where id = $7
+    and creator_id = $8`);
+    // [
+    //   name,
+    //   event_date,
+    //   event_time,
+    //   venue,
+    //   about,
+    //   contact,
+    //   id,
+    //   req.session.user_id,
+    // ]
+    res.json({ patch: result.rowCount });
+  } catch (error) {
+    next(error);
+  }
+});
 /* END used by event-profile.html by chloe */
 
 // loading tables category and event data pass to frontend

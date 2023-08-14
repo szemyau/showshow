@@ -162,3 +162,74 @@ alter table "event" add column user_create_event_image varchar(255);
 ALTER TABLE users_categories
   DROP CONSTRAINT users_preferences_preference_id_fkey,
   ADD FOREIGN KEY (category_id) REFERENCES category(id);
+
+--add column "topup, bottom_image" into table "category" by Brano
+  alter table "category" add column topup_image varchar(255);
+  alter table "category" add column bottom_image varchar(255);
+
+  update category set topup_image = 'topup-yoga.jpg' where name = 'topup-yoga';
+
+  insert into event (name, about) values
+  (
+'Party room 101'
+,'A party room is a designated space within a building or property
+            that is specifically designed and furnished for hosting parties and
+            other social gatherings. It is a place where people can come
+            together to celebrate special occasions, such as birthdays,
+            anniversaries, graduations, and other milestones. Party rooms are
+            often equipped with various amenities to enhance the party
+            experience, such as a sound system, lighting, and decorations. They
+            may also have tables and chairs for guests to socialize and enjoy
+            refreshments. Some party rooms are located within restaurants,
+            hotels, or event venues, while others are standalone spaces that can
+            be rented out for private events. They can range in size from small,
+            intimate rooms to large banquet halls that can accommodate hundreds
+            of guests. Overall, party rooms provide a convenient and enjoyable
+            way to host a celebration without having to worry about the
+            logistics of setting up and cleaning up
+'
+  );
+
+  insert into event (name, about) values
+  (
+    'Hiking 101'
+    ,'The attendees listen attentively, eager to learn more about the event.
+
+EVENT ORGANIZER
+We have carefully selected a picturesque trail that will take us through lush forests, stunning viewpoints, and breathtaking landscapes. Its an opportunity to reconnect with nature and challenge ourselves.
+
+VISUAL MONTAGE:
+
+Footage of hikers walking through serene forests.
+Aerial shots of majestic mountain ranges.
+Close-ups of hikers overcoming obstacles and cheering each other on.
+Smiling faces enjoying the scenic beauty of waterfalls and wildflowers.'
+  );
+
+insert into event (name, about) values
+(
+    'Music 101'
+    ,'Get ready to let the music move you, to dance like nobodys watching, and to create memories that will last a lifetime. The Harmony Festival awaits you!
+
+    The crowd cheers with excitement, eagerly anticipating the unforgettable music event.
+    Remember to adapt the script to match the specifics of your music event, including event details, dates, and any additional information you want to convey. Let the music unite and the magic unfold!'
+);
+
+insert into event (name, about) values
+(
+ 'VR Game 101'
+ ,'The Quest for the Enchanted Realm will be available for play starting [Game Release Date]. Make sure to reserve your gaming slots in advance to secure your place in this epic adventure.
+ The gamers applaud and eagerly discuss their plans to reserve their slots for the game release.
+ Remember to come dressed comfortably and be ready to embark on an unforgettable virtual journey. Get ready to experience Virtual Adventures like never before!
+ The gamers cheer with anticipation, eager to step into the virtual realm and embark on their epic quests.'
+);
+
+insert into event (name, about) values
+(
+ 'War Game 101'
+ ,'Our game plunges you into the heart of epic battles across historical and fictional war zones. Prepare to experience the thrill of combat, the camaraderie of a united force, and the triumph of valor in the face of adversity.
+ Clips of players gripping their controllers, their eyes locked on the screen.
+Intense battle scenes showcasing explosions, gunfire, and tactical maneuvers.
+Players coordinating their movements, formulating plans, and executing precise strategies.
+Close-ups of players reactions, displaying determination, excitement, and adrenaline-fueled intensity.'
+);

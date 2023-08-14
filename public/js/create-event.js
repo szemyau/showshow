@@ -38,6 +38,11 @@ submitForm.addEventListener("submit", async (event) => {
     Swal.fire("Failed to submit form", json.error, "error");
     return;
   }
+  await Swal.fire(
+    "You have successfully created an event!",
+    "You clicked the button!",
+    "success"
+  );
 
   window.location = "/event-profile.html";
 });
