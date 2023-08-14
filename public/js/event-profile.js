@@ -4,6 +4,7 @@
 
 let card = document.querySelector(".card");
 console.log("card:", card);
+let editBtn = document.querySelector(".edit-btn");
 
 async function loadEventProfile() {
   let res = await fetch("/events/by-me");
@@ -18,11 +19,37 @@ async function loadEventProfile() {
     event.created_at = new Date(event.created_at).toLocaleString();
     event.event_date = new Date(event.event_date).toLocaleDateString();
     event.event_time = event.event_time.replace(/:00$/, "");
-    event.edit = function () {
+
+    //edit function
+    event.edit = async function () {
       console.log("edit event:", event);
-      event.created_at = new Date(event.created_at).toLocaleString();
-      event.event_date = new Date(event.event_date).toLocaleDateString();
-      event.event_time = event.event_time.replace(/:00$/, "");
+      console.log("edit event NAME:", event.name);
+
+      const { value: formValues } = await Swal.fire({
+        title: "Edit your event",
+        html:
+          `<span>Event Name: <input id="swal-input1" class="swal2-input" value="${event.name}"></span>` +
+          `<span>Event Date: <input id="swal-input2" class="swal2-input" value=${event.event_date}></span>` +
+          `<span>Event Time: <input id="swal-input2" class="swal2-input" value=${event.event_time}></span>` +
+          ``,
+        focusConfirm: false,
+        preConfirm: () => {
+          return `Your event has been updated!`;
+        },
+        // preConfirm: () => {
+        //   return [
+        //     (document.getElementById("swal-input1").value = event.name),
+        //     (document.getElementById("swal-input2").value = "1"),
+        //   ];
+        // },
+      });
+
+      if (formValues) {
+        Swal.fire(JSON.stringify(formValues));
+      }
+      // event.created_at = new Date(event.created_at).toLocaleString();
+      // event.event_date = new Date(event.event_date).toLocaleDateString();
+      // event.event_time = event.event_time.replace(/:00$/, "");
     };
   }
   renderTemplate(eventList, json); //eventList = html "id"
@@ -71,3 +98,25 @@ async function loginStatus() {
   }
 }
 loginStatus();
+
+async function editEvent(editBtn) {
+  console.log("edit");
+
+  const { value: formValues } = await Swal.fire({
+    title: "Multiple inputs",
+    html:
+      '<input id="swal-input1" class="swal2-input">' +
+      '<input id="swal-input2" class="swal2-input">',
+    focusConfirm: false,
+    preConfirm: () => {
+      return [
+        document.getElementById("swal-input1").value,
+        document.getElementById("swal-input2").value,
+      ];
+    },
+  });
+
+  if (formValues) {
+    Swal.fire(JSON.stringify(formValues));
+  }
+}

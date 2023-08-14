@@ -149,6 +149,7 @@
               </div>
               <div class="btn-container">
                 <!-- edit button -->
+                <!-- data-onclick="edit" -->
                 <button
                   aria-label="修正 event"
                   class="bottom-right edit-btn"
@@ -169,6 +170,38 @@
             </div>
           </div>
         </template>
+      </div>
+
+      <!-- pop up a model to show the form in edit version -->
+      <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
