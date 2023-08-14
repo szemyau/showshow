@@ -27,6 +27,7 @@ app.use(sessionMiddleware);
 // });
 
 app.use(express.static("public"));
+
 app.use(userRoutes);
 app.use(categoryRoutes);
 app.use(createEventRoutes);
