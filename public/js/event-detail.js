@@ -9,6 +9,13 @@ async function loadEventDetail() {
     alert(json.error);
     return;
   }
+
+  document.querySelector("#top-image").src = `/photo/${json.event.topup_image}`;
+
+  document.querySelector(
+    "#bottom-image"
+  ).src = `/photo/${json.event.bottom_image}`;
+
   console.log(`json.event:`);
   console.log(json.event);
 
