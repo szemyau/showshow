@@ -26,17 +26,7 @@ async function loadEventProfile() {
     };
   }
   renderTemplate(eventList, json); //eventList = html "id"
-
-  // console.log(`events:`, json.events);
-  // console.log(`delete event:`, json.deleteEvent);
-  // for (let event of json.deleteEvent) {
-  //   console.log(event);
-
-  // cardContainer
-  //   .querySelector(".del-btn")
-  //   .addEventListener("click", () => deleteEvent());
 }
-// do i need to renderTemplate? i guess no becaz i only need to render html one time only
 
 loadEventProfile();
 
