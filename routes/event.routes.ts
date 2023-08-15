@@ -58,7 +58,7 @@ eventRoutes.post("/events", userOnlyAPI, (req, res, next) => {
   });
   form.parse(req, async (err, fields, files) => {
     try {
-      // console.log({ fields, files });
+      console.log({ fields, files });
 
       if (err) throw new HttpError(400, String(err));
 
@@ -145,6 +145,8 @@ order by event.id desc
 //delete what events u created
 eventRoutes.delete("/events/:id", userOnlyAPI, async (req, res, next) => {
   try {
+    console.log(req.body);
+
     let id = +req.params.id;
     if (!id) throw new HttpError(400, "invalid event id");
 
@@ -166,28 +168,65 @@ eventRoutes.delete("/events/:id", userOnlyAPI, async (req, res, next) => {
 eventRoutes.patch("/events/:id", userOnlyAPI, async (req, res, next) => {
   try {
     let id = +req.params.id;
+    console.log(`id: `, id);
     if (!id) throw new HttpError(400, "invalid event id");
+    const {
+      event_name,
+      event_date,
+      event_time,
+      venue,
+      quota,
+      event_category,
+      event_about,
+      contact,
+      filename,
+    } = req.body;
 
-    let result = await client.query(/* sql */ `
-      update event
-      set name = $1
-    , event_date = $2
-    , event_time = $3
-    , venue = $4
-    , about = $5
-    , contact = $6
-    where id = $7
-    and creator_id = $8`);
-    // [
-    //   name,
+    // console.log({
+    //   event_name,
     //   event_date,
     //   event_time,
     //   venue,
-    //   about,
+    //   quota,
+    //   event_category,
+    //   event_about,
     //   contact,
-    //   id,
-    //   req.session.user_id,
-    // ]
+    //   filename,
+    // });
+
+    let result = await client.query(
+      /* sql */ `
+      UPDATE event
+      SET name= $1
+      , event_date=$2
+      , event_time=$3
+      , venue=$4
+      , quota=$5
+      , category_id= $6
+      , about=$7
+      , contact=$8
+      , user_create_event_image=$9
+    WHERE id=$10 and creator_id =$11`,
+      [
+        event_name,
+        event_date,
+        event_time,
+        venue,
+        quota,
+        event_category,
+        event_about,
+        contact,
+        filename,
+        id,
+        req.session.user_id,
+      ]
+    );
+
+    //TODO update remaining columns on 15 Aug
+
+    let checkResult = result.rowCount;
+    console.log(`patch,`, checkResult);
+
     res.json({ patch: result.rowCount });
   } catch (error) {
     next(error);

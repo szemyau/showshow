@@ -23,6 +23,7 @@ submitForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   let form = event.target;
+  console.log(form);
   let res = await fetch(form.action, {
     method: form.method,
     body: new FormData(form),
@@ -58,7 +59,7 @@ function loadFile(event) {
 
 // function showImagePreview(event) {
 
-//     let imageDiv = document.createElement('div')
+//     let imageDiv = document.createElement('div')console.log(`event:`, event);
 //     imageDiv.innerHTML= `<div class="event-details">
 //     <img src="/photo/party-room.jpg" alt="Event Photo 1" />
 //     </div>

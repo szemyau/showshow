@@ -1,9 +1,4 @@
-// document.querySelector("#name").textContent = "hi";
-// let cardContainer = document.querySelector(".card-container");
-// console.log(`cardContainer`, cardContainer);
-
 let card = document.querySelector(".card");
-console.log("card:", card);
 let editBtn = document.querySelector(".edit-btn");
 
 async function loadEventProfile() {
@@ -14,42 +9,60 @@ async function loadEventProfile() {
     Swal.fire("Failed to load event profiles", json.error, "error");
     return;
   }
-  console.log(json);
+  // console.log(json);
   for (let event of json.events) {
+    console.log(`event:`, event);
     event.created_at = new Date(event.created_at).toLocaleString();
     event.event_date = new Date(event.event_date).toLocaleDateString();
-    event.event_time = event.event_time.replace(/:00$/, "");
+    event.event_time = event.event_time
+      ? event.event_time.replace(/:00$/, "")
+      : "12:00";
 
     //edit function
     event.edit = async function () {
       console.log("edit event:", event);
       console.log("edit event NAME:", event.name);
+      console.log(`edit`);
 
       const { value: formValues } = await Swal.fire({
         title: "Edit your event",
         html:
           `<span>Event Name: <input id="swal-input1" class="swal2-input" value="${event.name}"></span>` +
           `<span>Event Date: <input id="swal-input2" class="swal2-input" value=${event.event_date}></span>` +
-          `<span>Event Time: <input id="swal-input2" class="swal2-input" value=${event.event_time}></span>` +
+          `<span>Event Time: <input id="swal-input3" class="swal2-input" value=${event.event_time}></span>` +
           ``,
         focusConfirm: false,
         preConfirm: () => {
-          return `Your event has been updated!`;
+          return {
+            event_name: document.getElementById("swal-input1").value,
+            event_date: document.getElementById("swal-input2").value,
+            event_time: document.getElementById("swal-input3").value,
+          };
         },
-        // preConfirm: () => {
-        //   return [
-        //     (document.getElementById("swal-input1").value = event.name),
-        //     (document.getElementById("swal-input2").value = "1"),
-        //   ];
-        // },
       });
 
       if (formValues) {
-        Swal.fire(JSON.stringify(formValues));
+        Swal.fire("your requested has been updated!");
+        console.log("wtf", formValues);
+
+        //fetch path :
+
+        // let id = button.value;
+
+        let res = await fetch("/events/" + event.id, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formValues),
+        });
+        let json = await res.json();
+        if (json.error && res.status != 404) {
+          Swal.fire("Failed to edit form", json.error, "error");
+          return;
+        }
+        location.reload();
       }
-      // event.created_at = new Date(event.created_at).toLocaleString();
-      // event.event_date = new Date(event.event_date).toLocaleDateString();
-      // event.event_time = event.event_time.replace(/:00$/, "");
     };
   }
   renderTemplate(eventList, json); //eventList = html "id"
@@ -63,7 +76,7 @@ async function deleteEvent(button) {
   let res = await fetch("/events/" + id, { method: "DELETE" });
   let json = await res.json();
   if (json.error && res.status != 404) {
-    Swal.fire("Failed to delete memo", json.error, "error");
+    Swal.fire("Failed to delete form", json.error, "error");
     return;
   }
   let node = button.closest(".card");
@@ -84,9 +97,8 @@ async function deleteEvent(button) {
 
 // check if login or not <add katy's logout function>
 async function loginStatus() {
-  console.log(`loginstatus function run`);
   let res = await fetch("/role");
-  console.log(`check login status: ${res}`);
+  // console.log(`check login status: ${res}`);
   if (res) {
     document.querySelector("#login_button").style.display = "none";
     document.querySelector("#signup_button").style.display = "none";
@@ -99,24 +111,24 @@ async function loginStatus() {
 }
 loginStatus();
 
-async function editEvent(editBtn) {
-  console.log("edit");
+// async function editEvent(editBtn) {
+//   console.log("edit");
 
-  const { value: formValues } = await Swal.fire({
-    title: "Multiple inputs",
-    html:
-      '<input id="swal-input1" class="swal2-input">' +
-      '<input id="swal-input2" class="swal2-input">',
-    focusConfirm: false,
-    preConfirm: () => {
-      return [
-        document.getElementById("swal-input1").value,
-        document.getElementById("swal-input2").value,
-      ];
-    },
-  });
+//   const { value: formValues } = await Swal.fire({
+//     title: "Multiple inputs",
+//     html:
+//       '<input id="swal-input1" class="swal2-input">' +
+//       '<input id="swal-input2" class="swal2-input">',
+//     focusConfirm: false,
+//     preConfirm: () => {
+//       return [
+//         document.getElementById("swal-input1").value,
+//         document.getElementById("swal-input2").value,
+//       ];
+//     },
+//   });
 
-  if (formValues) {
-    Swal.fire(JSON.stringify(formValues));
-  }
-}
+//   if (formValues) {
+//     Swal.fire(JSON.stringify(formValues));
+//   }
+// }
