@@ -35,7 +35,9 @@ submitForm.addEventListener("submit", async (event) => {
 
   if (json.error) {
     console.log(json.error);
-    Swal.fire("Failed to submit form", json.error, "error");
+    // Swal.fire("Failed to submit form", json.error, "error");
+    Swal.fire("Failed to submit form", "", "error");
+
     return;
   }
   await Swal.fire(
