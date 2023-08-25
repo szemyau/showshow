@@ -1,11 +1,12 @@
 import { Router } from "express";
 import { client } from "../database";
+import { userOnlyAPI } from "../guard";
 
 export let categoryRoutes = Router();
 
 // select image
 //show category list on category-list.html by chloe
-categoryRoutes.get("/category-list", async (req, res, next) => {
+categoryRoutes.get("/category-list", userOnlyAPI, async (req, res, next) => {
   try {
     let result = await client.query(/* sql */ `
         select
@@ -27,6 +28,8 @@ categoryRoutes.get("/category-result", async (req, res, next) => {
     // let userID = 1; //req.session.user_id
     let userID = req.session.user_id;
     console.log(`userid-choice:`, userID);
+
+    //let categoryIdArray = req.query?.category as string[]||[];
 
     let categoryIdArray = req.query.category;
     let selectedId = Array.isArray(categoryIdArray)

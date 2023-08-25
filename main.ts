@@ -35,10 +35,13 @@ app.use(eventRoutes);
 
 app.get("/", (req, res) => res.redirect("/home.html"));
 
-app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
-  res.status(err.statusCode || 500);
-  res.json({ error: String(err) });
-});
+app.use(
+  (err: HttpError, req: Request, res: Response, next: NextFunction): void => {
+    console.log(err);
+    res.status(err.statusCode || 500);
+    res.json({ error: String(err).replace("TypeError: ", "") });
+  }
+);
 
 const port = 8000;
 app.listen(port, () => print(port));
