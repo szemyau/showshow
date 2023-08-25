@@ -75,3 +75,25 @@ async function loginStatus() {
     document.querySelector("#logout_button").style.display = "none";
   }
 }
+
+// remember me function
+const rmCheck = document.querySelector("#rememberme");
+const emailInput = document.querySelector("#login_email");
+
+if (localStorage.checkbox && localStorage.checkbox !== "") {
+  rmCheck.setAttribute("checked", "checked");
+  emailInput.value = localStorage.username;
+} else {
+  rmCheck.removeAttribute("checked");
+  emailInput.value = "";
+}
+
+function lsRememberMe() {
+  if (rmCheck.checked && emailInput.value !== "") {
+    localStorage.username = emailInput.value;
+    localStorage.checkbox = rmCheck.value;
+  } else {
+    localStorage.username = "";
+    localStorage.checkbox = "";
+  }
+}

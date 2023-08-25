@@ -56,3 +56,4 @@ CREATE TABLE "participants_events" (
     updated_at timestamp not null,
     message text
 );
+
