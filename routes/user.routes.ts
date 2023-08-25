@@ -98,7 +98,7 @@ userRoutes.post("/login", async (req: Request, res: Response) => {
     });
   }
 
-  // retrieve id and password to database
+  // retrieve id and password from database
   let result = await client.query(
     /*sql*/ `
             select password,id from "user" where email = $1`,
