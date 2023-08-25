@@ -12,7 +12,7 @@ export let eventRoutes = Router();
 /* BEGIN used by create-event.html by chloe */
 
 // build up category's choices in create event form
-eventRoutes.get("/categories", async (req, res, next) => {
+eventRoutes.get("/categories", userOnlyAPI, async (req, res, next) => {
   try {
     let result = await client.query(
       /* sql */ `
@@ -165,69 +165,103 @@ eventRoutes.delete("/events/:id", userOnlyAPI, async (req, res, next) => {
 });
 
 //edit what events u created
-eventRoutes.patch("/events/:id", userOnlyAPI, async (req, res, next) => {
+let editEventParser = object({
+  fields: object({
+    // event_category: id(),
+    event_name: string({ trim: true, nonEmpty: true }),
+    // event_about: string(),
+    event_date: string(),
+    event_time: string(),
+    // venue: string(),
+    // quota: string(),
+    // contact: string(),
+  }),
+});
+
+eventRoutes.post("/events/:id", userOnlyAPI, async (req, res, next) => {
   try {
     let id = +req.params.id;
-    console.log(`id: `, id);
+    console.log(`req.params.id`, id);
+
     if (!id) throw new HttpError(400, "invalid event id");
-    const {
-      event_name,
-      event_date,
-      event_time,
-      venue,
-      quota,
-      event_category,
-      event_about,
-      contact,
-      filename,
-    } = req.body;
 
-    // console.log({
-    //   event_name,
-    //   event_date,
-    //   event_time,
-    //   venue,
-    //   quota,
-    //   event_category,
-    //   event_about,
-    //   contact,
-    //   filename,
-    // });
+    let form = formidable({
+      uploadDir,
+      allowEmptyFiles: false,
+      filter(part) {
+        return part.mimetype?.startsWith("image/") || false;
+      },
+      filename(name, ext, part, form) {
+        return crypto.randomUUID() + "." + part.mimetype?.split("/").pop();
+      },
+    });
+    form.parse(req, async (err, fields, files) => {
+      try {
+        console.log({ fields, files });
 
-    let result = await client.query(
-      /* sql */ `
+        if (err) throw new HttpError(400, String(err));
+
+        let input = editEventParser.parse({ files, fields });
+
+        //ensure clients input all fields in the form
+        let image = toArray(files.image)[0];
+        // console.log(`show image :`, image);
+
+        //here's image's name
+        let filename = image?.newFilename;
+        console.log(`show filename: `, filename);
+
+        // other inputs will be not showed on the front-end
+
+        let result = await client.query(
+          /* sql */ `
       UPDATE event
       SET name= $1
       , event_date=$2
       , event_time=$3
-      , venue=$4
-      , quota=$5
-      , category_id= $6
-      , about=$7
-      , contact=$8
-      , user_create_event_image=$9
-    WHERE id=$10 and creator_id =$11`,
-      [
-        event_name,
-        event_date,
-        event_time,
-        venue,
-        quota,
-        event_category,
-        event_about,
-        contact,
-        filename,
-        id,
-        req.session.user_id,
-      ]
-    );
+    WHERE id=$4 and creator_id =$5`,
+          [
+            input.fields.event_name,
+            input.fields.event_date,
+            input.fields.event_time,
+            id,
+            req.session.user_id,
+          ]
+        );
 
-    //TODO update remaining columns on 15 Aug
+        //     let result = await client.query(
+        //       /* sql */ `
+        //   UPDATE event
+        //   SET name= $1
+        //   , event_date=$2
+        //   , event_time=$3
+        //   , venue=$4
+        //   , quota=$5
+        //   , category_id= $6
+        //   , about=$7
+        //   , contact=$8
+        //   , user_create_event_image=$9
+        // WHERE id=$10 and creator_id =$11`,
+        //       [
+        //         input.fields.event_name,
+        //         input.fields.event_date,
+        //         input.fields.event_time,
+        //         input.fields.venue,
+        //         input.fields.quota,
+        //         input.fields.event_category,
+        //         input.fields.event_about,
+        //         input.fields.contact,
+        //         filename,
+        //         id,
+        //         req.session.user_id,
+        //       ]
+        //     );
 
-    let checkResult = result.rowCount;
-    console.log(`patch,`, checkResult);
-
-    res.json({ patch: result.rowCount });
+        res.json({ patch: result.rowCount });
+      } catch (error) {
+        next(error);
+      }
+    });
   } catch (error) {
     next(error);
   }

@@ -19,15 +19,20 @@ async function loadCategories() {
 }
 loadCategories();
 
+// fetch '/events
 submitForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  let form = event.target;
+  let form = event.target; //將form所有既內容包起
   console.log(form);
   let res = await fetch(form.action, {
     method: form.method,
     body: new FormData(form),
   });
+
+  //TODO WHY I FAIL TO GET DATA
+  let eventDate = FormData.get(event.event_date);
+  console.log(`eventDate:`, eventDate);
 
   let json = await res.json();
 

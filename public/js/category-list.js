@@ -1,3 +1,5 @@
+let categoryList = document.querySelector(".categoryListContainer");
+
 async function loadCategoryList() {
   const res = await fetch("/category-list", {
     headers: { Accept: "application/json" },
@@ -16,8 +18,7 @@ async function loadCategoryList() {
     return;
   }
 
-  let categoryList = document.querySelector(".categoryListContainer");
-
+  // method "get" dont need to fetch body
   for (let category of json) {
     let node = categoryTemplate.content.cloneNode(true);
     node.querySelector("img").src = category.image;

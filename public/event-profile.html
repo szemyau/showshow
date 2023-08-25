@@ -117,7 +117,13 @@
         <!-- using container to store duplicate info, set data-template = database table name; data-bind = the output of result.row in server  -->
         <div id="eventList" data-template="event" data-bind="events"></div>
         <template data-name="event">
-          <div class="card" style="border-radius: 15px; margin-bottom: 1rem">
+          <form
+            data-id="card_id"
+            method="PATCH"
+            action="/events/:id"
+            class="card"
+            style="border-radius: 15px; margin-bottom: 1rem"
+          >
             <!-- content -->
             <div class="card-container">
               <div class="card-body p-4">
@@ -151,6 +157,17 @@
                 <!-- edit button -->
                 <!-- data-onclick="edit" -->
                 <button
+                  type="submit"
+                  aria-label="save event"
+                  class="bottom-right save-btn"
+                  data-onclick="save"
+                  data-value="id"
+                  hidden
+                >
+                  <i class="fa-solid fa-save" aria-hidden="true"></i>
+                </button>
+                <button
+                  type="button"
                   aria-label="修正 event"
                   class="bottom-right edit-btn"
                   data-onclick="edit"
@@ -160,6 +177,7 @@
                 </button>
                 <!-- delete button -->
                 <button
+                  type="button"
                   aria-label="撤回 event"
                   class="top-right del-btn"
                   onclick="deleteEvent(this)"
@@ -169,7 +187,7 @@
                 </button>
               </div>
             </div>
-          </div>
+          </form>
         </template>
       </div>
 
